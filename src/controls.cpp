@@ -17,7 +17,7 @@ void Controls::Update() {
             is_right_ = true;
         if(key == TK_LEFT)
             is_left_ = true;
-        if(key == TK_CLOSE)
+        if(key == TK_CLOSE || key == TK_ESCAPE)
             is_exit_ = true;
     }
 }

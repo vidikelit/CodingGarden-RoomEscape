@@ -8,7 +8,7 @@ list(APPEND CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/CMake")
 find_package(BearLibTerminal REQUIRED)
 include_directories(SYSTEM ${BLT_INCLUDE_DIRS})
 list(APPEND CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/CMake")
-add_executable(RoomEscape src/main.cpp src/controls.cpp include/controls.h src/player.cpp include/player.h src/window.cpp include/window.h)
+add_executable(RoomEscape src/main.cpp src/controls.cpp include/controls.h src/player.cpp include/player.h src/window.cpp include/window.h src/room.cpp include/room.h src/map.cpp include/map.h)
 
 target_link_libraries(${PROJECT_NAME} ${BLT_LIBRARIES})
 

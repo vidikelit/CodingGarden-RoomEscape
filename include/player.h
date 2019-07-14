@@ -6,7 +6,7 @@
 class Player {
     private:
         const Controls &controls;
-        int symbol_ = 0xE64;
+        const int symbol_ = 0x40;
 
         const int speed_ = 1;
         int x_;
