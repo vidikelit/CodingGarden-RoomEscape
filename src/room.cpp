@@ -12,6 +12,8 @@ void Room::drawWall() {
         terminal_put(x_ + i, y_ + getRoomSize(), symbol_wall_);
         terminal_put(x_, y_ + i, symbol_wall_);
         terminal_put(x_ + getRoomSize(), y_ + i, symbol_wall_);
+
+        terminal_put(x_ + 1, y_ + 1, 0xB7);
     }
     //отрисовка комнат карты
 //    for (int i = 0; i <= getRoomSize(); i++) {
@@ -19,6 +21,8 @@ void Room::drawWall() {
 //        terminal_put(i, getRoomSize(), symbol_wall_);
 //        terminal_put(0, i, symbol_wall_);
 //        terminal_put(getRoomSize(), i, symbol_wall_);
+
+//        terminal_put(1, 1, 0xB7);
 //    }
 }
 

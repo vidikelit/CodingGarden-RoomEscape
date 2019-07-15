@@ -27,7 +27,9 @@ void Player::Move() {
 }
 
 void Player::Render() {
+    terminal_layer(1);
     terminal_put(x_, y_, symbol_);
+    terminal_layer(0);
 }
 
 void Player::Update() {

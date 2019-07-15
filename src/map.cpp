@@ -24,19 +24,24 @@ void Map::Generate() {
         setPointX(getPointX() + room.getRoomSize());
 }
 
-void Map::Door(int x1, int y1) {
+void Map::Door(int x, int y) {
+    Room room = rooms.at(0);
     //вверх
-    if (y1 > getPointY())
-        drawDoor(x1 + 1, y1);
+    if(terminal_pick(x + 1, y - 1, 0) == 0xB7){
+        terminal_put(x + 1, y, 0x3E);
+    }
     //вниз
-    if (y1 < getPointY())
-        drawDoor(getPointX() + 1, getPointY());
+    if(terminal_pick(x + 1, y + room.getRoomSize() + 1, 0) == 0xB7){
+        terminal_put(x + 1, y + room.getRoomSize(), 0x3E);
+    }
     //влево
-    if (x1 > getPointX())
-        drawDoor(x1, y1 + 1);
+    if(terminal_pick(x - 1, y + 1, 0) == 0xB7){
+        terminal_put(x, y + 1, 0x3E);
+    }
     //вправо
-    if (x1 < getPointX())
-        drawDoor(getPointX(), getPointY() + 1);
+    if(terminal_pick(x + room.getRoomSize() + 1, y + 1, 0) == 0xB7){
+        terminal_put(x + room.getRoomSize(), y + 1, 0x3E);
+    }
 }
 
 void Map::Update() {
@@ -62,6 +67,10 @@ void Map::Update() {
         }
         rooms.push_back(Room(getPointX(), getPointY()));
         rooms.at(i).drawWall();
+    }
+    rooms.at(rooms.size()-1).drawWall();
+    for(int i = 0; i < rooms.size(); i++){
+        Door(rooms.at(i).getX(), rooms.at(i).getY());
     }
 }
 
