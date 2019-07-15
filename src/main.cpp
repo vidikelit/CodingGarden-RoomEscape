@@ -16,13 +16,10 @@ int main()
 
     Controls controls;
     Map map;
-    Room room;
-    Player player(controls, 13, 11);
-    map.Draw();
+    Player player(controls, 11, 11);
     map.Update();
     while(true) {
-//        terminal_clear();
-        //отчистка область поля комнаты
+////        отчистка области поля комнаты
 //        terminal_clear_area(1, 1, 18, 18);
         controls.Update();
         if(controls.IsExit())

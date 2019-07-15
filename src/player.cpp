@@ -4,7 +4,7 @@
 #include "../include/room.h"
 
 void Player::Move() {
-    Room room;
+    Room room{0,0};
     //движение при нажатии клавиши
     if(controls.IsUp())
         y_ -= speed_;
@@ -15,14 +15,14 @@ void Player::Move() {
     if(controls.IsLeft())
         x_ -= speed_;
 
-    //ограничения по передвижению по комнате
+////    ограничения по передвижению по комнате
 //    if(GetX() <= 0)
 //        x_ = GetX() + 1;
-//    if(GetX() >= room.GetRoomSize())
+//    if(GetX() >= room.getRoomSize())
 //        x_ = GetX() - 1;
 //    if(GetY() <= 0)
 //        y_ = GetY() + 1;
-//    if(GetY() >= room.GetRoomSize())
+//    if(GetY() >= room.getRoomSize())
 //        y_ = GetY() - 1;
 }
 

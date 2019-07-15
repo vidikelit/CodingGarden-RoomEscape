@@ -1,49 +1,68 @@
 #include <BearLibTerminal.h>
+#include <vector>
 #include "../include/map.h"
+#include "../include/room.h"
 
-void Map::Draw() {
-    //отрисовка комнат карты
-    for(int i = 0; i <= getRoomSize(); i++) {
-        terminal_put(point_x_ + i, point_y_, symbol_wall_);
-        terminal_put(point_x_ + i, point_y_ + getRoomSize(), symbol_wall_);
-        terminal_put(point_x_, point_y_ + i, symbol_wall_);
-        terminal_put(point_x_ + getRoomSize(), point_y_ + i, symbol_wall_);
-    }
+void Map::drawDoor(int x, int y) {
+    terminal_put(x, y, 0x3E);
 }
 
 void Map::Generate() {
+    Room room = rooms.at(0);
     int random = rand() % 100 + 1;
     //вверх
-    if(random <= 25)
-        setPointY(getPointY() - (getRoomSize()));
+    if (random <= 25)
+        setPointY(getPointY() - room.getRoomSize());
     //вниз
-    if(random > 25 && random <= 50)
-        setPointY(getPointY() + (getRoomSize()));
+    if (random > 25 && random <= 50)
+        setPointY(getPointY() + room.getRoomSize());
     //влево
-    if(random > 50 && random <= 75)
-        setPointX(getPointX() - (getRoomSize()));
+    if (random > 50 && random <= 75)
+        setPointX(getPointX() - room.getRoomSize());
     //вправо
-    if(random > 75)
-        setPointX(getPointX() + (getRoomSize()));
+    if (random > 75)
+        setPointX(getPointX() + room.getRoomSize());
 }
 
-void Map::Update(){
-    int random = rand() % 10 + 5;
-    for(int i = 0; i <= random; i++){
+void Map::Door(int x1, int y1) {
+    //вверх
+    if (y1 > getPointY())
+        drawDoor(x1 + 1, y1);
+    //вниз
+    if (y1 < getPointY())
+        drawDoor(getPointX() + 1, getPointY());
+    //влево
+    if (x1 > getPointX())
+        drawDoor(x1, y1 + 1);
+    //вправо
+    if (x1 < getPointX())
+        drawDoor(getPointX(), getPointY() + 1);
+}
+
+void Map::Update() {
+    int random = 5 + rand() % 10;
+    for(int i = 0; i <= random; i++) {
+        bool a = true;
         int x = getPointX();
         int y = getPointY();
         Generate();
-        while(terminal_pick(getPointX()+1, getPointY()+1, 0) == symbol_wall_){
-            setPointX(x);
-            setPointY(y);
-            Generate();
-        }
-        Draw();
-    }
-}
+        while(a){
+            a = false;
+            for(int i = 0; i < rooms.size(); i++){
+                if(rooms.at(i).getX() == getPointX()){
+                    if(rooms.at(i).getY() == getPointY()){
+                        setPointX(x);
+                        setPointY(y);
+                        Generate();
+                        a = true;
+                    }
 
-const int Map::getRoomSize() const {
-    return room_size_;
+                }
+            }
+        }
+        rooms.push_back(Room(getPointX(), getPointY()));
+        rooms.at(i).drawWall();
+    }
 }
 
 const int Map::getPointX() const {
