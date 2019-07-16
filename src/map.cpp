@@ -79,7 +79,7 @@ void Map::render(int n) {
 
 void Map::scanner(int x, int y, int n) {
     for(int i = 0; i <= 3;i++){
-        if(sqrt(pow(rooms.at(n).doorsCoords[i][0] - x, 2) + pow(rooms.at(n).doorsCoords[i][1] - y, 2)) <= 2){
+        if(sqrt(pow(rooms.at(n).doorsCoords[i][0] - x, 2) + pow(rooms.at(n).doorsCoords[i][1] - y, 2)) <= 1){
             teleport(i);
             playerPos(x, y, i);
         }
@@ -89,17 +89,14 @@ void Map::scanner(int x, int y, int n) {
 void Map::playerPos(int x, int y, int i) {
     player_x = x;
     player_y = y;
-    if(i == 0)
+    if (i == 0)
         player_y += 19;
-    if(i == 1)
+    if (i == 1)
         player_y -= 19;
-    if(i == 2)
+    if (i == 2)
         player_x += 19;
-    if(i == 3)
+    if (i == 3)
         player_x -= 19;
-
-    Controls controls;
-    Player player(controls, player_x, player_y);
 }
 
 void Map::teleport(int i) {

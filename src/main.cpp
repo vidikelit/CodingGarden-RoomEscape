@@ -26,7 +26,11 @@ int main()
 
         controls.Update();
         if(controls.isE()){
+            map.player_x = player.getX();
+            map.player_y = player.getY();
             map.scanner(player.getX(), player.getY(), map.number_room_);
+            player.setX(map.player_x);
+            player.setY(map.player_y);
         }
         if(controls.isExit())
             break;
