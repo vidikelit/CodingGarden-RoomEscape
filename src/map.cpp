@@ -1,5 +1,6 @@
 #include <BearLibTerminal.h>
 #include <vector>
+#include <tgmath.h>
 #include "../include/map.h"
 #include "../include/room.h"
 
@@ -41,7 +42,7 @@ void Map::generateDoor(int x, int y, int i) {
     }
 }
 
-void Map::update() {
+void Map::generator() {
     int random = 5 + rand() % 10;
     for(int i = 0; i <= random; i++) {
         bool a = true;
@@ -65,10 +66,45 @@ void Map::update() {
         rooms.push_back(Room(getPointX(), getPointY()));
     }
     for(int i = 0; i < rooms.size(); i++){
-        rooms.at(i).drawRoom();
-    }
-    for(int i = 0; i < rooms.size(); i++){
         generateDoor(rooms.at(i).getX(), rooms.at(i).getY(), i);
+    }
+}
+
+void Map::update() {
+    generator();
+}
+
+void Map::render(int n) {
+    rooms.at(n).renderRoom();
+    rooms.at(n).renderDoor();
+}
+
+void Map::scanner(int x, int y, int n) {
+    for(int i = 0; i <= 3;i++){
+        if(sqrt(pow(rooms.at(n).doorsCoords[i][0] - x, 2) + pow(rooms.at(n).doorsCoords[i][1] - y, 2)) <= 3)
+            teleport(i);
+    }
+}
+
+void Map::teleport(int i) {
+    int buff_x = 0;
+    int buff_y = 0;
+    if(i == 0)
+        buff_y -= rooms.at(0).getRoomSize();
+    if(i == 1)
+        buff_y += rooms.at(0).getRoomSize();
+    if(i == 2)
+        buff_x -= rooms.at(0).getRoomSize();
+    if(i == 3)
+        buff_x += rooms.at(0).getRoomSize();
+
+    for(int n = 0; n < rooms.size(); n++){
+        if(rooms.at(number_room_).getX() + buff_x == rooms.at(n).getX()){
+            if (rooms.at(number_room_).getY() + buff_y == rooms.at(n).getY()){
+                number_room_ = n;
+                render(n);
+            }
+        }
     }
 }
 
@@ -87,3 +123,4 @@ void Map::setPointX(int pointX) {
 void Map::setPointY(int pointY) {
     point_y_ = pointY;
 }
+

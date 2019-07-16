@@ -19,15 +19,15 @@ void Player::move() {
     if(controls.isLeft())
         x_ -= speed_;
 
-////    ограничения по передвижению по комнате
-//    if(getX() <= 0)
-//        x_ = getX() + 1;
-//    if(getX() >= room.getRoomSize())
-//        x_ = getX() - 1;
-//    if(getY() <= 0)
-//        y_ = getY() + 1;
-//    if(getY() >= room.getRoomSize())
-//        y_ = getY() - 1;
+//    ограничения по передвижению по комнате
+    if(getX() <= 0)
+        x_ = getX() + 1;
+    if(getX() >= room.getRoomSize())
+        x_ = getX() - 1;
+    if(getY() <= 0)
+        y_ = getY() + 1;
+    if(getY() >= room.getRoomSize())
+        y_ = getY() - 1;
 }
 
 void Player::render() {

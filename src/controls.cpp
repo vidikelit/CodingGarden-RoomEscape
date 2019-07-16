@@ -25,7 +25,7 @@ void Controls::Update() {
         //закрытие окна ESC
         if(key == TK_CLOSE || key == TK_ESCAPE)
             is_exit_ = true;
-        //взаимодействие с объектами (дверь)
+        //взаимодействие с объектами (дверь) E
         if(key == TK_E)
             is_e = true;
     }
