@@ -25,9 +25,9 @@ int main()
         terminal_layer(0);
 
         controls.Update();
+        map.player_x = player.getX();
+        map.player_y = player.getY();
         if(controls.isE()){
-            map.player_x = player.getX();
-            map.player_y = player.getY();
             map.scanner(player.getX(), player.getY(), map.number_room_);
             player.setX(map.player_x);
             player.setY(map.player_y);
