@@ -45,7 +45,7 @@ void Map::generateDoor(int x, int y, int i) {
 }
 
 void Map::generator() {
-    int random = 2 + rand() % 1;
+    int random = 5 + rand() % 5;
     for(int i = 0; i <= random; i++) {
         bool a = true;
         int x = getPointX();
@@ -82,6 +82,7 @@ void Map::scanner(int x, int y, int n) {
         if(sqrt(pow(rooms.at(n).doorsCoords[i][0] - x, 2) + pow(rooms.at(n).doorsCoords[i][1] - y, 2)) <= 1){
             teleport(i);
             playerPos(x, y, i);
+            break;
         }
     }
 }
@@ -116,6 +117,7 @@ void Map::teleport(int i) {
             if (rooms.at(number_room_).getY() + buff_y == rooms.at(n).getY()){
                 number_room_ = n;
                 render(n);
+                break;
             }
         }
     }
