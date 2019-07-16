@@ -50,5 +50,13 @@ int Player::getY() const {
 }
 
 Player::Player(const Controls &controls, int x, int y) : controls(controls), x_(x), y_(y) {
-//    terminal_set("0x40: src/tiles/fish_test.png");
+    terminal_set("0x40: ../src/tiles/fish_test.png");
+}
+
+void Player::setX(int x) {
+    x_ = x;
+}
+
+void Player::setY(int y) {
+    y_ = y;
 }

@@ -15,7 +15,6 @@ int main()
 
     Controls controls;
     Map map;
-
     Player player(controls, 11, 11);
     map.generator();
     map.render(0);
@@ -28,6 +27,8 @@ int main()
         controls.Update();
         if(controls.isE()){
             map.scanner(player.getX(), player.getY(), map.number_room_);
+            player.setX(map.player_x);
+            player.setY(map.player_y);
         }
         if(controls.isExit())
             break;

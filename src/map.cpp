@@ -3,6 +3,8 @@
 #include <tgmath.h>
 #include "../include/map.h"
 #include "../include/room.h"
+#include "../include/controls.h"
+#include "../include/player.h"
 
 void Map::generateRoom() {
     Room room = rooms.at(0);
@@ -70,10 +72,6 @@ void Map::generator() {
     }
 }
 
-void Map::update() {
-    generator();
-}
-
 void Map::render(int n) {
     rooms.at(n).renderRoom();
     rooms.at(n).renderDoor();
@@ -81,9 +79,24 @@ void Map::render(int n) {
 
 void Map::scanner(int x, int y, int n) {
     for(int i = 0; i <= 3;i++){
-        if(sqrt(pow(rooms.at(n).doorsCoords[i][0] - x, 2) + pow(rooms.at(n).doorsCoords[i][1] - y, 2)) <= 3)
+        if(sqrt(pow(rooms.at(n).doorsCoords[i][0] - x, 2) + pow(rooms.at(n).doorsCoords[i][1] - y, 2)) <= 2){
             teleport(i);
+            playerPos(x, y, i);
+        }
     }
+}
+
+void Map::playerPos(int x, int y, int i) {
+    player_x = x;
+    player_y = y;
+    if(i == 0)
+        player_y += 19;
+    if(i == 1)
+        player_y -= 19;
+    if(i == 2)
+        player_x += 19;
+    if(i == 3)
+        player_x -= 19;
 }
 
 void Map::teleport(int i) {
@@ -123,4 +136,5 @@ void Map::setPointX(int pointX) {
 void Map::setPointY(int pointY) {
     point_y_ = pointY;
 }
+
 
