@@ -3,11 +3,7 @@
 #include "../include/map.h"
 #include "../include/room.h"
 
-void Map::drawDoor(int x, int y) {
-    terminal_put(x, y, 0x3E);
-}
-
-void Map::Generate() {
+void Map::generateRoom() {
     Room room = rooms.at(0);
     int random = rand() % 100 + 1;
     //вверх
@@ -24,33 +20,34 @@ void Map::Generate() {
         setPointX(getPointX() + room.getRoomSize());
 }
 
-void Map::Door(int x, int y) {
-    Room room = rooms.at(0);
-    //вверх
-    if(terminal_pick(x + 1, y - 1, 0) == 0xB7){
-        terminal_put(x + 1, y, 0x3E);
-    }
-    //вниз
-    if(terminal_pick(x + 1, y + room.getRoomSize() + 1, 0) == 0xB7){
-        terminal_put(x + 1, y + room.getRoomSize(), 0x3E);
-    }
-    //влево
-    if(terminal_pick(x - 1, y + 1, 0) == 0xB7){
-        terminal_put(x, y + 1, 0x3E);
-    }
-    //вправо
-    if(terminal_pick(x + room.getRoomSize() + 1, y + 1, 0) == 0xB7){
-        terminal_put(x + room.getRoomSize(), y + 1, 0x3E);
+void Map::generateDoor(int x, int y, int i) {
+    for(int n = 0; n < rooms.size(); n++){
+        if(rooms.at(i).getX() == rooms.at(n).getX()){
+            if(rooms.at(i).getY() > rooms.at(n).getY())
+                //вверх
+                rooms.at(i).doors[0] = true;
+            if(rooms.at(i).getY() < rooms.at(n).getY())
+                //вниз
+                rooms.at(i).doors[1] = true;
+        }
+        if(rooms.at(i).getY() == rooms.at(n).getY()){
+            if(rooms.at(i).getX() > rooms.at(n).getX())
+                //влево
+                rooms.at(i).doors[2] = true;
+            if(rooms.at(i).getX() < rooms.at(n).getX())
+                //вправо
+                rooms.at(i).doors[3] = true;
+        }
     }
 }
 
-void Map::Update() {
+void Map::update() {
     int random = 5 + rand() % 10;
     for(int i = 0; i <= random; i++) {
         bool a = true;
         int x = getPointX();
         int y = getPointY();
-        Generate();
+        generateRoom();
         while(a){
             a = false;
             for(int i = 0; i < rooms.size(); i++){
@@ -58,7 +55,7 @@ void Map::Update() {
                     if(rooms.at(i).getY() == getPointY()){
                         setPointX(x);
                         setPointY(y);
-                        Generate();
+                        generateRoom();
                         a = true;
                     }
 
@@ -66,11 +63,12 @@ void Map::Update() {
             }
         }
         rooms.push_back(Room(getPointX(), getPointY()));
-        rooms.at(i).drawWall();
     }
-    rooms.at(rooms.size()-1).drawWall();
     for(int i = 0; i < rooms.size(); i++){
-        Door(rooms.at(i).getX(), rooms.at(i).getY());
+        rooms.at(i).drawRoom();
+    }
+    for(int i = 0; i < rooms.size(); i++){
+        generateDoor(rooms.at(i).getX(), rooms.at(i).getY(), i);
     }
 }
 

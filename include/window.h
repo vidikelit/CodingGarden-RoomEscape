@@ -7,8 +7,8 @@ class Window {
         const char* title_ = "RoomEscape";
         const char icon_ = '-';
         //размер для 16:9
-        int window_x_ = 25;
-        int window_y_ = 20;
+        int window_x_ = 26;
+        int window_y_ = 21;
         bool fullscreen_ = true;
     public:
         void Settings();

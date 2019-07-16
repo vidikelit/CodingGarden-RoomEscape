@@ -6,22 +6,18 @@
 
 class Map {
 private:
-    std::vector<Room> rooms{{10, 10}};
+    std::vector<Room> rooms{{0, 0}};
     //точка первой комнаты
-    int point_x_ = 10;
-    int point_y_ = 10;
+    int point_x_ = 0;
+    int point_y_ = 0;
 public:
-    void drawDoor(int x, int y);
-    void Generate();
-    void Door(int x, int y);
-    void Update();
+    void generateRoom();
+    void generateDoor(int x, int y, int i);
+    void update();
 
     const int getPointX() const;
-
     const int getPointY() const;
-
     void setPointX(int pointX);
-
     void setPointY(int pointY);
 };
 

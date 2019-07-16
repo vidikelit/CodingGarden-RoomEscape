@@ -3,45 +3,49 @@
 #include "../include/controls.h"
 #include "../include/room.h"
 
-void Player::Move() {
+void Player::interaction() {
+
+}
+
+void Player::move() {
     Room room{0,0};
     //движение при нажатии клавиши
-    if(controls.IsUp())
+    if(controls.isUp())
         y_ -= speed_;
-    if(controls.IsDown())
+    if(controls.isDown())
         y_ += speed_;
-    if(controls.IsRight())
+    if(controls.isRight())
         x_ += speed_;
-    if(controls.IsLeft())
+    if(controls.isLeft())
         x_ -= speed_;
 
 ////    ограничения по передвижению по комнате
-//    if(GetX() <= 0)
-//        x_ = GetX() + 1;
-//    if(GetX() >= room.getRoomSize())
-//        x_ = GetX() - 1;
-//    if(GetY() <= 0)
-//        y_ = GetY() + 1;
-//    if(GetY() >= room.getRoomSize())
-//        y_ = GetY() - 1;
+//    if(getX() <= 0)
+//        x_ = getX() + 1;
+//    if(getX() >= room.getRoomSize())
+//        x_ = getX() - 1;
+//    if(getY() <= 0)
+//        y_ = getY() + 1;
+//    if(getY() >= room.getRoomSize())
+//        y_ = getY() - 1;
 }
 
-void Player::Render() {
+void Player::render() {
     terminal_layer(1);
     terminal_put(x_, y_, symbol_);
     terminal_layer(0);
 }
 
-void Player::Update() {
-    Move();
-    Render();
+void Player::update() {
+    move();
+    render();
 }
 
-int Player::GetX() const {
+int Player::getX() const {
     return x_;
 }
 
-int Player::GetY() const {
+int Player::getY() const {
     return y_;
 }
 

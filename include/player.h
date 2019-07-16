@@ -12,16 +12,16 @@ class Player {
         int x_;
         int y_;
 
-        void Render();
-        void Move();
+        void render();
+        void move();
+        void interaction();
 
     public:
         Player(const Controls &controls, int x, int y);
 
-    void Update();
-
-        int GetX() const;
-        int GetY() const;
+        void update();
+        int getX() const;
+        int getY() const;
 };
 
 

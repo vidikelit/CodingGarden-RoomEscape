@@ -17,15 +17,18 @@ int main()
     Controls controls;
     Map map;
     Player player(controls, 11, 11);
-    map.Update();
+    map.update();
     while(true) {
-////        отчистка области поля комнаты
-//        terminal_clear_area(1, 1, 18, 18);
+//        отчистка области поля комнаты
+        terminal_layer(1);
+        terminal_clear_area(1, 1, 19, 19);
+        terminal_layer(0);
         controls.Update();
-        if(controls.IsExit())
+        if(controls.isExit())
             break;
 
-        player.Update();
+        player.update();
         terminal_refresh();
     }
+    terminal_close();
 }

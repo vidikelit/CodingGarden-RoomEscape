@@ -8,13 +8,16 @@ private:
     bool is_down_;
     bool is_right_;
     bool is_left_;
+    bool is_e;
     bool is_exit_;
 public:
-    bool IsUp() const;
-    bool IsDown() const;
-    bool IsRight() const;
-    bool IsLeft() const;
-    bool IsExit() const;
+    bool isUp() const;
+    bool isDown() const;
+    bool isRight() const;
+    bool isLeft() const;
+    bool isExit() const;
+    bool isE() const;
+
     void Update();
 };
 
