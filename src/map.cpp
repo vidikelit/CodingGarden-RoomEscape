@@ -45,7 +45,7 @@ void Map::generateDoor(int x, int y, int i) {
 }
 
 void Map::generator() {
-    int random = 5 + rand() % 10;
+    int random = 2 + rand() % 1;
     for(int i = 0; i <= random; i++) {
         bool a = true;
         int x = getPointX();
@@ -97,6 +97,9 @@ void Map::playerPos(int x, int y, int i) {
         player_x += 19;
     if(i == 3)
         player_x -= 19;
+
+    Controls controls;
+    Player player(controls, player_x, player_y);
 }
 
 void Map::teleport(int i) {

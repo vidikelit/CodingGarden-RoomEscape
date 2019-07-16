@@ -12,8 +12,8 @@ private:
     int point_y_ = 0;
 public:
     int number_room_ = 0;
-    int player_x = 0;
-    int player_y = 0;
+    int player_x;
+    int player_y;
 
     void generateRoom();
     void generateDoor(int x, int y, int i);
