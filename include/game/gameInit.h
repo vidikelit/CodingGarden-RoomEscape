@@ -13,6 +13,7 @@ class GameInit {
  public:
   void initialize();
   void update();
+  void renderHUD();
 
   explicit GameInit(Controls *controls);
 };

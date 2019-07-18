@@ -4,7 +4,6 @@
 #include "game/room.h"
 
 void Player::move() {
-  Room room{0, 0};
   // движение при нажатии клавиши
   if (controls.isUp()) {
     y_ -= speed_;
@@ -22,25 +21,32 @@ void Player::move() {
     x_ -= speed_;
     steps++;
   }
-  //    ограничения по передвижению по комнате
-  if (getX() <= 0) x_ = getX() + 1;
-  if (getX() >= room.getRoomSize()) x_ = getX() - 1;
-  if (getY() <= 0) y_ = getY() + 1;
-  if (getY() >= room.getRoomSize()) y_ = getY() - 1;
+  restriction();
 }
 
 void Player::render() {
-  terminal_layer(0);
   terminal_put(x_, y_, symbol_);
-  terminal_layer(0);
+}
 
-  //    terminal_put(21, 17, 0x40);
-  //    terminal_printf(22, 17, "=%d", steps);
-  //    terminal_clear_area(getX(),getY(), 1, 1);
-  //
-  //    terminal_put(21, 19, 0x24);
-  //    terminal_printf(22, 19, "=%d", coin);
-  //    terminal_clear_area(getX(),getY(), 1, 1);
+void Player::restriction() {
+  Map map;
+  //    ограничения по передвижению по комнате
+  if (getX() <= 0) {
+    setX(getX() + 1);
+    setSteps(getSteps() - 1);
+  }
+  if (getX() >= map.getCurrentRoom().getRoomSize()) {
+    setX(getX() - 1);
+    setSteps(getSteps() - 1);
+  }
+  if (getY() <= 0) {
+    setY(getY() + 1);
+    setSteps(getSteps() - 1);
+  }
+  if (getY() >= map.getCurrentRoom().getRoomSize()) {
+    setY(getY() - 1);
+    setSteps(getSteps() - 1);
+  }
 }
 
 void Player::update() {
@@ -66,4 +72,20 @@ void Player::setX(int x) {
 
 void Player::setY(int y) {
   y_ = y;
+}
+
+int Player::getSteps() const {
+  return steps;
+}
+
+void Player::setSteps(int steps) {
+  Player::steps = steps;
+}
+
+int Player::getCoin() const {
+  return coin;
+}
+
+void Player::setCoin(int coin) {
+  Player::coin = coin;
 }

@@ -17,6 +17,11 @@ void GameInit::initialize() {
 }
 
 void GameInit::update() {
+  terminal_layer(1);
+  terminal_clear_area(1, 1, 19, 19);
+  terminal_layer(0);
+  terminal_clear_area(1, 1, 19, 19);
+
   map.player_x = player.getX();
   map.player_y = player.getY();
   if (controls->isE()) {
@@ -24,8 +29,8 @@ void GameInit::update() {
     player.setX(map.player_x);
     player.setY(map.player_y);
   }
-
   map.render(map.getNumberRoom());
+  renderHUD();
   player.update();
   if (map.getCurrentRoom().getCoinCount() != 0) {
     terminal_layer(1);
@@ -34,9 +39,18 @@ void GameInit::update() {
         if (player.getX() == map.getCurrentRoom().getCoin(i).getX() &&
             player.getY() == map.getCurrentRoom().getCoin(i).getY()) {
           map.getCurrentRoom().removeCoin(i);
+          player.setCoin(player.getCoin() + 1);
         }
       }
     }
   }
-  //    interaction.update();
+}
+
+void GameInit::renderHUD() {
+  terminal_clear_area(21, 0, 7, 20);
+  terminal_put(21, 17, 0x40);
+  terminal_printf(22, 17, "=%d", player.getSteps());
+
+  terminal_put(21, 19, 0x24);
+  terminal_printf(22, 19, "=%d", player.getCoin());
 }

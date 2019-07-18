@@ -42,7 +42,7 @@ void Map::generateDoor(int x, int y, int i) {
 }
 
 void Map::generateCoin(int n) {
-  for (int i = 0; i <= std::experimental::randint(0, 4); i++) {
+  for (int i = 0; i <= std::experimental::randint(0, 3); i++) {
     rooms.at(n).pushCoin({std::experimental::randint(5, 16), std::experimental::randint(5, 16)});
   }
 }
