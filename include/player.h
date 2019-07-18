@@ -9,10 +9,11 @@ class Player {
         const int symbol_ = 0x40;
 
         const int speed_ = 1;
+        int coin = 0;
+        int steps = 0;
 
         void render();
         void move();
-        void interaction();
 
     public:
         int x_;

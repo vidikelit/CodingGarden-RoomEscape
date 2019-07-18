@@ -3,22 +3,25 @@
 #include "../include/controls.h"
 #include "../include/room.h"
 
-void Player::interaction() {
-
-}
-
 void Player::move() {
     Room room{0,0};
     //движение при нажатии клавиши
-    if(controls.isUp())
+    if(controls.isUp()){
         y_ -= speed_;
-    if(controls.isDown())
+        steps++;
+    }
+    if(controls.isDown()){
         y_ += speed_;
-    if(controls.isRight())
+        steps++;
+    }
+    if(controls.isRight()){
         x_ += speed_;
-    if(controls.isLeft())
+        steps++;
+    }
+    if(controls.isLeft()){
         x_ -= speed_;
-
+        steps++;
+    }
 //    ограничения по передвижению по комнате
     if(getX() <= 0)
         x_ = getX() + 1;
@@ -34,6 +37,14 @@ void Player::render() {
     terminal_layer(1);
     terminal_put(x_, y_, symbol_);
     terminal_layer(0);
+
+    terminal_put(21, 17, 0x40);
+    terminal_printf(22, 17, "=%d", steps);
+    terminal_clear_area(getX(),getY(), 1, 1);
+
+    terminal_put(21, 19, 0x24);
+    terminal_printf(22, 19, "=%d", coin);
+    terminal_clear_area(getX(),getY(), 1, 1);
 }
 
 void Player::update() {
@@ -50,7 +61,7 @@ int Player::getY() const {
 }
 
 Player::Player(const Controls &controls, int x, int y) : controls(controls), x_(x), y_(y) {
-    terminal_set("0x40: ../src/tiles/player.png");
+//    terminal_set("0x40: ../src/tiles/player.png");
 }
 
 void Player::setX(int x) {

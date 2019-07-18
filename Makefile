@@ -69,8 +69,8 @@ rebuild_cache/fast: rebuild_cache
 
 # Special rule for the target edit_cache
 edit_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
-	/home/vidik/apps/clion-2019.1.4/bin/cmake/linux/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake cache editor..."
+	/home/vidik/apps/clion-2019.1.4/bin/cmake/linux/bin/ccmake -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : edit_cache
 
 # Special rule for the target edit_cache
@@ -122,6 +122,33 @@ RoomEscape: cmake_check_build_system
 RoomEscape/fast:
 	$(MAKE) -f CMakeFiles/RoomEscape.dir/build.make CMakeFiles/RoomEscape.dir/build
 .PHONY : RoomEscape/fast
+
+src/coin.o: src/coin.cpp.o
+
+.PHONY : src/coin.o
+
+# target to build an object file
+src/coin.cpp.o:
+	$(MAKE) -f CMakeFiles/RoomEscape.dir/build.make CMakeFiles/RoomEscape.dir/src/coin.cpp.o
+.PHONY : src/coin.cpp.o
+
+src/coin.i: src/coin.cpp.i
+
+.PHONY : src/coin.i
+
+# target to preprocess a source file
+src/coin.cpp.i:
+	$(MAKE) -f CMakeFiles/RoomEscape.dir/build.make CMakeFiles/RoomEscape.dir/src/coin.cpp.i
+.PHONY : src/coin.cpp.i
+
+src/coin.s: src/coin.cpp.s
+
+.PHONY : src/coin.s
+
+# target to generate assembly for a file
+src/coin.cpp.s:
+	$(MAKE) -f CMakeFiles/RoomEscape.dir/build.make CMakeFiles/RoomEscape.dir/src/coin.cpp.s
+.PHONY : src/coin.cpp.s
 
 src/controls.o: src/controls.cpp.o
 
@@ -294,6 +321,9 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... RoomEscape"
 	@echo "... edit_cache"
+	@echo "... src/coin.o"
+	@echo "... src/coin.i"
+	@echo "... src/coin.s"
 	@echo "... src/controls.o"
 	@echo "... src/controls.i"
 	@echo "... src/controls.s"

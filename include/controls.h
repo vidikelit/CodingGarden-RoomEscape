@@ -1,7 +1,6 @@
 #ifndef INC_ROOMESCAPE_CONTROLS_H
 #define INC_ROOMESCAPE_CONTROLS_H
 
-
 class Controls {
 private:
     bool is_up_;

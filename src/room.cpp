@@ -28,6 +28,13 @@ void Room::renderDoor() {
     }
 }
 
+void Room::renderCoin() {
+    terminal_clear_area(1, 1, 19, 19);
+    for(auto &coin:coins){
+        terminal_put(coin.getX(), coin.getY(), coin.getSymbolCoin());
+    }
+}
+
 const int Room::getRoomSize() const {
     return room_size_;
 }
@@ -39,5 +46,4 @@ int Room::getX() const {
 int Room::getY() const {
     return y_;
 }
-
 

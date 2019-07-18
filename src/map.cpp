@@ -44,6 +44,12 @@ void Map::generateDoor(int x, int y, int i) {
     }
 }
 
+void Map::generateCoin(int n) {
+    for(int i = 0; i <= 2 + rand() % 2; i++) {
+        rooms.at(n).coins.push_back({4 + rand() % 16, 4 + rand() % 16});
+    }
+}
+
 void Map::generator() {
     int random = 5 + rand() % 5;
     for (int i = 0; i <= random; i++) {
@@ -69,14 +75,17 @@ void Map::generator() {
     }
     for (int i = 0; i < rooms.size(); i++) {
         generateDoor(rooms.at(i).getX(), rooms.at(i).getY(), i);
+        generateCoin(i);
     }
 }
 
 void Map::render(int n) {
-    terminal_set("0x23: ../src/tiles/castle.png");
-    terminal_set("0x3E: ../src/tiles/door.png");
+//    terminal_set("0x23: ../src/tiles/castle.png");
+//    terminal_set("0x3E: ../src/tiles/door.png");
+//    terminal_set("0x24: ../src/tiles/coinGold.png");
     rooms.at(n).renderRoom();
     rooms.at(n).renderDoor();
+    rooms.at(n).renderCoin();
 }
 
 void Map::scanner(int x, int y, int n) {

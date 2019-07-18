@@ -1,7 +1,7 @@
 #ifndef ROOMESCAPE_MAP_H
 #define ROOMESCAPE_MAP_H
 
-#include "../include/room.h"
+#include "room.h"
 #include <vector>
 
 class Map {
@@ -17,7 +17,9 @@ public:
 
     void generateRoom();
     void generateDoor(int x, int y, int i);
+    void generateCoin(int n);
     void generator();
+
     void render(int n);
     void scanner(int x_p, int y_p, int n_r);
     void teleport(int i);
