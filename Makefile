@@ -39,10 +39,10 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /usr/local/bin/cmake
+CMAKE_COMMAND = /home/vidik/apps/clion-2019.1.4/bin/cmake/linux/bin/cmake
 
 # The command to remove a file.
-RM = /usr/local/bin/cmake -E remove -f
+RM = /home/vidik/apps/clion-2019.1.4/bin/cmake/linux/bin/cmake -E remove -f
 
 # Escaping for special characters.
 EQUALS = =
@@ -59,7 +59,7 @@ CMAKE_BINARY_DIR = /home/vidik/CLionProjects/RoomEscape
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
-	/usr/local/bin/cmake -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	/home/vidik/apps/clion-2019.1.4/bin/cmake/linux/bin/cmake -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : rebuild_cache
 
 # Special rule for the target rebuild_cache
@@ -69,8 +69,8 @@ rebuild_cache/fast: rebuild_cache
 
 # Special rule for the target edit_cache
 edit_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake cache editor..."
-	/home/vidik/apps/clion-2019.1.4/bin/cmake/linux/bin/ccmake -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
+	/home/vidik/apps/clion-2019.1.4/bin/cmake/linux/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
 .PHONY : edit_cache
 
 # Special rule for the target edit_cache
@@ -122,6 +122,19 @@ RoomEscape: cmake_check_build_system
 RoomEscape/fast:
 	$(MAKE) -f CMakeFiles/RoomEscape.dir/build.make CMakeFiles/RoomEscape.dir/build
 .PHONY : RoomEscape/fast
+
+#=============================================================================
+# Target rules for targets named lint
+
+# Build rule for target.
+lint: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 lint
+.PHONY : lint
+
+# fast build rule for target.
+lint/fast:
+	$(MAKE) -f CMakeFiles/lint.dir/build.make CMakeFiles/lint.dir/build
+.PHONY : lint/fast
 
 src/coin.o: src/coin.cpp.o
 
@@ -346,8 +359,9 @@ help:
 	@echo "... clean"
 	@echo "... depend"
 	@echo "... rebuild_cache"
-	@echo "... RoomEscape"
 	@echo "... edit_cache"
+	@echo "... RoomEscape"
+	@echo "... lint"
 	@echo "... src/coin.o"
 	@echo "... src/coin.i"
 	@echo "... src/coin.s"

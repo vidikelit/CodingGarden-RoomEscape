@@ -140,7 +140,11 @@ Temporary Items
 cmake-build-debug
 build
 misc
+
+
+*.cbp
+*.make
+*.cmake
 RoomEscape
-RoomEscape.cbp
-CmakeFile
+CMakeFile
 CMakeCache.txt

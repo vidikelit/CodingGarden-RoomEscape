@@ -7,9 +7,24 @@ list(APPEND CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/CMake")
 
 find_package(BearLibTerminal REQUIRED)
 include_directories(SYSTEM ${BLT_INCLUDE_DIRS})
-list(APPEND CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/CMake")
-add_executable(RoomEscape src/main.cpp src/controls.cpp include/controls.h src/player.cpp include/player.h src/window.cpp include/window.h src/room.cpp include/room.h src/map.cpp include/map.h src/coin.cpp include/coin.h src/gameInit.cpp include/gameInit.h)
+
+set(PROJECT_HEADERS_DIR ${PROJECT_SOURCE_DIR}/include)
+set(PROJECT_SOURCES_DIR ${PROJECT_SOURCE_DIR}/src)
+set(PROJECT_SPRITES_DIR ${PROJECT_SOURCE_DIR}/resources)
+
+file(GLOB_RECURSE HEADERS ${PROJECT_HEADERS_DIR}/*.h)
+file(GLOB_RECURSE SOURCES ${PROJECT_SOURCES_DIR}/*.cpp)
+file(GLOB_RECURSE SPRITES ${PROJECT_SPRITES_DIR}/*.png)
+
+add_executable(${PROJECT_NAME} ${HEADERS} ${SOURCES})
+
+include_directories(${PROJECT_HEADERS_DIR} ${PROJECT_SPRITES_DIR})
 
 target_link_libraries(${PROJECT_NAME} ${BLT_LIBRARIES})
 
 file(COPY ${BLT_LIBRARY} DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
+
+    # Add linting before compilation
+include(CppLint)
+ADD_STYLE_CHECK_TARGET(lint ${PROJECT_NAME} ${PROJECT_HEADERS_DIR} ${PROJECT_SOURCES_DIR})
+add_dependencies(${PROJECT_NAME} lint)
