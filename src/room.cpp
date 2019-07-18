@@ -29,9 +29,10 @@ void Room::renderDoor() {
 }
 
 void Room::renderCoin() {
-    terminal_clear_area(1, 1, 19, 19);
     for(auto &coin:coins){
+        terminal_layer(1);
         terminal_put(coin.getX(), coin.getY(), coin.getSymbolCoin());
+        terminal_layer(0);
     }
 }
 
@@ -45,5 +46,21 @@ int Room::getX() const {
 
 int Room::getY() const {
     return y_;
+}
+
+int Room::getCoinCount() {
+    return static_cast<int>(coins.size());
+}
+
+Coin Room::getCoin(int i) {
+    return coins.at(i);
+}
+
+void Room::removeCoin(int i) {
+    coins.erase(coins.begin()+i);
+}
+
+void Room::pushCoin(Coin coin) {
+    coins.push_back(coin);
 }
 

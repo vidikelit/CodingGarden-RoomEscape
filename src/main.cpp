@@ -3,7 +3,6 @@
 #include "../include/player.h"
 #include "../include/window.h"
 #include "../include/map.h"
-#include "../include/interaction.h"
 #include "../include/gameInit.h"
 
 
@@ -14,15 +13,14 @@ int main()
     terminal_open();
     window.Settings();
     terminal_refresh();
-
     Controls controls;
     GameInit gameInit(controls);
     gameInit.initialize();
     while(true) {
-//        отчистка области поля комнаты
         terminal_layer(1);
         terminal_clear_area(1, 1, 19, 19);
         terminal_layer(0);
+        terminal_clear_area(1, 1, 19, 19);
 
         controls.Update();
         gameInit.update();

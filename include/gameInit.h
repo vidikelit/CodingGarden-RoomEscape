@@ -12,7 +12,6 @@ private:
 public:
     void initialize();
     void update();
-
     GameInit(Controls &controls);
 };
 

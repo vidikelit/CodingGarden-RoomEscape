@@ -19,7 +19,8 @@ public:
     void generateDoor(int x, int y, int i);
     void generateCoin(int n);
     void generator();
-
+    Room& getCurrentRoom();
+    int getNumberRoom();
     void render(int n);
     void scanner(int x_p, int y_p, int n_r);
     void teleport(int i);

@@ -39,10 +39,10 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /home/vidik/apps/clion-2019.1.4/bin/cmake/linux/bin/cmake
+CMAKE_COMMAND = /usr/local/bin/cmake
 
 # The command to remove a file.
-RM = /home/vidik/apps/clion-2019.1.4/bin/cmake/linux/bin/cmake -E remove -f
+RM = /usr/local/bin/cmake -E remove -f
 
 # Escaping for special characters.
 EQUALS = =
@@ -59,7 +59,7 @@ CMAKE_BINARY_DIR = /home/vidik/CLionProjects/RoomEscape
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
-	/home/vidik/apps/clion-2019.1.4/bin/cmake/linux/bin/cmake -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	/usr/local/bin/cmake -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : rebuild_cache
 
 # Special rule for the target rebuild_cache
@@ -203,33 +203,6 @@ src/gameInit.s: src/gameInit.cpp.s
 src/gameInit.cpp.s:
 	$(MAKE) -f CMakeFiles/RoomEscape.dir/build.make CMakeFiles/RoomEscape.dir/src/gameInit.cpp.s
 .PHONY : src/gameInit.cpp.s
-
-src/interaction.o: src/interaction.cpp.o
-
-.PHONY : src/interaction.o
-
-# target to build an object file
-src/interaction.cpp.o:
-	$(MAKE) -f CMakeFiles/RoomEscape.dir/build.make CMakeFiles/RoomEscape.dir/src/interaction.cpp.o
-.PHONY : src/interaction.cpp.o
-
-src/interaction.i: src/interaction.cpp.i
-
-.PHONY : src/interaction.i
-
-# target to preprocess a source file
-src/interaction.cpp.i:
-	$(MAKE) -f CMakeFiles/RoomEscape.dir/build.make CMakeFiles/RoomEscape.dir/src/interaction.cpp.i
-.PHONY : src/interaction.cpp.i
-
-src/interaction.s: src/interaction.cpp.s
-
-.PHONY : src/interaction.s
-
-# target to generate assembly for a file
-src/interaction.cpp.s:
-	$(MAKE) -f CMakeFiles/RoomEscape.dir/build.make CMakeFiles/RoomEscape.dir/src/interaction.cpp.s
-.PHONY : src/interaction.cpp.s
 
 src/main.o: src/main.cpp.o
 
@@ -384,9 +357,6 @@ help:
 	@echo "... src/gameInit.o"
 	@echo "... src/gameInit.i"
 	@echo "... src/gameInit.s"
-	@echo "... src/interaction.o"
-	@echo "... src/interaction.i"
-	@echo "... src/interaction.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"

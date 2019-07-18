@@ -5,16 +5,16 @@ class Coin {
     private:
         int x_;
         int y_;
-        const int symbol_coin_ = 0x24;
+        int symbol_coin_ = 0x24;
     public:
         Coin(int x, int y);
 
-    int getX() const;
-    int getY() const;
-    void setX(int x);
-    void setY(int y);
+        int getX() const;
+        int getY() const;
+        void setX(int x);
+        void setY(int y);
 
-    const int getSymbolCoin() const;
+        const int getSymbolCoin() const;
 };
 
 
