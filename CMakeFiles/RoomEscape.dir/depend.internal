@@ -8,9 +8,22 @@ CMakeFiles/RoomEscape.dir/src/controls.cpp.o
  /home/vidik/CLionProjects/RoomEscape/include/controls.h
  /home/vidik/CLionProjects/RoomEscape/src/controls.cpp
  lib/BearLibTerminal/include/BearLibTerminal.h
+CMakeFiles/RoomEscape.dir/src/gameInit.cpp.o
+ /home/vidik/CLionProjects/RoomEscape/include/coin.h
+ /home/vidik/CLionProjects/RoomEscape/include/controls.h
+ /home/vidik/CLionProjects/RoomEscape/include/gameInit.h
+ /home/vidik/CLionProjects/RoomEscape/include/map.h
+ /home/vidik/CLionProjects/RoomEscape/include/player.h
+ /home/vidik/CLionProjects/RoomEscape/include/room.h
+ /home/vidik/CLionProjects/RoomEscape/src/gameInit.cpp
+CMakeFiles/RoomEscape.dir/src/interaction.cpp.o
+ /home/vidik/CLionProjects/RoomEscape/include/interaction.h
+ /home/vidik/CLionProjects/RoomEscape/src/interaction.cpp
 CMakeFiles/RoomEscape.dir/src/main.cpp.o
  /home/vidik/CLionProjects/RoomEscape/include/coin.h
  /home/vidik/CLionProjects/RoomEscape/include/controls.h
+ /home/vidik/CLionProjects/RoomEscape/include/gameInit.h
+ /home/vidik/CLionProjects/RoomEscape/include/interaction.h
  /home/vidik/CLionProjects/RoomEscape/include/map.h
  /home/vidik/CLionProjects/RoomEscape/include/player.h
  /home/vidik/CLionProjects/RoomEscape/include/room.h

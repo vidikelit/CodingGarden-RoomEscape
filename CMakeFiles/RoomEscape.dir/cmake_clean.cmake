@@ -6,6 +6,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/RoomEscape.dir/src/room.cpp.o"
   "CMakeFiles/RoomEscape.dir/src/map.cpp.o"
   "CMakeFiles/RoomEscape.dir/src/coin.cpp.o"
+  "CMakeFiles/RoomEscape.dir/src/interaction.cpp.o"
+  "CMakeFiles/RoomEscape.dir/src/gameInit.cpp.o"
   "RoomEscape.pdb"
   "RoomEscape"
 )

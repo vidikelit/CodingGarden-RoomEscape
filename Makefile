@@ -177,6 +177,60 @@ src/controls.cpp.s:
 	$(MAKE) -f CMakeFiles/RoomEscape.dir/build.make CMakeFiles/RoomEscape.dir/src/controls.cpp.s
 .PHONY : src/controls.cpp.s
 
+src/gameInit.o: src/gameInit.cpp.o
+
+.PHONY : src/gameInit.o
+
+# target to build an object file
+src/gameInit.cpp.o:
+	$(MAKE) -f CMakeFiles/RoomEscape.dir/build.make CMakeFiles/RoomEscape.dir/src/gameInit.cpp.o
+.PHONY : src/gameInit.cpp.o
+
+src/gameInit.i: src/gameInit.cpp.i
+
+.PHONY : src/gameInit.i
+
+# target to preprocess a source file
+src/gameInit.cpp.i:
+	$(MAKE) -f CMakeFiles/RoomEscape.dir/build.make CMakeFiles/RoomEscape.dir/src/gameInit.cpp.i
+.PHONY : src/gameInit.cpp.i
+
+src/gameInit.s: src/gameInit.cpp.s
+
+.PHONY : src/gameInit.s
+
+# target to generate assembly for a file
+src/gameInit.cpp.s:
+	$(MAKE) -f CMakeFiles/RoomEscape.dir/build.make CMakeFiles/RoomEscape.dir/src/gameInit.cpp.s
+.PHONY : src/gameInit.cpp.s
+
+src/interaction.o: src/interaction.cpp.o
+
+.PHONY : src/interaction.o
+
+# target to build an object file
+src/interaction.cpp.o:
+	$(MAKE) -f CMakeFiles/RoomEscape.dir/build.make CMakeFiles/RoomEscape.dir/src/interaction.cpp.o
+.PHONY : src/interaction.cpp.o
+
+src/interaction.i: src/interaction.cpp.i
+
+.PHONY : src/interaction.i
+
+# target to preprocess a source file
+src/interaction.cpp.i:
+	$(MAKE) -f CMakeFiles/RoomEscape.dir/build.make CMakeFiles/RoomEscape.dir/src/interaction.cpp.i
+.PHONY : src/interaction.cpp.i
+
+src/interaction.s: src/interaction.cpp.s
+
+.PHONY : src/interaction.s
+
+# target to generate assembly for a file
+src/interaction.cpp.s:
+	$(MAKE) -f CMakeFiles/RoomEscape.dir/build.make CMakeFiles/RoomEscape.dir/src/interaction.cpp.s
+.PHONY : src/interaction.cpp.s
+
 src/main.o: src/main.cpp.o
 
 .PHONY : src/main.o
@@ -327,6 +381,12 @@ help:
 	@echo "... src/controls.o"
 	@echo "... src/controls.i"
 	@echo "... src/controls.s"
+	@echo "... src/gameInit.o"
+	@echo "... src/gameInit.i"
+	@echo "... src/gameInit.s"
+	@echo "... src/interaction.o"
+	@echo "... src/interaction.i"
+	@echo "... src/interaction.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"

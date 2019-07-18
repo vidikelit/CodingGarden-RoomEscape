@@ -3,6 +3,8 @@
 #include "../include/player.h"
 #include "../include/window.h"
 #include "../include/map.h"
+#include "../include/interaction.h"
+#include "../include/gameInit.h"
 
 
 int main()
@@ -14,10 +16,8 @@ int main()
     terminal_refresh();
 
     Controls controls;
-    Map map;
-    Player player(controls, 11, 11);
-    map.generator();
-    map.render(0);
+    GameInit gameInit(controls);
+    gameInit.initialize();
     while(true) {
 //        отчистка области поля комнаты
         terminal_layer(1);
@@ -25,16 +25,10 @@ int main()
         terminal_layer(0);
 
         controls.Update();
-        map.player_x = player.getX();
-        map.player_y = player.getY();
-        if(controls.isE()){
-            map.scanner(player.getX(), player.getY(), map.number_room_);
-            player.setX(map.player_x);
-            player.setY(map.player_y);
-        }
+        gameInit.update();
+
         if(controls.isExit())
             break;
-        player.update();
         terminal_refresh();
     }
     terminal_close();

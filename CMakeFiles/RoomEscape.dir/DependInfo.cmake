@@ -6,6 +6,8 @@ set(CMAKE_DEPENDS_LANGUAGES
 set(CMAKE_DEPENDS_CHECK_CXX
   "/home/vidik/CLionProjects/RoomEscape/src/coin.cpp" "/home/vidik/CLionProjects/RoomEscape/CMakeFiles/RoomEscape.dir/src/coin.cpp.o"
   "/home/vidik/CLionProjects/RoomEscape/src/controls.cpp" "/home/vidik/CLionProjects/RoomEscape/CMakeFiles/RoomEscape.dir/src/controls.cpp.o"
+  "/home/vidik/CLionProjects/RoomEscape/src/gameInit.cpp" "/home/vidik/CLionProjects/RoomEscape/CMakeFiles/RoomEscape.dir/src/gameInit.cpp.o"
+  "/home/vidik/CLionProjects/RoomEscape/src/interaction.cpp" "/home/vidik/CLionProjects/RoomEscape/CMakeFiles/RoomEscape.dir/src/interaction.cpp.o"
   "/home/vidik/CLionProjects/RoomEscape/src/main.cpp" "/home/vidik/CLionProjects/RoomEscape/CMakeFiles/RoomEscape.dir/src/main.cpp.o"
   "/home/vidik/CLionProjects/RoomEscape/src/map.cpp" "/home/vidik/CLionProjects/RoomEscape/CMakeFiles/RoomEscape.dir/src/map.cpp.o"
   "/home/vidik/CLionProjects/RoomEscape/src/player.cpp" "/home/vidik/CLionProjects/RoomEscape/CMakeFiles/RoomEscape.dir/src/player.cpp.o"

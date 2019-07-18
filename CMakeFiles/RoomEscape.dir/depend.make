@@ -8,8 +8,21 @@ CMakeFiles/RoomEscape.dir/src/controls.cpp.o: include/controls.h
 CMakeFiles/RoomEscape.dir/src/controls.cpp.o: src/controls.cpp
 CMakeFiles/RoomEscape.dir/src/controls.cpp.o: lib/BearLibTerminal/include/BearLibTerminal.h
 
+CMakeFiles/RoomEscape.dir/src/gameInit.cpp.o: include/coin.h
+CMakeFiles/RoomEscape.dir/src/gameInit.cpp.o: include/controls.h
+CMakeFiles/RoomEscape.dir/src/gameInit.cpp.o: include/gameInit.h
+CMakeFiles/RoomEscape.dir/src/gameInit.cpp.o: include/map.h
+CMakeFiles/RoomEscape.dir/src/gameInit.cpp.o: include/player.h
+CMakeFiles/RoomEscape.dir/src/gameInit.cpp.o: include/room.h
+CMakeFiles/RoomEscape.dir/src/gameInit.cpp.o: src/gameInit.cpp
+
+CMakeFiles/RoomEscape.dir/src/interaction.cpp.o: include/interaction.h
+CMakeFiles/RoomEscape.dir/src/interaction.cpp.o: src/interaction.cpp
+
 CMakeFiles/RoomEscape.dir/src/main.cpp.o: include/coin.h
 CMakeFiles/RoomEscape.dir/src/main.cpp.o: include/controls.h
+CMakeFiles/RoomEscape.dir/src/main.cpp.o: include/gameInit.h
+CMakeFiles/RoomEscape.dir/src/main.cpp.o: include/interaction.h
 CMakeFiles/RoomEscape.dir/src/main.cpp.o: include/map.h
 CMakeFiles/RoomEscape.dir/src/main.cpp.o: include/player.h
 CMakeFiles/RoomEscape.dir/src/main.cpp.o: include/room.h
