@@ -12,7 +12,10 @@ class Room {
   const int room_size_ = 20;
   const int symbol_wall_ = 0x23;
   const int symbol_door_ = 0x3E;
+  const int symbol_exit_ = 0x45;
   std::vector<Coin> coins{};
+  int exitDoor_[1][2] = {{10, 10}};
+  bool exit_ = false;
 
  public:
   const int doorsCoords[4][2] = {{10, 0}, {10, 20}, {0, 10}, {20, 10}};
@@ -21,6 +24,7 @@ class Room {
   void renderRoom();
   void renderDoor();
   void renderCoin();
+  void renderExit();
   void removeCoin(int i);
   void pushCoin(Coin coin);
 
@@ -30,6 +34,9 @@ class Room {
   const int getRoomSize() const;
   int getX() const;
   int getY() const;
+  void setExit(bool exit);
+  bool isExit() const;
+  const int getSymbolExit() const;
 };
 
 #endif  // INCLUDE_GAME_ROOM_H_

@@ -62,9 +62,7 @@ int Player::getY() const {
   return y_;
 }
 
-Player::Player(const Controls &controls, int x, int y) : controls(controls), x_(x), y_(y) {
-  terminal_set("0x40: ./resources/tiles/player.png");
-}
+Player::Player(const Controls &controls, int x, int y) : controls(controls), x_(x), y_(y) {}
 
 void Player::setX(int x) {
   x_ = x;

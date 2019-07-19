@@ -82,6 +82,7 @@ void Map::render(int n) {
 
 void Map::renderCoin(int n) {
   rooms.at(n).renderCoin();
+  rooms.at(n).renderExit();
 }
 
 void Map::scanner(int x, int y, int n) {

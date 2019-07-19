@@ -30,6 +30,12 @@ void Room::renderCoin() {
   }
 }
 
+void Room::renderExit() {
+  if (isExit() == true) {
+    terminal_put(exitDoor_[0][0], exitDoor_[0][1], symbol_exit_);
+  }
+}
+
 const int Room::getRoomSize() const {
   return room_size_;
 }
@@ -56,4 +62,13 @@ void Room::removeCoin(int i) {
 
 void Room::pushCoin(Coin coin) {
   coins.push_back(coin);
+}
+void Room::setExit(bool exit) {
+  exit_ = exit;
+}
+bool Room::isExit() const {
+  return exit_;
+}
+const int Room::getSymbolExit() const {
+  return symbol_exit_;
 }
