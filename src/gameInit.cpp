@@ -25,17 +25,16 @@ void GameInit::gameStart() {
     if (getMenuPoint() == i) {
       terminal_color(color_from_name("green"));
     }
+    terminal_printf(9, 8 + i, "%s", menu[i]);
+    terminal_color(color_from_name("white"));
     if (controls->isEnter()) {
       if (getMenuPoint() == 0) {
         setMenuPoint(10);
-        terminal_color(color_from_name("NULL"));
         initialize();
         setGameStart(false);
       }
       if (getMenuPoint() == 1) terminal_close();
     }
-    terminal_printf(9, 8 + i, "%s", menu[i]);
-    terminal_color(color_from_name("white"));
   }
   if (controls->isDown()) {
     setMenuPoint(getMenuPoint() + 1);
