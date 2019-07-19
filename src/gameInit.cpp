@@ -22,14 +22,26 @@ void GameInit::update() {
   terminal_layer(0);
   terminal_clear_area(1, 1, 19, 19);
 
+  if (gameOver) {
+    endGame();
+    return;
+  }
+
+  if (map.getAllCoin() == 0) {
+    terminal_put(10, 10, 0x3E);
+  }
+
   map.player_x = player.getX();
   map.player_y = player.getY();
   if (controls->isE()) {
     map.scanner(player.getX(), player.getY(), map.number_room_);
     player.setX(map.player_x);
     player.setY(map.player_y);
+    if (terminal_pick(player.getX(), player.getY(), 0) == 0x3E) {
+      gameOver = true;
+    }
   }
-  map.render(map.getNumberRoom());
+  map.renderCoin(map.getNumberRoom());
   renderHUD();
   player.update();
   if (map.getCurrentRoom().getCoinCount() != 0) {
@@ -53,4 +65,11 @@ void GameInit::renderHUD() {
 
   terminal_put(21, 19, 0x24);
   terminal_printf(22, 19, "=%d", player.getCoin());
+}
+
+void GameInit::endGame() {
+  terminal_clear();
+  terminal_print(0, 0, "Статистика:");
+  terminal_printf(1, 2, "Шагов=%d", player.getSteps());
+  terminal_printf(1, 3, "Монет=%d", player.getCoin());
 }

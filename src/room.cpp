@@ -11,12 +11,6 @@ void Room::renderRoom() {
     terminal_put(0, i, symbol_wall_);
     terminal_put(getRoomSize(), i, symbol_wall_);
   }
-  //    //  отрисовка пола
-  //    for(int i = 1; i < getRoomSize(); i++) {
-  //        for (int j = 1; j < getRoomSize(); j++) {
-  //            terminal_put(i, j, 0xB7);
-  //        }
-  //    }
 }
 
 void Room::renderDoor() {

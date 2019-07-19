@@ -78,6 +78,9 @@ void Map::generator() {
 void Map::render(int n) {
   rooms.at(n).renderRoom();
   rooms.at(n).renderDoor();
+}
+
+void Map::renderCoin(int n) {
   rooms.at(n).renderCoin();
 }
 
@@ -143,4 +146,10 @@ Room& Map::getCurrentRoom() {
 
 int Map::getNumberRoom() {
   return number_room_;
+}
+
+int Map::getAllCoin() {
+  int coin = 0;
+  for (int i = 0; i < rooms.size(); i++) coin += rooms.at(i).getCoinCount();
+  return coin;
 }

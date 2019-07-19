@@ -22,11 +22,12 @@ class Map {
   void generator();
   Room& getCurrentRoom();
   int getNumberRoom();
+  int getAllCoin();
   void render(int n);
+  void renderCoin(int n);
   void scanner(int x_p, int y_p, int n_r);
   void teleport(int i);
   void playerPos(int x_p, int y_p, int i);
-
   const int getPointX() const;
   const int getPointY() const;
   void setPointX(int pointX);

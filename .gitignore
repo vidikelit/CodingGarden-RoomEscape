@@ -146,5 +146,5 @@ misc
 *.make
 *.cmake
 RoomEscape
-CMakeFile
+CMakeFiles
 CMakeCache.txt

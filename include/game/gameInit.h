@@ -10,10 +10,13 @@ class GameInit {
   Controls *controls;
   Player player{*controls, 11, 11};
 
+  bool gameOver = false;
  public:
   void initialize();
   void update();
   void renderHUD();
+
+  void endGame();
 
   explicit GameInit(Controls *controls);
 };
