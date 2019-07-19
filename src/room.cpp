@@ -16,7 +16,7 @@ void Room::renderRoom() {
 void Room::renderDoor() {
   //    отрисовка дверей
   for (int i = 0; i <= 4; i++) {
-    if (doors[i] == true) {
+    if (doors[i]) {
       terminal_put(doorsCoords[i][0], doorsCoords[i][1], symbol_door_);
     }
   }
@@ -31,7 +31,7 @@ void Room::renderCoin() {
 }
 
 void Room::renderExit() {
-  if (isExit() == true) {
+  if (isExit()) {
     terminal_put(exitDoor_[0][0], exitDoor_[0][1], symbol_exit_);
   }
 }

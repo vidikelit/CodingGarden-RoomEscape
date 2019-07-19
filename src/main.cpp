@@ -15,10 +15,13 @@ int main() {
   terminal_refresh();
   Controls controls;
   GameInit gameInit(&controls);
-  gameInit.initialize();
   while (true) {
     controls.Update();
-    gameInit.update();
+    if (gameInit.isGameStart()) {
+      gameInit.gameStart();
+    } else {
+      gameInit.update();
+    }
     if (controls.isExit()) break;
     terminal_refresh();
   }

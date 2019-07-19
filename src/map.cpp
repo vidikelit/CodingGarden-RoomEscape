@@ -9,7 +9,7 @@
 
 void Map::generateRoom() {
   Room room = rooms.at(0);
-  int random = std::experimental::randint(0, 100) + 1;
+  int random = std::experimental::randint(1, 100);
   // вверх
   if (random <= 25) setPointY(getPointY() - room.getRoomSize());
   // вниз
@@ -42,14 +42,13 @@ void Map::generateDoor(int x, int y, int i) {
 }
 
 void Map::generateCoin(int n) {
-  for (int i = 0; i <= std::experimental::randint(0, 3); i++) {
+  for (int i = 0; i < std::experimental::randint(1, 4); i++) {
     rooms.at(n).pushCoin({std::experimental::randint(5, 16), std::experimental::randint(5, 16)});
   }
 }
 
 void Map::generator() {
-  int random = 5 + std::experimental::randint(0, 5);
-  for (int i = 0; i <= random; i++) {
+  for (int i = 0; i < std::experimental::randint(5, 10); i++) {
     bool a = true;
     int x = getPointX();
     int y = getPointY();

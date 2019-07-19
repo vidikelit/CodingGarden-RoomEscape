@@ -22,6 +22,7 @@ void Controls::Update() {
     if (key == TK_CLOSE || key == TK_ESCAPE) is_exit_ = true;
     // взаимодействие с объектами (дверь) E
     if (key == TK_E) is_e = true;
+    if (key == TK_ENTER) is_enter_ = true;
   }
 }
 
@@ -42,4 +43,7 @@ bool Controls::isExit() const {
 }
 bool Controls::isE() const {
   return is_e;
+}
+bool Controls::isEnter() const {
+  return is_enter_;
 }

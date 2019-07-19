@@ -8,6 +8,7 @@ class Controls {
   bool is_right_;
   bool is_left_;
   bool is_e;
+  bool is_enter_;
   bool is_exit_;
 
  public:
@@ -17,6 +18,7 @@ class Controls {
   bool isLeft() const;
   bool isExit() const;
   bool isE() const;
+  bool isEnter() const;
 
   void Update();
 };

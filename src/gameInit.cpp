@@ -18,18 +18,47 @@ void GameInit::initialize() {
   map.render(0);
 }
 
+void GameInit::gameStart() {
+  terminal_clear();
+  terminal_print(9, 5, "[color=red]Room Escape");
+  for (int i = 0; i < menu.size(); i++) {
+    if (getMenuPoint() == i) {
+      terminal_color(color_from_name("green"));
+    }
+    if (controls->isEnter()) {
+      if (getMenuPoint() == 0) {
+        setMenuPoint(10);
+        terminal_color(color_from_name("NULL"));
+        initialize();
+        setGameStart(false);
+      }
+      if (getMenuPoint() == 1) terminal_close();
+    }
+    terminal_printf(9, 8 + i, "%s", menu[i]);
+    terminal_color(color_from_name("white"));
+  }
+  if (controls->isDown()) {
+    setMenuPoint(getMenuPoint() + 1);
+    if (getMenuPoint() > menu.size() - 1) setMenuPoint(0);
+  }
+  if (controls->isUp()) {
+    setMenuPoint(getMenuPoint() - 1);
+    if (getMenuPoint() < 0) setMenuPoint(menu.size() - 1);
+  }
+}
+
 void GameInit::update() {
   terminal_layer(1);
   terminal_clear_area(1, 1, 19, 19);
   terminal_layer(0);
   terminal_clear_area(1, 1, 19, 19);
 
-  if (gameOver) {
+  if (gameOver_) {
     endGame();
     return;
   }
 
-  if (isCoinStop() == true) {
+  if (isCoinStop()) {
     if (map.getAllCoin() == 0) {
       setCoinStop(false);
       map.getCurrentRoom().setExit(true);
@@ -44,7 +73,7 @@ void GameInit::update() {
     player.setX(map.player_x);
     player.setY(map.player_y);
     if (terminal_pick(player.getX(), player.getY(), 0) == map.getCurrentRoom().getSymbolExit()) {
-      gameOver = true;
+      gameOver_ = true;
     }
   }
 
@@ -80,8 +109,20 @@ void GameInit::endGame() {
   terminal_printf(1, 3, "Монет=%d", player.getCoin());
 }
 bool GameInit::isCoinStop() const {
-  return coinStop;
+  return coinStop_;
 }
 void GameInit::setCoinStop(bool coinStop) {
-  GameInit::coinStop = coinStop;
+  GameInit::coinStop_ = coinStop;
+}
+bool GameInit::isGameStart() const {
+  return gameStart_;
+}
+void GameInit::setGameStart(bool gameStart) {
+  gameStart_ = gameStart;
+}
+int GameInit::getMenuPoint() const {
+  return menuPoint;
+}
+void GameInit::setMenuPoint(int menuPoint) {
+  GameInit::menuPoint = menuPoint;
 }
