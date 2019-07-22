@@ -5,6 +5,7 @@ class Coin {
  private:
   int x_;
   int y_;
+
   int symbol_coin_ = 0x24;
 
  public:
@@ -15,7 +16,7 @@ class Coin {
   void setX(int x);
   void setY(int y);
 
-  const int getSymbolCoin() const;
+  int getSymbolCoin() const;
 };
 
 #endif  // INCLUDE_GAME_COIN_H_

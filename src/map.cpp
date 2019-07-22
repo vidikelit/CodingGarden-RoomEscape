@@ -87,7 +87,7 @@ void Map::renderCoin(int n) {
 void Map::scanner(int x, int y, int n) {
   for (int i = 0; i <= 3; i++) {
     if (sqrt(pow(rooms.at(n).doorsCoords[i][0] - x, 2) + pow(rooms.at(n).doorsCoords[i][1] - y, 2)) <= 1) {
-      if (rooms.at(n).doors[i] == true) {
+      if (rooms.at(n).doors[i]) {
         teleport(i);
         playerPos(x, y, i);
         break;
@@ -97,12 +97,12 @@ void Map::scanner(int x, int y, int n) {
 }
 
 void Map::playerPos(int x, int y, int i) {
-  player_x = x;
-  player_y = y;
-  if (i == 0) player_y += 19;
-  if (i == 1) player_y -= 19;
-  if (i == 2) player_x += 19;
-  if (i == 3) player_x -= 19;
+  player_x_ = x;
+  player_y_ = y;
+  if (i == 0) player_y_ += 19;
+  if (i == 1) player_y_ -= 19;
+  if (i == 2) player_x_ += 19;
+  if (i == 3) player_x_ -= 19;
 }
 
 void Map::teleport(int i) {
@@ -152,4 +152,10 @@ int Map::getAllCoin() {
   int coin = 0;
   for (int i = 0; i < rooms.size(); i++) coin += rooms.at(i).getCoinCount();
   return coin;
+}
+const std::vector<Room>& Map::getRooms() const {
+  return rooms;
+}
+void Map::setRooms(Room room) {
+  Map::rooms.push_back(Room(room.getX(), room.getY()));
 }

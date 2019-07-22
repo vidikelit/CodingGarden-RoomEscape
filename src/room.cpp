@@ -72,3 +72,9 @@ bool Room::isExit() const {
 const int Room::getSymbolExit() const {
   return symbol_exit_;
 }
+void Room::setX(int x) {
+  x_ = x;
+}
+void Room::setY(int y) {
+  y_ = y;
+}

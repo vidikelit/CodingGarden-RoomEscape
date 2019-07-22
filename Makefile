@@ -325,6 +325,33 @@ src/room.cpp.s:
 	$(MAKE) -f CMakeFiles/RoomEscape.dir/build.make CMakeFiles/RoomEscape.dir/src/room.cpp.s
 .PHONY : src/room.cpp.s
 
+src/saver_loader.o: src/saver_loader.cpp.o
+
+.PHONY : src/saver_loader.o
+
+# target to build an object file
+src/saver_loader.cpp.o:
+	$(MAKE) -f CMakeFiles/RoomEscape.dir/build.make CMakeFiles/RoomEscape.dir/src/saver_loader.cpp.o
+.PHONY : src/saver_loader.cpp.o
+
+src/saver_loader.i: src/saver_loader.cpp.i
+
+.PHONY : src/saver_loader.i
+
+# target to preprocess a source file
+src/saver_loader.cpp.i:
+	$(MAKE) -f CMakeFiles/RoomEscape.dir/build.make CMakeFiles/RoomEscape.dir/src/saver_loader.cpp.i
+.PHONY : src/saver_loader.cpp.i
+
+src/saver_loader.s: src/saver_loader.cpp.s
+
+.PHONY : src/saver_loader.s
+
+# target to generate assembly for a file
+src/saver_loader.cpp.s:
+	$(MAKE) -f CMakeFiles/RoomEscape.dir/build.make CMakeFiles/RoomEscape.dir/src/saver_loader.cpp.s
+.PHONY : src/saver_loader.cpp.s
+
 src/window.o: src/window.cpp.o
 
 .PHONY : src/window.o
@@ -383,6 +410,9 @@ help:
 	@echo "... src/room.o"
 	@echo "... src/room.i"
 	@echo "... src/room.s"
+	@echo "... src/saver_loader.o"
+	@echo "... src/saver_loader.i"
+	@echo "... src/saver_loader.s"
 	@echo "... src/window.o"
 	@echo "... src/window.i"
 	@echo "... src/window.s"

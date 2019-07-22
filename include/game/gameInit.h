@@ -10,18 +10,20 @@ class GameInit {
   Map map;
   Controls *controls;
   Player player{*controls, 11, 11};
-  std::vector<const char*> menu{"Начало игры", "Выход"};
+  std::vector<const char *> menu{"Начало игры", "Выход", "Сохранение", "Загрузка"};
   bool gameStart_ = true;
   bool gameOver_ = false;
   bool coinStop_ = true;
   int menuPoint = 0;
 
  public:
-  void initialize();
+  void initializeNew();
+  void initializeLoad();
   void update();
   void renderHUD();
   void endGame();
-  void gameStart();
+  void gameMenu();
+  void setSprites();
   bool isCoinStop() const;
   void setCoinStop(bool coinStop);
   bool isGameStart() const;

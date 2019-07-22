@@ -34,6 +34,8 @@ class Room {
   const int getRoomSize() const;
   int getX() const;
   int getY() const;
+  void setX(int x);
+  void setY(int y);
   void setExit(bool exit);
   bool isExit() const;
   const int getSymbolExit() const;

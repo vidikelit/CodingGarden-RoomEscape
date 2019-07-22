@@ -6,7 +6,6 @@
 #include "game/window.h"
 
 int main() {
-  srand(time(NULL));
   Window window;
 
   terminal_open();
@@ -18,7 +17,8 @@ int main() {
   while (true) {
     controls.Update();
     if (gameInit.isGameStart()) {
-      gameInit.gameStart();
+      gameInit.gameMenu();
+      if (gameInit.getMenuPoint() == 11) break;
     } else {
       gameInit.update();
     }

@@ -18,6 +18,6 @@ void Coin::setY(int y) {
   y_ = y;
 }
 
-const int Coin::getSymbolCoin() const {
+int Coin::getSymbolCoin() const {
   return symbol_coin_;
 }
