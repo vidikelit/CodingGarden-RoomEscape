@@ -27,8 +27,8 @@ class Map {
   void scanner(int x_p, int y_p, int n_r);
   void teleport(int i);
   void playerPos(int x_p, int y_p, int i);
-  const int getPointX() const;
-  const int getPointY() const;
+  int getPointX() const;
+  int getPointY() const;
   void setPointX(int pointX);
   void setPointY(int pointY);
   const std::vector<Room>& getRooms() const;

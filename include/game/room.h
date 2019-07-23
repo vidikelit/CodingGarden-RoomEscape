@@ -9,10 +9,10 @@ class Room {
   int x_;
   int y_;
   // размер комнаты
-  const int room_size_ = 20;
-  const int symbol_wall_ = 0x23;
-  const int symbol_door_ = 0x3E;
-  const int symbol_exit_ = 0x45;
+  int room_size_ = 20;
+  int symbol_wall_ = 0x23;
+  int symbol_door_ = 0x3E;
+int symbol_exit_ = 0x25;
   std::vector<Coin> coins{};
   int exitDoor_[1][2] = {{10, 10}};
   bool exit_ = false;
@@ -31,14 +31,14 @@ class Room {
   Room(int x, int y);
   int getCoinCount();
   Coin getCoin(int i);
-  const int getRoomSize() const;
+  int getRoomSize() const;
   int getX() const;
   int getY() const;
   void setX(int x);
   void setY(int y);
   void setExit(bool exit);
   bool isExit() const;
-  const int getSymbolExit() const;
+  int getSymbolExit() const;
 };
 
 #endif  // INCLUDE_GAME_ROOM_H_

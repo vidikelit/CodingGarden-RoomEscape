@@ -7,9 +7,10 @@ class Controls {
   bool is_down_;
   bool is_right_;
   bool is_left_;
-  bool is_e;
+  bool is_e_;
   bool is_enter_;
   bool is_exit_;
+  bool is_esc_;
 
  public:
   bool isUp() const;
@@ -19,7 +20,7 @@ class Controls {
   bool isExit() const;
   bool isE() const;
   bool isEnter() const;
-
+  bool isEsc() const;
   void Update();
 };
 

@@ -36,10 +36,6 @@ void Room::renderExit() {
   }
 }
 
-const int Room::getRoomSize() const {
-  return room_size_;
-}
-
 int Room::getX() const {
   return x_;
 }
@@ -69,12 +65,15 @@ void Room::setExit(bool exit) {
 bool Room::isExit() const {
   return exit_;
 }
-const int Room::getSymbolExit() const {
-  return symbol_exit_;
-}
 void Room::setX(int x) {
   x_ = x;
 }
 void Room::setY(int y) {
   y_ = y;
+}
+int Room::getRoomSize() const {
+  return room_size_;
+}
+int Room::getSymbolExit() const {
+  return symbol_exit_;
 }

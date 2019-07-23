@@ -25,6 +25,6 @@ int main() {
     if (controls.isExit()) break;
     terminal_refresh();
   }
-  gameInit.endGame();
+//  gameInit.endGame();
   terminal_close();
 }

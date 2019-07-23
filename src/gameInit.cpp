@@ -1,5 +1,6 @@
 #include "game/gameInit.h"
 #include <BearLibTerminal.h>
+#include <cstring>
 #include "game/coin.h"
 #include "game/controls.h"
 #include "game/map.h"
@@ -10,15 +11,19 @@
 GameInit::GameInit(Controls* controls) : controls(controls) {}
 
 void GameInit::initializeNew() {
+  map = Map();
   map.generator();
   setSprites();
   map.render(0);
 }
 
 void GameInit::initializeLoad() {
+  player.setCoin(0);
+  player.setSteps(0);
+  map = Map();
   SaverLoader saverLoader(&map);
   saverLoader.loader();
-  for (int i = 0; i < map.getRooms().size(); i++) {
+  for (unsigned int i = 0; i < map.getRooms().size(); i++) {
     map.generateDoor(map.getRooms().at(i).getX(), map.getRooms().at(i).getY(), i);
     map.generateCoin(i);
   }
@@ -29,32 +34,46 @@ void GameInit::initializeLoad() {
 void GameInit::gameMenu() {
   terminal_clear();
   terminal_print(9, 5, "[color=red]Room Escape");
-  for (int i = 0; i < menu.size(); i++) {
-    if (getMenuPoint() == i) {
+  for (unsigned int i = 0; i < menu.size(); i++) {
+    if (getMenuPoint() == static_cast<int>(i)) {
       terminal_color(color_from_name("green"));
     }
     terminal_printf(9, 8 + i, "%s", menu[i]);
     terminal_color(color_from_name("white"));
     if (controls->isEnter()) {
-      if (getMenuPoint() == 0) {
-        SaverLoader saverLoader(&map);
+      // продолжить игру
+      if (strcmp(menu[getMenuPoint()], continue_game_) == 0) {
+        setMenuPoint(10);
+        setGameStart(false);
+        map.render(map.getNumberRoom());
+        break;
+      }
+      // новая игра
+      if (strcmp(menu[getMenuPoint()], new_game_) == 0) {
         setMenuPoint(10);
         initializeNew();
-
-        saverLoader.saver();
+        if (strcmp(menu[0], continue_game_) != 0) setMenu();
         setGameStart(false);
+        break;
       }
-      if (getMenuPoint() == 1) {
-        setMenuPoint(10);
-      }
-//      if (getMenuPoint() == 2) {
-//        SaverLoader saverLoader;
-//        saverLoader.saver();
-//      }
-      if (getMenuPoint() == 3) {
-        setMenuPoint(10);
+      // загрузить игру
+      if (strcmp(menu[getMenuPoint()], load_game_) == 0) {
+        setMenuPoint(0);
         initializeLoad();
         setGameStart(false);
+        break;
+      }
+      // сохранить игру
+      if (strcmp(menu[getMenuPoint()], save_game_) == 0) {
+        SaverLoader saverLoader(&map);
+        setMenuPoint(0);
+        saverLoader.saver();
+        break;
+      }
+      // выход
+      if (strcmp(menu[getMenuPoint()], end_game_) == 0) {
+        setMenuPoint(11);
+        break;
       }
     }
   }
@@ -64,8 +83,19 @@ void GameInit::gameMenu() {
   }
   if (controls->isDown()) {
     setMenuPoint(getMenuPoint() + 1);
-    if (getMenuPoint() > menu.size() - 1) setMenuPoint(0);
+    if (getMenuPoint() > static_cast<int>(menu.size()) - 1) setMenuPoint(0);
   }
+  terminal_color(color_from_name("white"));
+}
+
+void GameInit::setMenu() {
+  menu.insert(menu.begin(), continue_game_);
+  menu.insert(menu.begin() + 2, save_game_);
+}
+
+void GameInit::loadMenu() {
+  terminal_clear();
+  terminal_print(9, 5, "[color=red]Сохранения");
 }
 
 void GameInit::update() {
@@ -85,7 +115,7 @@ void GameInit::update() {
       map.getCurrentRoom().setExit(true);
     }
   }
-
+  setGameStart(false);
   map.renderCoin(map.getNumberRoom());
   map.player_x_ = player.getX();
   map.player_y_ = player.getY();
@@ -111,6 +141,12 @@ void GameInit::update() {
         }
       }
     }
+    terminal_layer(0);
+  }
+  if (controls->isEsc()) {
+    setGameStart(true);
+    setMenuPoint(0);
+    gameMenu();
   }
 }
 
@@ -134,7 +170,7 @@ void GameInit::setSprites() {
   terminal_set("0x40: ./resources/sprites/player.png");
   terminal_set("0x23: ./resources/sprites/castle.png");
   terminal_set("0x3E: ./resources/sprites/door.png");
-  terminal_set("0x45: ./resources/sprites/signExit.png");
+  terminal_set("0x25: ./resources/sprites/signExit.png");
   terminal_set("0x24: ./resources/sprites/coinGold.png");
 }
 

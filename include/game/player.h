@@ -6,9 +6,10 @@
 
 class Player {
  private:
+  const Controls &controls;
   int x_;
   int y_;
-  const Controls &controls;
+
   const int symbol_ = 0x40;
 
   const int speed_ = 1;
