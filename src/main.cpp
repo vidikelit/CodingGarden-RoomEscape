@@ -13,18 +13,23 @@ int main() {
   window.Settings();
   terminal_refresh();
   Controls controls;
+  terminal_set("input: filter=[keyboard+];");
   GameInit gameInit(&controls);
   while (true) {
     controls.Update();
     if (gameInit.isGameStart()) {
-      gameInit.gameMenu();
       if (gameInit.getMenuPoint() == 11) break;
+      if (gameInit.getMenuStatus() == 1 || gameInit.getMenuStatus() == 2) {
+        if (gameInit.getMenuStatus() == 1) gameInit.loadMenu();
+        if (gameInit.getMenuStatus() == 2) gameInit.saveMenu();
+      } else {
+        gameInit.gameMenu();
+      }
     } else {
       gameInit.update();
     }
     if (controls.isExit()) break;
     terminal_refresh();
   }
-//  gameInit.endGame();
   terminal_close();
 }

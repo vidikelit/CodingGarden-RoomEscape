@@ -21,7 +21,7 @@ set(STYLE_FILTER ${STYLE_FILTER}-build/include_subdir,)
 #set(STYLE_FILTER ${STYLE_FILTER}-build/include_what_you_use,)
 #set(STYLE_FILTER ${STYLE_FILTER}-build/header_guard,)
 
-#set(STYLE_FILTER ${STYLE_FILTER}-readability/streams,)
+set(STYLE_FILTER ${STYLE_FILTER}-readability/streams,)
 #set(STYLE_FILTER ${STYLE_FILTER}-readability/todo,)
 #set(STYLE_FILTER ${STYLE_FILTER}-readability/namespace,)
 

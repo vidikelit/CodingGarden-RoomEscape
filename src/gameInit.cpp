@@ -11,6 +11,7 @@
 GameInit::GameInit(Controls* controls) : controls(controls) {}
 
 void GameInit::initializeNew() {
+  if (strcmp(menu[0], continue_game_) != 0) setMenu();
   map = Map();
   map.generator();
   setSprites();
@@ -18,10 +19,12 @@ void GameInit::initializeNew() {
 }
 
 void GameInit::initializeLoad() {
+  if (strcmp(menu[0], continue_game_) != 0) setMenu();
+  setCoinStop(true);
+  map = Map();
   player.setCoin(0);
   player.setSteps(0);
-  map = Map();
-  SaverLoader saverLoader(&map);
+  saverLoader.setMap(&map);
   saverLoader.loader();
   for (unsigned int i = 0; i < map.getRooms().size(); i++) {
     map.generateDoor(map.getRooms().at(i).getX(), map.getRooms().at(i).getY(), i);
@@ -52,22 +55,19 @@ void GameInit::gameMenu() {
       if (strcmp(menu[getMenuPoint()], new_game_) == 0) {
         setMenuPoint(10);
         initializeNew();
-        if (strcmp(menu[0], continue_game_) != 0) setMenu();
         setGameStart(false);
         break;
       }
       // загрузить игру
       if (strcmp(menu[getMenuPoint()], load_game_) == 0) {
         setMenuPoint(0);
-        initializeLoad();
-        setGameStart(false);
+        setMenuStatus(1);
         break;
       }
       // сохранить игру
       if (strcmp(menu[getMenuPoint()], save_game_) == 0) {
-        SaverLoader saverLoader(&map);
         setMenuPoint(0);
-        saverLoader.saver();
+        setMenuStatus(2);
         break;
       }
       // выход
@@ -95,9 +95,114 @@ void GameInit::setMenu() {
 
 void GameInit::loadMenu() {
   terminal_clear();
-  terminal_print(9, 5, "[color=red]Сохранения");
+  terminal_print(9, 5, "[color=red]Загрузить\nгенерацию");
+  for (unsigned int i = 0; i < menuLoad.size(); i++) {
+    if (getMenuPoint() == static_cast<int>(i)) {
+      terminal_color(color_from_name("green"));
+    }
+    terminal_printf(9, 8 + i, "%s", menuLoad[i]);
+    terminal_color(color_from_name("white"));
+    if (controls->isEnter()) {
+      // Слот 1
+      if (strcmp(menuLoad[getMenuPoint()], slot1_) == 0) {
+        saverLoader.setSaveSlot(0);
+        initializeLoad();
+        setMenuPoint(0);
+        setMenuStatus(0);
+        setGameStart(false);
+        break;
+      }
+      // Слот 2
+      if (strcmp(menuLoad[getMenuPoint()], slot2_) == 0) {
+        saverLoader.setSaveSlot(1);
+        initializeLoad();
+        setMenuPoint(0);
+        setMenuStatus(0);
+        setGameStart(false);
+        break;
+      }
+      // Слот 3
+      if (strcmp(menuLoad[getMenuPoint()], slot3_) == 0) {
+        saverLoader.setSaveSlot(2);
+        initializeLoad();
+        setMenuPoint(0);
+        setMenuStatus(0);
+        setGameStart(false);
+        break;
+      }
+    }
+  }
+  if (controls->isUp()) {
+    setMenuPoint(getMenuPoint() - 1);
+    if (getMenuPoint() < 0) setMenuPoint(menuLoad.size() - 1);
+  }
+  if (controls->isDown()) {
+    setMenuPoint(getMenuPoint() + 1);
+    if (getMenuPoint() > static_cast<int>(menuLoad.size()) - 1) setMenuPoint(0);
+  }
+  if (controls->isEsc()) {
+    setMenuPoint(0);
+    setMenuStatus(0);
+  }
+  terminal_color(color_from_name("white"));
 }
 
+void GameInit::saveMenu() {
+  terminal_clear();
+  terminal_print(9, 5, "[color=red]Сохранить\nгенерацию");
+  for (unsigned int i = 0; i < menuLoad.size(); i++) {
+    if (getMenuPoint() == static_cast<int>(i)) {
+      terminal_color(color_from_name("green"));
+    }
+    terminal_printf(9, 8 + i, "%s", menuLoad[i]);
+    terminal_color(color_from_name("white"));
+    if (controls->isEnter()) {
+      // Слот 1
+      if (strcmp(menuLoad[getMenuPoint()], slot1_) == 0) {
+        saverLoader.setSaveSlot(0);
+        saverLoader.setMap(&map);
+        saverLoader.saver();
+        setMenuPoint(0);
+        setMenuStatus(0);
+        setGameStart(true);
+        break;
+      }
+      // Слот 2
+      if (strcmp(menuLoad[getMenuPoint()], slot2_) == 0) {
+        saverLoader.setSaveSlot(1);
+        saverLoader.setMap(&map);
+        saverLoader.saver();
+        setMenuPoint(0);
+        setMenuStatus(0);
+        setGameStart(true);
+        break;
+      }
+      // Слот 3
+      if (strcmp(menuLoad[getMenuPoint()], slot3_) == 0) {
+        saverLoader.setSaveSlot(2);
+        saverLoader.setMap(&map);
+        saverLoader.saver();
+        setMenuPoint(0);
+        setMenuStatus(0);
+        setGameStart(true);
+        break;
+      }
+    }
+  }
+  if (controls->isUp()) {
+    setMenuPoint(getMenuPoint() - 1);
+    if (getMenuPoint() < 0) setMenuPoint(menuLoad.size() - 1);
+  }
+  if (controls->isDown()) {
+    setMenuPoint(getMenuPoint() + 1);
+    if (getMenuPoint() > static_cast<int>(menuLoad.size()) - 1) setMenuPoint(0);
+  }
+  if (controls->isEsc()) {
+    setMenuPoint(0);
+    setMenuStatus(0);
+  }
+  terminal_color(color_from_name("white"));
+}
 void GameInit::update() {
   terminal_layer(1);
   terminal_clear_area(1, 1, 19, 19);
@@ -119,6 +224,9 @@ void GameInit::update() {
   map.renderCoin(map.getNumberRoom());
   map.player_x_ = player.getX();
   map.player_y_ = player.getY();
+  if (terminal_pick(player.getX(), player.getY(), 0) == map.getCurrentRoom().getSymbolExit()) {
+    terminal_print(7, 8, "Press E");
+  }
   if (controls->isE()) {
     map.scanner(player.getX(), player.getY(), map.number_room_);
     player.setX(map.player_x_);
@@ -191,4 +299,13 @@ int GameInit::getMenuPoint() const {
 }
 void GameInit::setMenuPoint(int menuPoint) {
   GameInit::menuPoint = menuPoint;
+}
+int GameInit::getMenuStatus() const {
+  return menuStatus;
+}
+void GameInit::setMenuStatus(int menuStatus) {
+  GameInit::menuStatus = menuStatus;
+}
+bool GameInit::isGameOver() const {
+  return gameOver_;
 }

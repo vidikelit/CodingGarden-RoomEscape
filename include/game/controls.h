@@ -22,6 +22,7 @@ class Controls {
   bool isEnter() const;
   bool isEsc() const;
   void Update();
+  void menuUpdate();
 };
 
 #endif  // INCLUDE_GAME_CONTROLS_H_
