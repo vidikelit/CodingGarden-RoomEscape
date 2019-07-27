@@ -5,11 +5,9 @@
 #include "game/room.h"
 
 void SaverLoader::saver() {
-  char ch;
-  int newLine = 0;
-  int cell = 0;
   std::string str;
-  char symbol = '\n';
+  char ch;
+  int newLine = 0, cell = 0;
 
   textSave.clear();
   // собираем содержимое файла
@@ -21,12 +19,12 @@ void SaverLoader::saver() {
   }
   for (unsigned int i = 0; i < textSave.size(); i++) {
     if (newLine == saveSlot) break;
-    if (textSave.at(i) == symbol) newLine++;
+    if (textSave.at(i) == '\n') newLine++;
     cell++;
   }
   // удаление слота
   for (unsigned int i = 0;; i++) {
-    if (textSave.at(cell) == symbol) break;
+    if (textSave.at(cell) == '\n') break;
     textSave.erase(textSave.begin() + cell);
   }
   // формирование данных
@@ -52,9 +50,8 @@ void SaverLoader::saver() {
 }
 
 void SaverLoader::loader() {
-  int x = 0, y = 0;
   char ch;
-  int newLine = 0;
+  int x = 0, y = 0, newLine = 0;
   Room room(x, y);
 
   file = fopen(path, "r");
@@ -74,15 +71,9 @@ void SaverLoader::loader() {
   fclose(file);
 }
 
-SaverLoader::SaverLoader(Map *map) : map(map) {}
-
-int SaverLoader::getSaveSlot() const {
-  return saveSlot;
-}
 void SaverLoader::setSaveSlot(int saveSlot) {
   SaverLoader::saveSlot = saveSlot;
 }
 void SaverLoader::setMap(Map *map) {
   SaverLoader::map = map;
 }
-SaverLoader::SaverLoader() {}

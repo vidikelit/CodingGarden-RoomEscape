@@ -15,7 +15,7 @@ set(PROJECT_SOURCES_DIR ${PROJECT_SOURCE_DIR}/src)
 file(GLOB_RECURSE HEADERS ${PROJECT_HEADERS_DIR}/*.h)
 file(GLOB_RECURSE SOURCES ${PROJECT_SOURCES_DIR}/*.cpp)
 
-add_executable(${PROJECT_NAME} ${HEADERS} ${SOURCES} src/gameMenu.cpp include/game/gameMenu.h)
+add_executable(${PROJECT_NAME} ${HEADERS} ${SOURCES})
 
 include_directories(${PROJECT_HEADERS_DIR})
 

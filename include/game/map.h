@@ -19,6 +19,8 @@ class Map {
   void generateDoor(int x, int y, int i);
   void generateCoin(int n);
   void generator();
+  void setDoorCoin();
+
   Room& getCurrentRoom();
   int getNumberRoom();
   int getAllCoin();

@@ -65,11 +65,15 @@ void Map::generator() {
     }
     rooms.push_back(Room(getPointX(), getPointY()));
   }
+  setDoorCoin();
+}
+void Map::setDoorCoin() {
   for (unsigned int i = 0; i < rooms.size(); i++) {
     generateDoor(rooms.at(i).getX(), rooms.at(i).getY(), i);
     generateCoin(i);
   }
 }
+
 void Map::render(int n) {
   rooms.at(n).renderRoom();
   rooms.at(n).renderDoor();

@@ -26,7 +26,8 @@ void Controls::Update() {
     // взаимодействие с объектами (дверь) E
     if (key == TK_E) is_e_ = true;
     // выбор
-    if (key == TK_ENTER) is_enter_ = true;
+    if (key == TK_ENTER)
+      is_enter_ = true;
     // выход в меню
     if (key == TK_ESCAPE) is_esc_ = true;
   }

@@ -8,7 +8,7 @@ class Window {
   // размер для 16:9
   int window_x_ = 28;
   int window_y_ = 21;
-  bool fullscreen_ = true;
+  bool fullscreen_ = false;
 
  public:
   void Settings();

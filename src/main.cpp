@@ -1,34 +1,29 @@
 #include <BearLibTerminal.h>
 #include "game/controls.h"
-#include "game/gameInit.h"
-#include "game/map.h"
-#include "game/player.h"
+#include "game/gameLogic.h"
 #include "game/window.h"
 
 int main() {
   Window window;
+  Controls controls;
+  GameLogic gameLogic(&controls);
 
   terminal_open();
-  terminal_composition(TK_ON);
-  window.Settings();
   terminal_refresh();
-  Controls controls;
+  terminal_composition(TK_ON);
   terminal_set("input: filter=[keyboard+];");
-  GameInit gameInit(&controls);
+
+  window.Settings();
+  gameLogic.initGame();
   while (true) {
     controls.Update();
-    if (gameInit.isGameStart()) {
-      if (gameInit.getMenuPoint() == 11) break;
-      if (gameInit.getMenuStatus() == 1 || gameInit.getMenuStatus() == 2) {
-        if (gameInit.getMenuStatus() == 1) gameInit.loadMenu();
-        if (gameInit.getMenuStatus() == 2) gameInit.saveMenu();
-      } else {
-        gameInit.gameMenu();
-      }
-    } else {
-      gameInit.update();
-    }
+    if (gameLogic.isEnd()) break;
     if (controls.isExit()) break;
+    if (gameLogic.isRun()) {
+      gameLogic.update();
+    } else {
+      gameLogic.updateMenu();
+    }
     terminal_refresh();
   }
   terminal_close();

@@ -17,11 +17,8 @@ class SaverLoader {
   void saver();
   void loader();
 
-  int getSaveSlot() const;
-  SaverLoader();
   void setSaveSlot(int saveSlot);
   void setMap(Map *map);
-  explicit SaverLoader(Map *map);
 };
 
 #endif  // INCLUDE_GAME_SAVER_LOADER_H_

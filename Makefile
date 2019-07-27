@@ -39,10 +39,10 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /home/vidik/apps/clion-2019.1.4/bin/cmake/linux/bin/cmake
+CMAKE_COMMAND = /usr/local/bin/cmake
 
 # The command to remove a file.
-RM = /home/vidik/apps/clion-2019.1.4/bin/cmake/linux/bin/cmake -E remove -f
+RM = /usr/local/bin/cmake -E remove -f
 
 # Escaping for special characters.
 EQUALS = =
@@ -59,7 +59,7 @@ CMAKE_BINARY_DIR = /home/vidik/CLionProjects/RoomEscape
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
-	/home/vidik/apps/clion-2019.1.4/bin/cmake/linux/bin/cmake -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	/usr/local/bin/cmake -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : rebuild_cache
 
 # Special rule for the target rebuild_cache
@@ -69,8 +69,8 @@ rebuild_cache/fast: rebuild_cache
 
 # Special rule for the target edit_cache
 edit_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
-	/home/vidik/apps/clion-2019.1.4/bin/cmake/linux/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake cache editor..."
+	/home/vidik/apps/clion-2019.1.4/bin/cmake/linux/bin/ccmake -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : edit_cache
 
 # Special rule for the target edit_cache
@@ -190,32 +190,32 @@ src/controls.cpp.s:
 	$(MAKE) -f CMakeFiles/RoomEscape.dir/build.make CMakeFiles/RoomEscape.dir/src/controls.cpp.s
 .PHONY : src/controls.cpp.s
 
-src/gameInit.o: src/gameInit.cpp.o
+src/gameLogic.o: src/gameLogic.cpp.o
 
-.PHONY : src/gameInit.o
+.PHONY : src/gameLogic.o
 
 # target to build an object file
-src/gameInit.cpp.o:
-	$(MAKE) -f CMakeFiles/RoomEscape.dir/build.make CMakeFiles/RoomEscape.dir/src/gameInit.cpp.o
-.PHONY : src/gameInit.cpp.o
+src/gameLogic.cpp.o:
+	$(MAKE) -f CMakeFiles/RoomEscape.dir/build.make CMakeFiles/RoomEscape.dir/src/gameLogic.cpp.o
+.PHONY : src/gameLogic.cpp.o
 
-src/gameInit.i: src/gameInit.cpp.i
+src/gameLogic.i: src/gameLogic.cpp.i
 
-.PHONY : src/gameInit.i
+.PHONY : src/gameLogic.i
 
 # target to preprocess a source file
-src/gameInit.cpp.i:
-	$(MAKE) -f CMakeFiles/RoomEscape.dir/build.make CMakeFiles/RoomEscape.dir/src/gameInit.cpp.i
-.PHONY : src/gameInit.cpp.i
+src/gameLogic.cpp.i:
+	$(MAKE) -f CMakeFiles/RoomEscape.dir/build.make CMakeFiles/RoomEscape.dir/src/gameLogic.cpp.i
+.PHONY : src/gameLogic.cpp.i
 
-src/gameInit.s: src/gameInit.cpp.s
+src/gameLogic.s: src/gameLogic.cpp.s
 
-.PHONY : src/gameInit.s
+.PHONY : src/gameLogic.s
 
 # target to generate assembly for a file
-src/gameInit.cpp.s:
-	$(MAKE) -f CMakeFiles/RoomEscape.dir/build.make CMakeFiles/RoomEscape.dir/src/gameInit.cpp.s
-.PHONY : src/gameInit.cpp.s
+src/gameLogic.cpp.s:
+	$(MAKE) -f CMakeFiles/RoomEscape.dir/build.make CMakeFiles/RoomEscape.dir/src/gameLogic.cpp.s
+.PHONY : src/gameLogic.cpp.s
 
 src/gameMenu.o: src/gameMenu.cpp.o
 
@@ -422,9 +422,9 @@ help:
 	@echo "... src/controls.o"
 	@echo "... src/controls.i"
 	@echo "... src/controls.s"
-	@echo "... src/gameInit.o"
-	@echo "... src/gameInit.i"
-	@echo "... src/gameInit.s"
+	@echo "... src/gameLogic.o"
+	@echo "... src/gameLogic.i"
+	@echo "... src/gameLogic.s"
 	@echo "... src/gameMenu.o"
 	@echo "... src/gameMenu.i"
 	@echo "... src/gameMenu.s"
