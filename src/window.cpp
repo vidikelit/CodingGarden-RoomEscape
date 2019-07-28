@@ -6,3 +6,9 @@ void Window::Settings() {
                 icon_, fullscreen_);
   terminal_set("font: ./resources/fonts/RussoOne-Regular.ttf, size=30");
 }
+int Window::getWindowX() const {
+  return window_x_;
+}
+int Window::getWindowY() const {
+  return window_y_;
+}

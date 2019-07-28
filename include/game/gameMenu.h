@@ -5,7 +5,7 @@
 #include <cstring>
 #include <vector>
 #include "game/controls.h"
-#include "game/map.h"
+#include "game/gameMap.h"
 
 class GameMenu {
  private:

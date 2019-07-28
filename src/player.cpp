@@ -1,7 +1,6 @@
 #include "game/player.h"
 #include <BearLibTerminal.h>
 #include "game/controls.h"
-#include "game/room.h"
 
 void Player::move() {
   // движение при нажатии клавиши
@@ -25,25 +24,27 @@ void Player::move() {
 }
 
 void Player::render() {
+  terminal_layer(1);
   terminal_put(x_, y_, symbol_);
+  terminal_layer(0);
 }
 
 void Player::restriction() {
-  Map map;
+  GameMap gameMap;
   //    ограничения по передвижению по комнате
   if (getX() <= 0) {
     setX(getX() + 1);
     setSteps(getSteps() - 1);
   }
-  if (getX() >= map.getCurrentRoom().getRoomSize()) {
+  if (getX() >= gameMap.getCurrentRoom().getRoomSizeX()) {
     setX(getX() - 1);
     setSteps(getSteps() - 1);
   }
-  if (getY() <= 0) {
+  if (getY() <= 5) {
     setY(getY() + 1);
     setSteps(getSteps() - 1);
   }
-  if (getY() >= map.getCurrentRoom().getRoomSize()) {
+  if (getY() >= gameMap.getCurrentRoom().getRoomSizeY()) {
     setY(getY() - 1);
     setSteps(getSteps() - 1);
   }

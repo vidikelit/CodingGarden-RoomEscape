@@ -2,7 +2,7 @@
 #define INCLUDE_GAME_PLAYER_H_
 
 #include "game/controls.h"
-#include "game/map.h"
+#include "game/gameMap.h"
 
 class Player {
  private:

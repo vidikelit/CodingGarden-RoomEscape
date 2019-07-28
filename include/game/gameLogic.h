@@ -3,13 +3,13 @@
 
 #include "game/controls.h"
 #include "game/gameMenu.h"
-#include "game/map.h"
 #include "game/player.h"
 #include "game/saver_loader.h"
+#include "game/gameMap.h"
 
 class GameLogic {
  private:
-  Map map;
+  GameMap gameMap;
   GameMenu gameMenu;
   SaverLoader saverLoader;
   Controls* controls;
@@ -18,6 +18,7 @@ class GameLogic {
   bool run_ = false;
   bool end_ = false;
   bool endGame_ = false;
+  bool exitLevel_ = false;
 
  public:
   void newGame();
@@ -32,6 +33,8 @@ class GameLogic {
   void setRun(bool run);
   bool isEnd() const;
   void setEnd(bool end);
+  bool isExitLevel() const;
+  void setExitLevel(bool exitLevel);
   explicit GameLogic(Controls* controls);
 };
 

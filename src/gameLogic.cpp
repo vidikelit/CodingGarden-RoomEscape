@@ -1,5 +1,6 @@
 #include "game/gameLogic.h"
 #include "game/gameMenu.h"
+
 // инициализация объектов игры
 void GameLogic::initGame() {
   setSprites();
@@ -8,23 +9,25 @@ void GameLogic::initGame() {
 void GameLogic::newGame() {
   if (strcmp(gameMenu.getPointMainMenu()[0], gameMenu.getContinueGame()) != 0) gameMenu.setNewMenuPoint();
   terminal_clear();
-  map = Map();
-  map.generator();
-  map.render(0);
+  gameMap = GameMap();
+  gameMap.generatorMap();
+  gameMap.render(0);
   setRun(true);
+  setExitLevel(false);
 }
 // загрузка сохраненной игры
 void GameLogic::loadGame() {
   if (strcmp(gameMenu.getPointMainMenu()[0], gameMenu.getContinueGame()) != 0) gameMenu.setNewMenuPoint();
   gameMenu.setMenuPoint(0);
-  map = Map();
-  saverLoader.setMap(&map);
+  gameMap = GameMap();
+  saverLoader.setMap(&gameMap);
   saverLoader.loader();
   player.setCoin(0);
   player.setSteps(0);
-  map.setDoorCoin();
-  map.render(0);
+  gameMap.setDoorCoin();
+  gameMap.render(0);
   setRun(true);
+  setExitLevel(false);
 }
 // конец игры - вывод статистики
 void GameLogic::endGame() {
@@ -42,7 +45,7 @@ void GameLogic::updateMenu() {
   if (gameMenu.isContinueGame()) {
     gameMenu.setContinueGame(false);
     setRun(true);
-    map.render(map.getNumberRoom());
+    gameMap.render(gameMap.getNumberRoom());
   }
   // новая игра
   if (gameMenu.isNewGame()) {
@@ -53,7 +56,7 @@ void GameLogic::updateMenu() {
   if (gameMenu.isSaveGame()) {
     gameMenu.setSaveGame(false);
     saverLoader.setSaveSlot(gameMenu.getSlot());
-    saverLoader.setMap(&map);
+    saverLoader.setMap(&gameMap);
     saverLoader.saver();
   }
   // загрузить игру
@@ -71,42 +74,43 @@ void GameLogic::updateMenu() {
 // обновление игры
 void GameLogic::update() {
   terminal_layer(1);
-  terminal_clear_area(1, 1, 19, 19);
+  terminal_clear_area(0, 0, 31, 21);
   terminal_layer(0);
-  terminal_clear_area(1, 1, 19, 19);
+  terminal_clear_area(1, 6, 29, 14);
   if (endGame_) {
     endGame();
     return;
   }
   // если в комнатах нет монет, то ставится выход
-  if (map.getAllCoin() == 0) {
-    map.getCurrentRoom().setExit(true);
+  if (gameMap.getAllCoin() == 0 && !isExitLevel()) {
+    gameMap.getCurrentRoom().setExit(true);
+    setExitLevel(true);
   }
-  map.renderCoin(map.getNumberRoom());
+  gameMap.renderCoin(gameMap.getNumberRoom());
   // сообщение о нажатии клавиши
-  if (terminal_pick(player.getX(), player.getY(), 0) == map.getCurrentRoom().getSymbolExit()) {
-    terminal_print(7, 8, "Press E");
+  if (terminal_pick(player.getX(), player.getY(), 0) == gameMap.getCurrentRoom().getSymbolExit()) {
+    terminal_print(12, 11, "Press E");
   }
-  map.player_x_ = player.getX();
-  map.player_y_ = player.getY();
+  gameMap.player_x_ = player.getX();
+  gameMap.player_y_ = player.getY();
   // выход на E
   if (controls->isE()) {
-    map.scanner(player.getX(), player.getY(), map.number_room_);
-    player.setX(map.player_x_);
-    player.setY(map.player_y_);
-    if (terminal_pick(player.getX(), player.getY(), 0) == map.getCurrentRoom().getSymbolExit()) {
+    gameMap.scanner(player.getX(), player.getY(), gameMap.getNumberRoom());
+    player.setX(gameMap.player_x_);
+    player.setY(gameMap.player_y_);
+    if (terminal_pick(player.getX(), player.getY(), 0) == gameMap.getCurrentRoom().getSymbolExit()) {
       endGame_ = true;
     }
   }
   player.update();
   // сбор монет
-  if (map.getCurrentRoom().getCoinCount() != 0) {
+  if (gameMap.getCurrentRoom().getCoinCount() != 0) {
     terminal_layer(1);
-    if (terminal_pick(player.getX(), player.getY(), 0) == map.getCurrentRoom().getCoin(0).getSymbolCoin()) {
-      for (int i = 0; i < map.getCurrentRoom().getCoinCount(); i++) {
-        if (player.getX() == map.getCurrentRoom().getCoin(i).getX() &&
-            player.getY() == map.getCurrentRoom().getCoin(i).getY()) {
-          map.getCurrentRoom().removeCoin(i);
+    if (terminal_pick(player.getX(), player.getY(), 0) == gameMap.getCurrentRoom().getCoin(0).getSymbolCoin()) {
+      for (int i = 0; i < gameMap.getCurrentRoom().getCoinCount(); i++) {
+        if (player.getX() == gameMap.getCurrentRoom().getCoin(i).getX() &&
+            player.getY() == gameMap.getCurrentRoom().getCoin(i).getY()) {
+          gameMap.getCurrentRoom().removeCoin(i);
           player.setCoin(player.getCoin() + 1);
         }
       }
@@ -142,4 +146,10 @@ bool GameLogic::isEnd() const {
 }
 void GameLogic::setEnd(bool end) {
   end_ = end;
+}
+bool GameLogic::isExitLevel() const {
+  return exitLevel_;
+}
+void GameLogic::setExitLevel(bool exitLevel) {
+  exitLevel_ = exitLevel;
 }

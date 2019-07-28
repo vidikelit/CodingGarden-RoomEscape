@@ -1,8 +1,8 @@
 #include "game/saver_loader.h"
 #include <stdio.h>
 #include <string>
-#include "game/map.h"
-#include "game/room.h"
+#include "game/gameMap.h"
+#include "game/gameRoom.h"
 
 void SaverLoader::saver() {
   std::string str;
@@ -18,7 +18,7 @@ void SaverLoader::saver() {
     textSave.push_back(ch);
   }
   for (unsigned int i = 0; i < textSave.size(); i++) {
-    if (newLine == saveSlot) break;
+    if (newLine == saveSlot_) break;
     if (textSave.at(i) == '\n') newLine++;
     cell++;
   }
@@ -28,13 +28,13 @@ void SaverLoader::saver() {
     textSave.erase(textSave.begin() + cell);
   }
   // формирование данных
-  for (unsigned int i = 1; i < map->getRooms().size(); i++) {
-    str = std::to_string(map->getRooms().at(i).getX());
+  for (unsigned int i = 1; i < gameMap->getRooms().size(); i++) {
+    str = std::to_string(gameMap->getRooms().at(i).getX());
     for (auto s : str) {
       textSave.insert(textSave.begin() + cell++, s);
     }
     textSave.insert(textSave.begin() + cell++, ',');
-    str = std::to_string(map->getRooms().at(i).getY());
+    str = std::to_string(gameMap->getRooms().at(i).getY());
     for (auto s : str) {
       textSave.insert(textSave.begin() + cell++, s);
     }
@@ -52,10 +52,10 @@ void SaverLoader::saver() {
 void SaverLoader::loader() {
   char ch;
   int x = 0, y = 0, newLine = 0;
-  Room room(x, y);
+  GameRoom gameRoom(x, y);
 
   file = fopen(path, "r");
-  while (newLine != saveSlot) {
+  while (newLine != saveSlot_) {
     fscanf(file, "%c", &ch);
     if (ch == '\n') newLine++;
   }
@@ -64,16 +64,17 @@ void SaverLoader::loader() {
     fseek(file, -1, SEEK_CUR);
     if (ch == '\n') break;
     fscanf(file, "%d,%d;", &x, &y);
-    room.setX(x);
-    room.setY(y);
-    map->setRooms(Room(room.getX(), room.getY()));
+    gameRoom.setX(x);
+    gameRoom.setY(y);
+    gameMap->setRooms(GameRoom(gameRoom.getX(), gameRoom.getY()));
   }
   fclose(file);
 }
 
 void SaverLoader::setSaveSlot(int saveSlot) {
-  SaverLoader::saveSlot = saveSlot;
+  SaverLoader::saveSlot_ = saveSlot;
 }
-void SaverLoader::setMap(Map *map) {
-  SaverLoader::map = map;
+void SaverLoader::setMap(GameMap *gameMap) {
+  SaverLoader::gameMap = gameMap;
 }
+

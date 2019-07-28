@@ -39,10 +39,10 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /usr/local/bin/cmake
+CMAKE_COMMAND = /home/vidik/apps/clion-2019.1.4/bin/cmake/linux/bin/cmake
 
 # The command to remove a file.
-RM = /usr/local/bin/cmake -E remove -f
+RM = /home/vidik/apps/clion-2019.1.4/bin/cmake/linux/bin/cmake -E remove -f
 
 # Escaping for special characters.
 EQUALS = =
@@ -59,7 +59,7 @@ CMAKE_BINARY_DIR = /home/vidik/CLionProjects/RoomEscape
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
-	/usr/local/bin/cmake -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	/home/vidik/apps/clion-2019.1.4/bin/cmake/linux/bin/cmake -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : rebuild_cache
 
 # Special rule for the target rebuild_cache
@@ -69,8 +69,8 @@ rebuild_cache/fast: rebuild_cache
 
 # Special rule for the target edit_cache
 edit_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake cache editor..."
-	/home/vidik/apps/clion-2019.1.4/bin/cmake/linux/bin/ccmake -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
+	/home/vidik/apps/clion-2019.1.4/bin/cmake/linux/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
 .PHONY : edit_cache
 
 # Special rule for the target edit_cache
@@ -217,6 +217,33 @@ src/gameLogic.cpp.s:
 	$(MAKE) -f CMakeFiles/RoomEscape.dir/build.make CMakeFiles/RoomEscape.dir/src/gameLogic.cpp.s
 .PHONY : src/gameLogic.cpp.s
 
+src/gameMap.o: src/gameMap.cpp.o
+
+.PHONY : src/gameMap.o
+
+# target to build an object file
+src/gameMap.cpp.o:
+	$(MAKE) -f CMakeFiles/RoomEscape.dir/build.make CMakeFiles/RoomEscape.dir/src/gameMap.cpp.o
+.PHONY : src/gameMap.cpp.o
+
+src/gameMap.i: src/gameMap.cpp.i
+
+.PHONY : src/gameMap.i
+
+# target to preprocess a source file
+src/gameMap.cpp.i:
+	$(MAKE) -f CMakeFiles/RoomEscape.dir/build.make CMakeFiles/RoomEscape.dir/src/gameMap.cpp.i
+.PHONY : src/gameMap.cpp.i
+
+src/gameMap.s: src/gameMap.cpp.s
+
+.PHONY : src/gameMap.s
+
+# target to generate assembly for a file
+src/gameMap.cpp.s:
+	$(MAKE) -f CMakeFiles/RoomEscape.dir/build.make CMakeFiles/RoomEscape.dir/src/gameMap.cpp.s
+.PHONY : src/gameMap.cpp.s
+
 src/gameMenu.o: src/gameMenu.cpp.o
 
 .PHONY : src/gameMenu.o
@@ -243,6 +270,33 @@ src/gameMenu.s: src/gameMenu.cpp.s
 src/gameMenu.cpp.s:
 	$(MAKE) -f CMakeFiles/RoomEscape.dir/build.make CMakeFiles/RoomEscape.dir/src/gameMenu.cpp.s
 .PHONY : src/gameMenu.cpp.s
+
+src/gameRoom.o: src/gameRoom.cpp.o
+
+.PHONY : src/gameRoom.o
+
+# target to build an object file
+src/gameRoom.cpp.o:
+	$(MAKE) -f CMakeFiles/RoomEscape.dir/build.make CMakeFiles/RoomEscape.dir/src/gameRoom.cpp.o
+.PHONY : src/gameRoom.cpp.o
+
+src/gameRoom.i: src/gameRoom.cpp.i
+
+.PHONY : src/gameRoom.i
+
+# target to preprocess a source file
+src/gameRoom.cpp.i:
+	$(MAKE) -f CMakeFiles/RoomEscape.dir/build.make CMakeFiles/RoomEscape.dir/src/gameRoom.cpp.i
+.PHONY : src/gameRoom.cpp.i
+
+src/gameRoom.s: src/gameRoom.cpp.s
+
+.PHONY : src/gameRoom.s
+
+# target to generate assembly for a file
+src/gameRoom.cpp.s:
+	$(MAKE) -f CMakeFiles/RoomEscape.dir/build.make CMakeFiles/RoomEscape.dir/src/gameRoom.cpp.s
+.PHONY : src/gameRoom.cpp.s
 
 src/main.o: src/main.cpp.o
 
@@ -271,33 +325,6 @@ src/main.cpp.s:
 	$(MAKE) -f CMakeFiles/RoomEscape.dir/build.make CMakeFiles/RoomEscape.dir/src/main.cpp.s
 .PHONY : src/main.cpp.s
 
-src/map.o: src/map.cpp.o
-
-.PHONY : src/map.o
-
-# target to build an object file
-src/map.cpp.o:
-	$(MAKE) -f CMakeFiles/RoomEscape.dir/build.make CMakeFiles/RoomEscape.dir/src/map.cpp.o
-.PHONY : src/map.cpp.o
-
-src/map.i: src/map.cpp.i
-
-.PHONY : src/map.i
-
-# target to preprocess a source file
-src/map.cpp.i:
-	$(MAKE) -f CMakeFiles/RoomEscape.dir/build.make CMakeFiles/RoomEscape.dir/src/map.cpp.i
-.PHONY : src/map.cpp.i
-
-src/map.s: src/map.cpp.s
-
-.PHONY : src/map.s
-
-# target to generate assembly for a file
-src/map.cpp.s:
-	$(MAKE) -f CMakeFiles/RoomEscape.dir/build.make CMakeFiles/RoomEscape.dir/src/map.cpp.s
-.PHONY : src/map.cpp.s
-
 src/player.o: src/player.cpp.o
 
 .PHONY : src/player.o
@@ -324,33 +351,6 @@ src/player.s: src/player.cpp.s
 src/player.cpp.s:
 	$(MAKE) -f CMakeFiles/RoomEscape.dir/build.make CMakeFiles/RoomEscape.dir/src/player.cpp.s
 .PHONY : src/player.cpp.s
-
-src/room.o: src/room.cpp.o
-
-.PHONY : src/room.o
-
-# target to build an object file
-src/room.cpp.o:
-	$(MAKE) -f CMakeFiles/RoomEscape.dir/build.make CMakeFiles/RoomEscape.dir/src/room.cpp.o
-.PHONY : src/room.cpp.o
-
-src/room.i: src/room.cpp.i
-
-.PHONY : src/room.i
-
-# target to preprocess a source file
-src/room.cpp.i:
-	$(MAKE) -f CMakeFiles/RoomEscape.dir/build.make CMakeFiles/RoomEscape.dir/src/room.cpp.i
-.PHONY : src/room.cpp.i
-
-src/room.s: src/room.cpp.s
-
-.PHONY : src/room.s
-
-# target to generate assembly for a file
-src/room.cpp.s:
-	$(MAKE) -f CMakeFiles/RoomEscape.dir/build.make CMakeFiles/RoomEscape.dir/src/room.cpp.s
-.PHONY : src/room.cpp.s
 
 src/saver_loader.o: src/saver_loader.cpp.o
 
@@ -425,21 +425,21 @@ help:
 	@echo "... src/gameLogic.o"
 	@echo "... src/gameLogic.i"
 	@echo "... src/gameLogic.s"
+	@echo "... src/gameMap.o"
+	@echo "... src/gameMap.i"
+	@echo "... src/gameMap.s"
 	@echo "... src/gameMenu.o"
 	@echo "... src/gameMenu.i"
 	@echo "... src/gameMenu.s"
+	@echo "... src/gameRoom.o"
+	@echo "... src/gameRoom.i"
+	@echo "... src/gameRoom.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"
-	@echo "... src/map.o"
-	@echo "... src/map.i"
-	@echo "... src/map.s"
 	@echo "... src/player.o"
 	@echo "... src/player.i"
 	@echo "... src/player.s"
-	@echo "... src/room.o"
-	@echo "... src/room.i"
-	@echo "... src/room.s"
 	@echo "... src/saver_loader.o"
 	@echo "... src/saver_loader.i"
 	@echo "... src/saver_loader.s"

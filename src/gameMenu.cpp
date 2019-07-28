@@ -7,12 +7,12 @@ void GameMenu::update() {
   if (menu_ == 0) mainMenu();
 }
 void GameMenu::mainMenu() {
-  terminal_print(9, 5, "[color=red]Room Escape");
+  terminal_print(10, 7, "[color=red]Room Escape");
   for (unsigned int i = 0; i < pointMainMenu.size(); i++) {
     if (getMenuPoint() == static_cast<int>(i)) {
       terminal_color(color_from_name("green"));
     }
-    terminal_printf(9, 8 + i, "%s", pointMainMenu[i]);
+    terminal_printf(10, 10 + i, "%s", pointMainMenu[i]);
     terminal_color(color_from_name("white"));
     if (controls->isEnter()) {
       // продолжить игру
@@ -59,14 +59,14 @@ void GameMenu::mainMenu() {
 void GameMenu::saveLoadMenu() {
   terminal_clear();
   if (getMenu() == 1)
-    terminal_print(9, 5, "[color=red]Сохранить\nгенерацию");
+    terminal_print(10, 7, "[color=red]Сохранить\nгенерацию");
   else
-    terminal_print(9, 5, "[color=red]Загрузить\nгенерацию");
+    terminal_print(10, 7, "[color=red]Загрузить\nгенерацию");
   for (unsigned int i = 0; i < pointSaveLoadMenu.size(); i++) {
     if (getMenuPoint() == static_cast<int>(i)) {
       terminal_color(color_from_name("green"));
     }
-    terminal_printf(9, 8 + i, "%s", pointSaveLoadMenu[i]);
+    terminal_printf(10, 10 + i, "%s", pointSaveLoadMenu[i]);
     terminal_color(color_from_name("white"));
     if (controls->isEnter()) {
       // Слот 1
