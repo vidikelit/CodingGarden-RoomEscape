@@ -130,7 +130,6 @@ void GameLogic::setSprites() {
   terminal_set("0x3E: ./resources/sprites/door.png");
   terminal_set("0x25: ./resources/sprites/signExit.png");
   terminal_set("0x24: ./resources/sprites/coinGold.png");
-  terminal_set("0x10: ./resources/sprites/castle.png");
 }
 GameLogic::GameLogic(Controls *controls) : controls(controls) {
   gameMenu.setControls(controls);

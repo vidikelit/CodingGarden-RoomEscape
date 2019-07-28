@@ -7,6 +7,7 @@
 class GameRoom {
  private:
   std::vector<Coin> coins{};
+  std::vector<int> tilesWall;
   // координаты комнаты
   int x_;
   int y_;
@@ -14,7 +15,7 @@ class GameRoom {
   int room_size_x_ = 21;
   int room_size_y_ = 17;
 
-  int symbol_wall_ = 0x10;
+  int symbol_wall_ = 0xE00;
   int symbol_door_ = 0x3E;
   int symbol_exit_ = 0x25;
 
