@@ -63,7 +63,7 @@ void GameMap::generatorDoor(int x, int y, int i) {
 // генератор монет
 void GameMap::generatorCoin(int n) {
   for (int i = 0; i < std::experimental::randint(1, 4); i++) {
-    rooms.at(n).pushCoin({std::experimental::randint(2, 29), std::experimental::randint(9, 18)});
+    rooms.at(n).pushCoin({std::experimental::randint(3, 18), std::experimental::randint(8, 15)});
   }
 }
 void GameMap::setDoorCoin() {
@@ -94,10 +94,10 @@ void GameMap::scanner(int x, int y, int n) {
 void GameMap::playerPos(int x, int y, int i) {
   player_x_ = x;
   player_y_ = y;
-  if (i == 0) player_y_ += 15;
-  if (i == 1) player_y_ -= 14;
-  if (i == 2) player_x_ += 29;
-  if (i == 3) player_x_ -= 29;
+  if (i == 0) player_y_ += 8;
+  if (i == 1) player_y_ -= 8;
+  if (i == 2) player_x_ += 19;
+  if (i == 3) player_x_ -= 19;
 }
 void GameMap::teleport(int i) {
   int buff_x = 0;

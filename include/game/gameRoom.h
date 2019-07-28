@@ -11,21 +11,21 @@ class GameRoom {
   int x_;
   int y_;
   // размер по осям
-  int room_size_x_ = 30;
-  int room_size_y_ = 20;
+  int room_size_x_ = 21;
+  int room_size_y_ = 17;
 
-  int symbol_wall_ = 0x23;
+  int symbol_wall_ = 0x10;
   int symbol_door_ = 0x3E;
   int symbol_exit_ = 0x25;
 
   // выход в комнате
-  int exitDoor_[1][2] = {{15, 12}};
+  int exitDoor_[1][2] = {{10, 11}};
   bool exit_ = false;
 
  public:
   // двери в комнате
   bool doors[4] = {false, false, false, false};
-  int doorsCoords[4][2] = {{15, 5}, {15, room_size_y_}, {0, 12}, {room_size_x_, 12}};
+  int doorsCoords[4][2] = {{10, 6}, {10, room_size_y_-1}, {0, 11}, {room_size_x_ - 1, 11}};
 
   void renderRoom();
   void renderDoor();

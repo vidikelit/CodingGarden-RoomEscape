@@ -36,15 +36,15 @@ void Player::restriction() {
     setX(getX() + 1);
     setSteps(getSteps() - 1);
   }
-  if (getX() >= gameMap.getCurrentRoom().getRoomSizeX()) {
+  if (getX() >= gameMap.getCurrentRoom().getRoomSizeX() - 1) {
     setX(getX() - 1);
     setSteps(getSteps() - 1);
   }
-  if (getY() <= 5) {
+  if (getY() <= 6) {
     setY(getY() + 1);
     setSteps(getSteps() - 1);
   }
-  if (getY() >= gameMap.getCurrentRoom().getRoomSizeY()) {
+  if (getY() >= gameMap.getCurrentRoom().getRoomSizeY() - 1) {
     setY(getY() - 1);
     setSteps(getSteps() - 1);
   }

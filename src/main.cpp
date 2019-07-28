@@ -15,7 +15,6 @@ int main() {
 
   window.Settings();
   gameLogic.initGame();
-
   while (true) {
     controls.Update();
     if (gameLogic.isEnd()) break;

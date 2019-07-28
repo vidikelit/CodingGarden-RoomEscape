@@ -3,14 +3,18 @@
 
 void GameRoom::renderRoom() {
   //    отрисовка стен комнаты X
-  for (int i = 0; i <= getRoomSizeX(); i++) {
-    terminal_put(i, 5, symbol_wall_);
-    terminal_put(i, getRoomSizeY(), symbol_wall_);
+  for (int i = 0; i < getRoomSizeX(); i++) {
+      // верхняя полоса
+      terminal_put(i, 6, symbol_wall_);
+      // нижняя полоса
+      terminal_put(i, getRoomSizeY() - 1, symbol_wall_);
   }
   //    отрисовка стен комнаты Y
-  for (int i = 1; i <= getRoomSizeY() - 6; i++) {
-    terminal_put(0, i + 5, symbol_wall_);
-    terminal_put(getRoomSizeX(), i + 5, symbol_wall_);
+  for (int i = 0; i < getRoomSizeY() - 8; i++) {
+      // левая полоса
+      terminal_put(0, 7 + i, symbol_wall_);
+      // правая полоса
+      terminal_put(getRoomSizeX() - 1, 7 + i, symbol_wall_);
   }
 }
 void GameRoom::renderDoor() {

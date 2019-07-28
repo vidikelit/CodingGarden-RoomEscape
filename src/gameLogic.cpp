@@ -74,9 +74,9 @@ void GameLogic::updateMenu() {
 // обновление игры
 void GameLogic::update() {
   terminal_layer(1);
-  terminal_clear_area(0, 0, 31, 21);
+  terminal_clear_area(0, 0, 21, 17);
   terminal_layer(0);
-  terminal_clear_area(1, 6, 29, 14);
+  terminal_clear_area(1, 7, 19, 9);
   if (endGame_) {
     endGame();
     return;
@@ -127,10 +127,10 @@ void GameLogic::update() {
 // установка спрайтов
 void GameLogic::setSprites() {
   terminal_set("0x40: ./resources/sprites/player.png");
-  terminal_set("0x23: ./resources/sprites/castle.png");
   terminal_set("0x3E: ./resources/sprites/door.png");
   terminal_set("0x25: ./resources/sprites/signExit.png");
   terminal_set("0x24: ./resources/sprites/coinGold.png");
+  terminal_set("0x10: ./resources/sprites/castle.png");
 }
 GameLogic::GameLogic(Controls *controls) : controls(controls) {
   gameMenu.setControls(controls);
