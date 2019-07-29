@@ -24,9 +24,8 @@ void Player::move() {
 }
 
 void Player::render() {
-  terminal_layer(1);
+  terminal_layer(2);
   terminal_put(x_, y_, symbol_);
-  terminal_layer(0);
 }
 
 void Player::restriction() {

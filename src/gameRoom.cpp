@@ -2,9 +2,10 @@
 #include <BearLibTerminal.h>
 
 void GameRoom::renderRoom() {
+  terminal_layer(0);
   // левый верхний
   symbol_wall_ = 0xE00;
-  terminal_set("0xE00: resources/tilesets/tilesetWall.png, size=64x64");
+  terminal_set("0xE00: resources/tilesets/tilesetRoom.png, size=64x64");
   terminal_put(0, 6, 0xE00);
   terminal_put(20, 6, 0xE01);
   terminal_put(0, 16, 0xE02);
@@ -41,28 +42,66 @@ void GameRoom::renderRoom() {
   // правая полоса
   symbol_wall_ = 0xE1C;
   tilesWall.clear();
-  for (unsigned int i = 0; i < 2; i++)
-    tilesWall.push_back(symbol_wall_++);
+  for (unsigned int i = 0; i < 2; i++) tilesWall.push_back(symbol_wall_++);
   for (int i = 0; i < getRoomSizeY() - 8; i++) {
     terminal_put(getRoomSizeX() - 1, 7 + i, tilesWall.at(0));
     tilesWall.push_back(tilesWall.at(0));
     tilesWall.erase(tilesWall.begin());
   }
+  // отрисовка пола
+  // угловые
+  terminal_put(1, 7, 0xE04);
+  terminal_put(19, 7, 0xE18);
+  terminal_put(1, 15, 0xE19);
+  terminal_put(19, 15, 0xE1A);
+  // центральная заливка
+  for (int i = 0; i < getRoomSizeX() - 4; i++) {
+    for (int j = 0; j < getRoomSizeY() - 10; j++) {
+      terminal_put(i + 2, j + 8, 0xE1B);
+    }
+  }
+  // верхняя полоса
+  symbol_wall_ = 0xE05;
+  tilesWall.clear();
+  for (unsigned int i = 0; i < 2; i++) tilesWall.push_back(symbol_wall_++);
+  for (int i = 0; i < getRoomSizeX() - 4; i++) {
+    terminal_put(i + 2, 7, tilesWall.at(0));
+    tilesWall.push_back(tilesWall.at(0));
+    tilesWall.erase(tilesWall.begin());
+  }
+  // нижняя полоса
+  symbol_wall_ = 0xE1E;
+  tilesWall.clear();
+  for (unsigned int i = 0; i < 2; i++) tilesWall.push_back(symbol_wall_++);
+  for (int i = 0; i < getRoomSizeX() - 4; i++) {
+    terminal_put(i + 2, getRoomSizeY() - 2, tilesWall.at(0));
+    tilesWall.push_back(tilesWall.at(0));
+    tilesWall.erase(tilesWall.begin());
+  }
+  // левая полоса
+  for (int i = 0; i < getRoomSizeY() - 10; i++) {
+    terminal_put(1, 8 + i, 0xE17);
+  }
+  // правая полоса
+  for (int i = 0; i < getRoomSizeY() - 10; i++) {
+    terminal_put(getRoomSizeX() - 2, 8 + i, 0xE20);
+  }
 }
 void GameRoom::renderDoor() {
   // отрисовка дверей
-  for (int i = 0; i <= 4; i++) {
+  symbol_wall_ = 0xE21;
+  tilesDoors.clear();
+  for (unsigned int i = 0; i < 4; i++) tilesDoors.push_back(symbol_wall_++);
+  for (int i = 0; i <4; i++) {
     if (doors[i]) {
-      terminal_put(doorsCoords[i][0], doorsCoords[i][1], symbol_door_);
+      terminal_put(doorsCoords[i][0], doorsCoords[i][1], tilesDoors.at(i));
     }
   }
 }
 // действия с монетами в комнате
 void GameRoom::renderCoin() {
   for (auto &coin : coins) {
-    terminal_layer(1);
     terminal_put(coin.getX(), coin.getY(), coin.getSymbolCoin());
-    terminal_layer(0);
   }
 }
 Coin GameRoom::getCoin(int i) {

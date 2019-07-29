@@ -4,8 +4,9 @@
 #include <stdio.h>
 #include <vector>
 #include "game/gameMap.h"
+#include "game/lib/i_saver_loader.h"
 
-class SaverLoader {
+class SaverLoader: public ISaverLoader{
  private:
   GameMap *gameMap;
   FILE *file;
@@ -14,8 +15,8 @@ class SaverLoader {
   int saveSlot_ = 0;
 
  public:
-  void saver();
-  void loader();
+  void saver() override;
+  void loader() override;
 
   void setSaveSlot(int saveSlot);
   void setMap(GameMap *gameMap);

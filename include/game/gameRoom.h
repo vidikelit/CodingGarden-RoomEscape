@@ -8,6 +8,7 @@ class GameRoom {
  private:
   std::vector<Coin> coins{};
   std::vector<int> tilesWall;
+  std::vector<int> tilesDoors;
   // координаты комнаты
   int x_;
   int y_;

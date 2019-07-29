@@ -73,10 +73,11 @@ void GameLogic::updateMenu() {
 }
 // обновление игры
 void GameLogic::update() {
-  terminal_layer(1);
-  terminal_clear_area(0, 0, 21, 17);
-  terminal_layer(0);
+  // очистка поля
+  terminal_layer(2);
   terminal_clear_area(1, 7, 19, 9);
+//  terminal_layer(0);
+//  terminal_clear_area(0, 0, 21, 6);
   if (endGame_) {
     endGame();
     return;
@@ -105,7 +106,6 @@ void GameLogic::update() {
   player.update();
   // сбор монет
   if (gameMap.getCurrentRoom().getCoinCount() != 0) {
-    terminal_layer(1);
     if (terminal_pick(player.getX(), player.getY(), 0) == gameMap.getCurrentRoom().getCoin(0).getSymbolCoin()) {
       for (int i = 0; i < gameMap.getCurrentRoom().getCoinCount(); i++) {
         if (player.getX() == gameMap.getCurrentRoom().getCoin(i).getX() &&
@@ -115,7 +115,6 @@ void GameLogic::update() {
         }
       }
     }
-    terminal_layer(0);
   }
   // выход в меню
   if (controls->isEsc()) {
@@ -127,7 +126,6 @@ void GameLogic::update() {
 // установка спрайтов
 void GameLogic::setSprites() {
   terminal_set("0x40: ./resources/sprites/player.png");
-  terminal_set("0x3E: ./resources/sprites/door.png");
   terminal_set("0x25: ./resources/sprites/signExit.png");
   terminal_set("0x24: ./resources/sprites/coinGold.png");
 }
