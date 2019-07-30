@@ -39,10 +39,10 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /usr/local/bin/cmake
+CMAKE_COMMAND = /home/vidik/apps/clion-2019.1.4/bin/cmake/linux/bin/cmake
 
 # The command to remove a file.
-RM = /usr/local/bin/cmake -E remove -f
+RM = /home/vidik/apps/clion-2019.1.4/bin/cmake/linux/bin/cmake -E remove -f
 
 # Escaping for special characters.
 EQUALS = =
@@ -59,7 +59,7 @@ CMAKE_BINARY_DIR = /home/vidik/CLionProjects/RoomEscape
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
-	/usr/local/bin/cmake -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	/home/vidik/apps/clion-2019.1.4/bin/cmake/linux/bin/cmake -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : rebuild_cache
 
 # Special rule for the target rebuild_cache
@@ -325,6 +325,60 @@ src/main.cpp.s:
 	$(MAKE) -f CMakeFiles/RoomEscape.dir/build.make CMakeFiles/RoomEscape.dir/src/main.cpp.s
 .PHONY : src/main.cpp.s
 
+src/miniMap.o: src/miniMap.cpp.o
+
+.PHONY : src/miniMap.o
+
+# target to build an object file
+src/miniMap.cpp.o:
+	$(MAKE) -f CMakeFiles/RoomEscape.dir/build.make CMakeFiles/RoomEscape.dir/src/miniMap.cpp.o
+.PHONY : src/miniMap.cpp.o
+
+src/miniMap.i: src/miniMap.cpp.i
+
+.PHONY : src/miniMap.i
+
+# target to preprocess a source file
+src/miniMap.cpp.i:
+	$(MAKE) -f CMakeFiles/RoomEscape.dir/build.make CMakeFiles/RoomEscape.dir/src/miniMap.cpp.i
+.PHONY : src/miniMap.cpp.i
+
+src/miniMap.s: src/miniMap.cpp.s
+
+.PHONY : src/miniMap.s
+
+# target to generate assembly for a file
+src/miniMap.cpp.s:
+	$(MAKE) -f CMakeFiles/RoomEscape.dir/build.make CMakeFiles/RoomEscape.dir/src/miniMap.cpp.s
+.PHONY : src/miniMap.cpp.s
+
+src/miniRooms.o: src/miniRooms.cpp.o
+
+.PHONY : src/miniRooms.o
+
+# target to build an object file
+src/miniRooms.cpp.o:
+	$(MAKE) -f CMakeFiles/RoomEscape.dir/build.make CMakeFiles/RoomEscape.dir/src/miniRooms.cpp.o
+.PHONY : src/miniRooms.cpp.o
+
+src/miniRooms.i: src/miniRooms.cpp.i
+
+.PHONY : src/miniRooms.i
+
+# target to preprocess a source file
+src/miniRooms.cpp.i:
+	$(MAKE) -f CMakeFiles/RoomEscape.dir/build.make CMakeFiles/RoomEscape.dir/src/miniRooms.cpp.i
+.PHONY : src/miniRooms.cpp.i
+
+src/miniRooms.s: src/miniRooms.cpp.s
+
+.PHONY : src/miniRooms.s
+
+# target to generate assembly for a file
+src/miniRooms.cpp.s:
+	$(MAKE) -f CMakeFiles/RoomEscape.dir/build.make CMakeFiles/RoomEscape.dir/src/miniRooms.cpp.s
+.PHONY : src/miniRooms.cpp.s
+
 src/player.o: src/player.cpp.o
 
 .PHONY : src/player.o
@@ -378,6 +432,33 @@ src/saver_loader.s: src/saver_loader.cpp.s
 src/saver_loader.cpp.s:
 	$(MAKE) -f CMakeFiles/RoomEscape.dir/build.make CMakeFiles/RoomEscape.dir/src/saver_loader.cpp.s
 .PHONY : src/saver_loader.cpp.s
+
+src/wall.o: src/wall.cpp.o
+
+.PHONY : src/wall.o
+
+# target to build an object file
+src/wall.cpp.o:
+	$(MAKE) -f CMakeFiles/RoomEscape.dir/build.make CMakeFiles/RoomEscape.dir/src/wall.cpp.o
+.PHONY : src/wall.cpp.o
+
+src/wall.i: src/wall.cpp.i
+
+.PHONY : src/wall.i
+
+# target to preprocess a source file
+src/wall.cpp.i:
+	$(MAKE) -f CMakeFiles/RoomEscape.dir/build.make CMakeFiles/RoomEscape.dir/src/wall.cpp.i
+.PHONY : src/wall.cpp.i
+
+src/wall.s: src/wall.cpp.s
+
+.PHONY : src/wall.s
+
+# target to generate assembly for a file
+src/wall.cpp.s:
+	$(MAKE) -f CMakeFiles/RoomEscape.dir/build.make CMakeFiles/RoomEscape.dir/src/wall.cpp.s
+.PHONY : src/wall.cpp.s
 
 src/window.o: src/window.cpp.o
 
@@ -437,12 +518,21 @@ help:
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"
+	@echo "... src/miniMap.o"
+	@echo "... src/miniMap.i"
+	@echo "... src/miniMap.s"
+	@echo "... src/miniRooms.o"
+	@echo "... src/miniRooms.i"
+	@echo "... src/miniRooms.s"
 	@echo "... src/player.o"
 	@echo "... src/player.i"
 	@echo "... src/player.s"
 	@echo "... src/saver_loader.o"
 	@echo "... src/saver_loader.i"
 	@echo "... src/saver_loader.s"
+	@echo "... src/wall.o"
+	@echo "... src/wall.i"
+	@echo "... src/wall.s"
 	@echo "... src/window.o"
 	@echo "... src/window.i"
 	@echo "... src/window.s"

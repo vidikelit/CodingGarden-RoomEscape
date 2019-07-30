@@ -64,9 +64,7 @@ void SaverLoader::loader() {
     fseek(file, -1, SEEK_CUR);
     if (ch == '\n') break;
     fscanf(file, "%d,%d;", &x, &y);
-    gameRoom.setX(x);
-    gameRoom.setY(y);
-    gameMap->setRooms(GameRoom(gameRoom.getX(), gameRoom.getY()));
+    gameMap->formLevel(x, y);
   }
   fclose(file);
 }

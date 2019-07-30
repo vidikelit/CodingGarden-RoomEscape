@@ -9,10 +9,10 @@ class Player {
   const Controls &controls;
   int x_;
   int y_;
+  int speed_ = 1;
 
   const int symbol_ = 0x40;
 
-  const int speed_ = 1;
   int coin = 0;
   int steps = 0;
 
@@ -21,8 +21,6 @@ class Player {
 
   void update();
   void render();
-  void move();
-  void restriction();
 
   int getX() const;
   int getY() const;
@@ -32,6 +30,8 @@ class Player {
   void setSteps(int steps);
   int getCoin() const;
   void setCoin(int coin);
+  int getSpeed() const;
+  void setSpeed(int speed);
 };
 
 #endif  // INCLUDE_GAME_PLAYER_H_

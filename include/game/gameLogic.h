@@ -6,10 +6,13 @@
 #include "game/player.h"
 #include "game/saver_loader.h"
 #include "game/gameMap.h"
+#include "game/miniMap.h"
+#include "game/wall.h"
 
 class GameLogic {
  private:
   GameMap gameMap;
+  MiniMap miniMap;
   GameMenu gameMenu;
   SaverLoader saverLoader;
   Controls* controls;
@@ -28,6 +31,8 @@ class GameLogic {
   void updateMenu();
   void initGame();
   void setSprites();
+  void playerMove();
+  void interWall(int x, int y);
 
   bool isRun() const;
   void setRun(bool run);
@@ -35,6 +40,7 @@ class GameLogic {
   void setEnd(bool end);
   bool isExitLevel() const;
   void setExitLevel(bool exitLevel);
+
   explicit GameLogic(Controls* controls);
 };
 

@@ -5,8 +5,8 @@
 
 // генератор карты
 void GameMap::generatorMap() {
-  // генерируется от 5 до 10 комнат на карте
-  for (int i = 0; i < std::experimental::randint(5, 10); i++) {
+  // генерируется от 3 до 5 комнат на карте
+  for (int i = 0; i < std::experimental::randint(3, 5); i++) {
     bool a = true;
     int x = getPointX();
     int y = getPointY();
@@ -33,13 +33,21 @@ void GameMap::generatorRoom() {
   GameRoom gameRoom = rooms.at(0);
   int random = std::experimental::randint(1, 100);
   // вверх
-  if (random <= 25) setPointY(getPointY() - gameRoom.getRoomSizeY());
+  if (random <= 25) {
+    setPointY(getPointY() - gameRoom.getRoomSizeY());
+  }
   // вниз
-  if (random > 25 && random <= 50) setPointY(getPointY() + gameRoom.getRoomSizeY());
+  if (random > 25 && random <= 50) {
+    setPointY(getPointY() + gameRoom.getRoomSizeY());
+  }
   // влево
-  if (random > 50 && random <= 75) setPointX(getPointX() - gameRoom.getRoomSizeX());
+  if (random > 50 && random <= 75) {
+    setPointX(getPointX() - gameRoom.getRoomSizeX());
+  }
   // вправо
-  if (random > 75) setPointX(getPointX() + gameRoom.getRoomSizeX());
+  if (random > 75) {
+    setPointX(getPointX() + gameRoom.getRoomSizeX());
+  }
 }
 // генератор дверей
 void GameMap::generatorDoor(int x, int y, int i) {
@@ -96,10 +104,11 @@ void GameMap::playerPos(int x, int y, int i) {
   player_y_ = y;
   if (i == 0) player_y_ += 8;
   if (i == 1) player_y_ -= 8;
-  if (i == 2) player_x_ += 19;
-  if (i == 3) player_x_ -= 19;
+  if (i == 2) player_x_ += 18;
+  if (i == 3) player_x_ -= 18;
 }
 void GameMap::teleport(int i) {
+
   int buff_x = 0;
   int buff_y = 0;
   if (i == 0) buff_y -= rooms.at(0).getRoomSizeY();
@@ -121,6 +130,9 @@ int GameMap::getAllCoin() {
   int coin = 0;
   for (unsigned int i = 0; i < rooms.size(); i++) coin += rooms.at(i).getCoinCount();
   return coin;
+}
+void GameMap::formLevel(int x, int y) {
+  rooms.push_back(GameRoom(x, y));
 }
 GameRoom& GameMap::getCurrentRoom() {
   return rooms[number_room_];

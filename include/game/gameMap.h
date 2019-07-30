@@ -1,8 +1,8 @@
 #ifndef INCLUDE_GAME_GAMEMAP_H_
 #define INCLUDE_GAME_GAMEMAP_H_
 
+#include <vector>
 #include "game/gameRoom.h"
-#include "vector"
 
 class GameMap {
  private:
@@ -26,6 +26,7 @@ class GameMap {
   void setDoorCoin();
   void render(int n);
   void renderCoin(int n);
+  void formLevel(int x, int y);
   void scanner(int x_p, int y_p, int n_r);
   void teleport(int i);
   void playerPos(int x_p, int y_p, int i);
@@ -34,6 +35,10 @@ class GameMap {
   void setPointX(int pointX);
   int getPointY() const;
   void setPointY(int pointY);
+  int getMiniX() const;
+  void setMiniX(int miniX);
+  int getMiniY() const;
+  void setMiniY(int miniY);
   int getNumberRoom() const;
   int getAllCoin();
   const std::vector<GameRoom>& getRooms() const;

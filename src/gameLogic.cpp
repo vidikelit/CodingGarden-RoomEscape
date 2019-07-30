@@ -10,22 +10,30 @@ void GameLogic::newGame() {
   if (strcmp(gameMenu.getPointMainMenu()[0], gameMenu.getContinueGame()) != 0) gameMenu.setNewMenuPoint();
   terminal_clear();
   gameMap = GameMap();
+  miniMap = MiniMap(&gameMap);
   gameMap.generatorMap();
+  miniMap.generatorMiniMap();
   gameMap.render(0);
+  miniMap.render();
+  player.setX(10);
+  player.setY(11);
   setRun(true);
   setExitLevel(false);
 }
-// загрузка сохраненной игры
+// загрузка игры
 void GameLogic::loadGame() {
+  terminal_layer(0);
+  terminal_clear_area(0, 0, 21, 17);
   if (strcmp(gameMenu.getPointMainMenu()[0], gameMenu.getContinueGame()) != 0) gameMenu.setNewMenuPoint();
   gameMenu.setMenuPoint(0);
   gameMap = GameMap();
+  miniMap = MiniMap();
   saverLoader.setMap(&gameMap);
   saverLoader.loader();
-  player.setCoin(0);
-  player.setSteps(0);
   gameMap.setDoorCoin();
+  miniMap.generatorMiniMap();
   gameMap.render(0);
+  miniMap.render();
   setRun(true);
   setExitLevel(false);
 }
@@ -75,9 +83,7 @@ void GameLogic::updateMenu() {
 void GameLogic::update() {
   // очистка поля
   terminal_layer(2);
-  terminal_clear_area(1, 7, 19, 9);
-//  terminal_layer(0);
-//  terminal_clear_area(0, 0, 21, 6);
+  terminal_clear_area(0, 0, 21, 17);
   if (endGame_) {
     endGame();
     return;
@@ -103,6 +109,7 @@ void GameLogic::update() {
       endGame_ = true;
     }
   }
+  playerMove();
   player.update();
   // сбор монет
   if (gameMap.getCurrentRoom().getCoinCount() != 0) {
@@ -123,11 +130,40 @@ void GameLogic::update() {
     gameMenu.setMenu(0);
   }
 }
+void GameLogic::interWall(int player_x, int player_y) {
+  terminal_layer(0);
+  // верхняя стена
+  if (terminal_pick(player.getX(), player.getY(), 0) == gameMap.getCurrentRoom().getWall()) {
+    player.setY(player_y);
+    player.setX(player_x);
+  }
+}
 // установка спрайтов
 void GameLogic::setSprites() {
   terminal_set("0x40: ./resources/sprites/player.png");
   terminal_set("0x25: ./resources/sprites/signExit.png");
   terminal_set("0x24: ./resources/sprites/coinGold.png");
+}
+void GameLogic::playerMove() {
+  int player_x = player.getX();
+  int player_y = player.getY();
+  if (controls->isUp()) {
+    player.setY(player.getY() - player.getSpeed());
+    player.setSteps(player.getSteps() + 1);
+  }
+  if (controls->isDown()) {
+    player.setY(player.getY() + player.getSpeed());
+    player.setSteps(player.getSteps() + 1);
+  }
+  if (controls->isLeft()) {
+    player.setX(player.getX() - player.getSpeed());
+    player.setSteps(player.getSteps() + 1);
+  }
+  if (controls->isRight()) {
+    player.setX(player.getX() + player.getSpeed());
+    player.setSteps(player.getSteps() + 1);
+  }
+  interWall(player_x, player_y);
 }
 GameLogic::GameLogic(Controls *controls) : controls(controls) {
   gameMenu.setControls(controls);
@@ -150,3 +186,4 @@ bool GameLogic::isExitLevel() const {
 void GameLogic::setExitLevel(bool exitLevel) {
   exitLevel_ = exitLevel;
 }
+

@@ -18,7 +18,6 @@ int main() {
   while (true) {
     controls.Update();
     if (gameLogic.isEnd()) break;
-    if (controls.isExit()) break;
     if (gameLogic.isRun()) {
       gameLogic.update();
     } else {

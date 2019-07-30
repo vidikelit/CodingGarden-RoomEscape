@@ -3,8 +3,17 @@
 
 void GameRoom::renderRoom() {
   terminal_layer(0);
+  for (int i = 0; i < room_size_x_; i++) {
+    terminal_put(0 + i, 6, wall.getSymbolWall());
+    terminal_put(0 + i, room_size_y_ - 1, wall.getSymbolWall());
+  }
+  for (int i = 0; i < room_size_y_ - 8; i++) {
+    terminal_put(0, 7 + i, wall.getSymbolWall());
+    terminal_put(room_size_x_ - 1, 7 + i, wall.getSymbolWall());
+  }
   // левый верхний
   symbol_wall_ = 0xE00;
+  tilesWall.clear();
   terminal_set("0xE00: resources/tilesets/tilesetRoom.png, size=64x64");
   terminal_put(0, 6, 0xE00);
   terminal_put(20, 6, 0xE01);
@@ -92,7 +101,7 @@ void GameRoom::renderDoor() {
   symbol_wall_ = 0xE21;
   tilesDoors.clear();
   for (unsigned int i = 0; i < 4; i++) tilesDoors.push_back(symbol_wall_++);
-  for (int i = 0; i <4; i++) {
+  for (int i = 0; i < 4; i++) {
     if (doors[i]) {
       terminal_put(doorsCoords[i][0], doorsCoords[i][1], tilesDoors.at(i));
     }
@@ -148,5 +157,8 @@ void GameRoom::setX(int x) {
 }
 void GameRoom::setY(int y) {
   y_ = y;
+}
+int GameRoom::getWall() {
+  return wall.getSymbolWall();
 }
 GameRoom::GameRoom(int x, int y) : x_(x), y_(y) {}

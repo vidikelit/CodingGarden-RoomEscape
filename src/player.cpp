@@ -2,55 +2,11 @@
 #include <BearLibTerminal.h>
 #include "game/controls.h"
 
-void Player::move() {
-  // движение при нажатии клавиши
-  if (controls.isUp()) {
-    y_ -= speed_;
-    steps++;
-  }
-  if (controls.isDown()) {
-    y_ += speed_;
-    steps++;
-  }
-  if (controls.isRight()) {
-    x_ += speed_;
-    steps++;
-  }
-  if (controls.isLeft()) {
-    x_ -= speed_;
-    steps++;
-  }
-  restriction();
-}
-
 void Player::render() {
   terminal_layer(2);
   terminal_put(x_, y_, symbol_);
 }
-
-void Player::restriction() {
-  GameMap gameMap;
-  //    ограничения по передвижению по комнате
-  if (getX() <= 0) {
-    setX(getX() + 1);
-    setSteps(getSteps() - 1);
-  }
-  if (getX() >= gameMap.getCurrentRoom().getRoomSizeX() - 1) {
-    setX(getX() - 1);
-    setSteps(getSteps() - 1);
-  }
-  if (getY() <= 6) {
-    setY(getY() + 1);
-    setSteps(getSteps() - 1);
-  }
-  if (getY() >= gameMap.getCurrentRoom().getRoomSizeY() - 1) {
-    setY(getY() - 1);
-    setSteps(getSteps() - 1);
-  }
-}
-
 void Player::update() {
-  move();
   render();
 }
 
@@ -86,4 +42,10 @@ int Player::getCoin() const {
 
 void Player::setCoin(int coin) {
   Player::coin = coin;
+}
+int Player::getSpeed() const {
+  return speed_;
+}
+void Player::setSpeed(int speed) {
+  speed_ = speed;
 }

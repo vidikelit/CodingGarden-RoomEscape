@@ -3,9 +3,11 @@
 
 #include <vector>
 #include "game/coin.h"
+#include "game/wall.h"
 
 class GameRoom {
  private:
+  Wall wall;
   std::vector<Coin> coins{};
   std::vector<int> tilesWall;
   std::vector<int> tilesDoors;
@@ -16,8 +18,8 @@ class GameRoom {
   int room_size_x_ = 21;
   int room_size_y_ = 17;
 
-  int symbol_wall_ = 0xE00;
   int symbol_door_ = 0x3E;
+  int symbol_wall_ = 0x23;
   int symbol_exit_ = 0x25;
 
   // выход в комнате
@@ -45,6 +47,7 @@ class GameRoom {
   void setExit(bool exit);
   int getSymbolExit() const;
 
+  int getWall();
   int getRoomSizeX() const;
   int getRoomSizeY() const;
   int getX() const;
