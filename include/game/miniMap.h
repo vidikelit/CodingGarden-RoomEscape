@@ -14,6 +14,7 @@ class MiniMap {
 
  public:
   void generatorMiniMap();
+  void mapMove(int i);
   void render();
   void setRoomsCoords(int x_, int y_);
   explicit MiniMap(GameMap* gameMap);

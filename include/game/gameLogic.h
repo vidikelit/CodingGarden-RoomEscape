@@ -21,7 +21,11 @@ class GameLogic {
   bool run_ = false;
   bool end_ = false;
   bool endGame_ = false;
+  bool renderSave_ = false;
   bool exitLevel_ = false;
+
+  int player_x_ = 0;
+  int player_y_ = 0;
 
  public:
   void newGame();
@@ -33,6 +37,12 @@ class GameLogic {
   void setSprites();
   void playerMove();
   void interWall(int x, int y);
+  void renderSave();
+
+  // переход в новую комнату
+  void scanner(int x, int y, int n);
+  void playerPos(int x, int y, int n);
+  void teleport(int i);
 
   bool isRun() const;
   void setRun(bool run);
@@ -40,7 +50,12 @@ class GameLogic {
   void setEnd(bool end);
   bool isExitLevel() const;
   void setExitLevel(bool exitLevel);
-
+  int getPlayerX() const;
+  void setPlayerX(int playerX);
+  int getPlayerY() const;
+  void setPlayerY(int playerY);
+  bool isEndGame() const;
+  void setEndGame(bool endGame);
   explicit GameLogic(Controls* controls);
 };
 

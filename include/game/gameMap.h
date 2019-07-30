@@ -15,10 +15,6 @@ class GameMap {
   int number_room_ = 0;
 
  public:
-  // координаты игрока
-  int player_x_;
-  int player_y_;
-
   void generatorMap();
   void generatorRoom();
   void generatorDoor(int x, int y, int i);
@@ -27,22 +23,15 @@ class GameMap {
   void render(int n);
   void renderCoin(int n);
   void formLevel(int x, int y);
-  void scanner(int x_p, int y_p, int n_r);
-  void teleport(int i);
-  void playerPos(int x_p, int y_p, int i);
 
   int getPointX() const;
   void setPointX(int pointX);
   int getPointY() const;
   void setPointY(int pointY);
-  int getMiniX() const;
-  void setMiniX(int miniX);
-  int getMiniY() const;
-  void setMiniY(int miniY);
   int getNumberRoom() const;
+  void setNumberRoom(int numberRoom);
   int getAllCoin();
   const std::vector<GameRoom>& getRooms() const;
-  void setRooms(GameRoom gameRoom);
   GameRoom& getCurrentRoom();
 };
 

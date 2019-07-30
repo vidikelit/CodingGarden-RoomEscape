@@ -74,12 +74,14 @@ void GameMap::generatorCoin(int n) {
     rooms.at(n).pushCoin({std::experimental::randint(3, 18), std::experimental::randint(8, 15)});
   }
 }
+// расстановка дверей и монет
 void GameMap::setDoorCoin() {
   for (unsigned int i = 0; i < rooms.size(); i++) {
     generatorDoor(rooms.at(i).getX(), rooms.at(i).getY(), i);
     generatorCoin(i);
   }
 }
+// отрисовка (перенести в другое место)!
 void GameMap::render(int n) {
   rooms.at(n).renderRoom();
   rooms.at(n).renderDoor();
@@ -87,44 +89,6 @@ void GameMap::render(int n) {
 void GameMap::renderCoin(int n) {
   rooms.at(n).renderCoin();
   rooms.at(n).renderExit();
-}
-void GameMap::scanner(int x, int y, int n) {
-  for (int i = 0; i <= 3; i++) {
-    if (sqrt(pow(rooms.at(n).doorsCoords[i][0] - x, 2) + pow(rooms.at(n).doorsCoords[i][1] - y, 2)) <= 1) {
-      if (rooms.at(n).doors[i]) {
-        teleport(i);
-        playerPos(x, y, i);
-        break;
-      }
-    }
-  }
-}
-void GameMap::playerPos(int x, int y, int i) {
-  player_x_ = x;
-  player_y_ = y;
-  if (i == 0) player_y_ += 8;
-  if (i == 1) player_y_ -= 8;
-  if (i == 2) player_x_ += 18;
-  if (i == 3) player_x_ -= 18;
-}
-void GameMap::teleport(int i) {
-
-  int buff_x = 0;
-  int buff_y = 0;
-  if (i == 0) buff_y -= rooms.at(0).getRoomSizeY();
-  if (i == 1) buff_y += rooms.at(0).getRoomSizeY();
-  if (i == 2) buff_x -= rooms.at(0).getRoomSizeX();
-  if (i == 3) buff_x += rooms.at(0).getRoomSizeX();
-
-  for (unsigned int n = 0; n < rooms.size(); n++) {
-    if (rooms.at(number_room_).getX() + buff_x == rooms.at(n).getX()) {
-      if (rooms.at(number_room_).getY() + buff_y == rooms.at(n).getY()) {
-        number_room_ = n;
-        render(n);
-        break;
-      }
-    }
-  }
 }
 int GameMap::getAllCoin() {
   int coin = 0;
@@ -152,9 +116,9 @@ void GameMap::setPointY(int pointY) {
 int GameMap::getNumberRoom() const {
   return number_room_;
 }
+void GameMap::setNumberRoom(int numberRoom) {
+  number_room_ = numberRoom;
+}
 const std::vector<GameRoom>& GameMap::getRooms() const {
   return rooms;
-}
-void GameMap::setRooms(GameRoom gameRoom) {
-  GameMap::rooms.push_back(GameRoom(gameRoom.getX(), gameRoom.getY()));
 }

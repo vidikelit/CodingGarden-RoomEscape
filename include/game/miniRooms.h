@@ -5,15 +5,14 @@ class MiniRooms {
  private:
   int x_;
   int y_;
+  int symbol_mini_room = 0x4F;
 
  public:
-  void render();
-  void moveRoom(int i);
-
   int getX() const;
-  void setX(int x);
   int getY() const;
+  void setX(int x);
   void setY(int y);
+  int getSymbolMiniRoom() const;
   MiniRooms(int x, int y);
 };
 
