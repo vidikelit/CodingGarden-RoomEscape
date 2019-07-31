@@ -6,7 +6,7 @@
 // генератор карты
 void GameMap::generatorMap() {
   // генерируется от 3 до 5 комнат на карте
-  for (int i = 0; i < std::experimental::randint(3, 5); i++) {
+  for (int i = 0; i < std::experimental::randint(5, 10); i++) {
     bool a = true;
     int x = getPointX();
     int y = getPointY();

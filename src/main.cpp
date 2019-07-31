@@ -12,7 +12,7 @@ int main() {
   terminal_refresh();
   terminal_composition(TK_ON);
   terminal_set("input: filter=[keyboard+];");
-
+  terminal_refresh();
   window.Settings();
   gameLogic.initGame();
   while (true) {

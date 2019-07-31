@@ -38,6 +38,7 @@ class GameLogic {
   void playerMove();
   void interWall(int x, int y);
   void renderSave();
+  void stats();
 
   // переход в новую комнату
   void scanner(int x, int y, int n);

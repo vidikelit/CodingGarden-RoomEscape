@@ -15,7 +15,7 @@ set(PROJECT_SOURCES_DIR ${PROJECT_SOURCE_DIR}/src)
 file(GLOB_RECURSE HEADERS ${PROJECT_HEADERS_DIR}/*.h)
 file(GLOB_RECURSE SOURCES ${PROJECT_SOURCES_DIR}/*.cpp)
 
-add_executable(${PROJECT_NAME} ${HEADERS} ${SOURCES} include/game/lib/i_saver_loader.h src/miniMap.cpp include/game/miniMap.h src/wall.cpp include/game/wall.h src/miniRooms.cpp include/game/miniRooms.h)
+add_executable(${PROJECT_NAME} ${HEADERS} ${SOURCES})
 
 include_directories(${PROJECT_HEADERS_DIR})
 

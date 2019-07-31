@@ -91,8 +91,8 @@ void GameLogic::updateMenu() {
 }
 void GameLogic::renderSave() {
   terminal_clear();
-  terminal_print(1, 8, "Генерация сохранена");
-  terminal_print(4, 10, "Нажмите [color=red]Enter");
+  terminal_print(0, 8, "Генерация сохранена");
+  terminal_print(3, 10, "Нажмите [color=red]Enter");
   if (controls->isEnter()) {
     renderSave_ = false;
     gameMenu.setGameMenuStatus(true);
@@ -155,11 +155,13 @@ void GameLogic::update() {
     gameMenu.setGameMenuStatus(true);
     gameMenu.setMenu(0);
   }
+  stats();
 }
 void GameLogic::interWall(int x, int y) {
   terminal_layer(0);
   // верхняя стена
   if (terminal_pick(player.getX(), player.getY(), 0) == gameMap.getCurrentRoom().getWall()) {
+    player.setSteps(player.getSteps() - 1);
     player.setX(x);
     player.setY(y);
   }
@@ -269,4 +271,14 @@ bool GameLogic::isEndGame() const {
 }
 void GameLogic::setEndGame(bool endGame) {
   endGame_ = endGame;
+}
+void GameLogic::stats() {
+  terminal_layer(4);
+  terminal_clear_area(5, 0, 21, 5);
+  terminal_put(6, 0, 0x40);
+  terminal_printf(7, 0, "=%d", player.getSteps());
+
+  terminal_put(6, 1, 0x24);
+  terminal_printf(7, 1, "=%d", player.getCoin());
+  terminal_layer(2);
 }
