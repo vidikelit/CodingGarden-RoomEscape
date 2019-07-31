@@ -1,3 +1,0 @@
-/home/vidik/CLionProjects/RoomEscape/CMakeFiles/rebuild_cache.dir
-/home/vidik/CLionProjects/RoomEscape/CMakeFiles/RoomEscape.dir
-/home/vidik/CLionProjects/RoomEscape/CMakeFiles/edit_cache.dir

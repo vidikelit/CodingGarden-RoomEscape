@@ -123,6 +123,19 @@ RoomEscape/fast:
 	$(MAKE) -f CMakeFiles/RoomEscape.dir/build.make CMakeFiles/RoomEscape.dir/build
 .PHONY : RoomEscape/fast
 
+#=============================================================================
+# Target rules for targets named lint
+
+# Build rule for target.
+lint: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 lint
+.PHONY : lint
+
+# fast build rule for target.
+lint/fast:
+	$(MAKE) -f CMakeFiles/lint.dir/build.make CMakeFiles/lint.dir/build
+.PHONY : lint/fast
+
 src/coin.o: src/coin.cpp.o
 
 .PHONY : src/coin.o
@@ -177,6 +190,114 @@ src/controls.cpp.s:
 	$(MAKE) -f CMakeFiles/RoomEscape.dir/build.make CMakeFiles/RoomEscape.dir/src/controls.cpp.s
 .PHONY : src/controls.cpp.s
 
+src/gameLogic.o: src/gameLogic.cpp.o
+
+.PHONY : src/gameLogic.o
+
+# target to build an object file
+src/gameLogic.cpp.o:
+	$(MAKE) -f CMakeFiles/RoomEscape.dir/build.make CMakeFiles/RoomEscape.dir/src/gameLogic.cpp.o
+.PHONY : src/gameLogic.cpp.o
+
+src/gameLogic.i: src/gameLogic.cpp.i
+
+.PHONY : src/gameLogic.i
+
+# target to preprocess a source file
+src/gameLogic.cpp.i:
+	$(MAKE) -f CMakeFiles/RoomEscape.dir/build.make CMakeFiles/RoomEscape.dir/src/gameLogic.cpp.i
+.PHONY : src/gameLogic.cpp.i
+
+src/gameLogic.s: src/gameLogic.cpp.s
+
+.PHONY : src/gameLogic.s
+
+# target to generate assembly for a file
+src/gameLogic.cpp.s:
+	$(MAKE) -f CMakeFiles/RoomEscape.dir/build.make CMakeFiles/RoomEscape.dir/src/gameLogic.cpp.s
+.PHONY : src/gameLogic.cpp.s
+
+src/gameMap.o: src/gameMap.cpp.o
+
+.PHONY : src/gameMap.o
+
+# target to build an object file
+src/gameMap.cpp.o:
+	$(MAKE) -f CMakeFiles/RoomEscape.dir/build.make CMakeFiles/RoomEscape.dir/src/gameMap.cpp.o
+.PHONY : src/gameMap.cpp.o
+
+src/gameMap.i: src/gameMap.cpp.i
+
+.PHONY : src/gameMap.i
+
+# target to preprocess a source file
+src/gameMap.cpp.i:
+	$(MAKE) -f CMakeFiles/RoomEscape.dir/build.make CMakeFiles/RoomEscape.dir/src/gameMap.cpp.i
+.PHONY : src/gameMap.cpp.i
+
+src/gameMap.s: src/gameMap.cpp.s
+
+.PHONY : src/gameMap.s
+
+# target to generate assembly for a file
+src/gameMap.cpp.s:
+	$(MAKE) -f CMakeFiles/RoomEscape.dir/build.make CMakeFiles/RoomEscape.dir/src/gameMap.cpp.s
+.PHONY : src/gameMap.cpp.s
+
+src/gameMenu.o: src/gameMenu.cpp.o
+
+.PHONY : src/gameMenu.o
+
+# target to build an object file
+src/gameMenu.cpp.o:
+	$(MAKE) -f CMakeFiles/RoomEscape.dir/build.make CMakeFiles/RoomEscape.dir/src/gameMenu.cpp.o
+.PHONY : src/gameMenu.cpp.o
+
+src/gameMenu.i: src/gameMenu.cpp.i
+
+.PHONY : src/gameMenu.i
+
+# target to preprocess a source file
+src/gameMenu.cpp.i:
+	$(MAKE) -f CMakeFiles/RoomEscape.dir/build.make CMakeFiles/RoomEscape.dir/src/gameMenu.cpp.i
+.PHONY : src/gameMenu.cpp.i
+
+src/gameMenu.s: src/gameMenu.cpp.s
+
+.PHONY : src/gameMenu.s
+
+# target to generate assembly for a file
+src/gameMenu.cpp.s:
+	$(MAKE) -f CMakeFiles/RoomEscape.dir/build.make CMakeFiles/RoomEscape.dir/src/gameMenu.cpp.s
+.PHONY : src/gameMenu.cpp.s
+
+src/gameRoom.o: src/gameRoom.cpp.o
+
+.PHONY : src/gameRoom.o
+
+# target to build an object file
+src/gameRoom.cpp.o:
+	$(MAKE) -f CMakeFiles/RoomEscape.dir/build.make CMakeFiles/RoomEscape.dir/src/gameRoom.cpp.o
+.PHONY : src/gameRoom.cpp.o
+
+src/gameRoom.i: src/gameRoom.cpp.i
+
+.PHONY : src/gameRoom.i
+
+# target to preprocess a source file
+src/gameRoom.cpp.i:
+	$(MAKE) -f CMakeFiles/RoomEscape.dir/build.make CMakeFiles/RoomEscape.dir/src/gameRoom.cpp.i
+.PHONY : src/gameRoom.cpp.i
+
+src/gameRoom.s: src/gameRoom.cpp.s
+
+.PHONY : src/gameRoom.s
+
+# target to generate assembly for a file
+src/gameRoom.cpp.s:
+	$(MAKE) -f CMakeFiles/RoomEscape.dir/build.make CMakeFiles/RoomEscape.dir/src/gameRoom.cpp.s
+.PHONY : src/gameRoom.cpp.s
+
 src/main.o: src/main.cpp.o
 
 .PHONY : src/main.o
@@ -204,32 +325,59 @@ src/main.cpp.s:
 	$(MAKE) -f CMakeFiles/RoomEscape.dir/build.make CMakeFiles/RoomEscape.dir/src/main.cpp.s
 .PHONY : src/main.cpp.s
 
-src/map.o: src/map.cpp.o
+src/miniMap.o: src/miniMap.cpp.o
 
-.PHONY : src/map.o
+.PHONY : src/miniMap.o
 
 # target to build an object file
-src/map.cpp.o:
-	$(MAKE) -f CMakeFiles/RoomEscape.dir/build.make CMakeFiles/RoomEscape.dir/src/map.cpp.o
-.PHONY : src/map.cpp.o
+src/miniMap.cpp.o:
+	$(MAKE) -f CMakeFiles/RoomEscape.dir/build.make CMakeFiles/RoomEscape.dir/src/miniMap.cpp.o
+.PHONY : src/miniMap.cpp.o
 
-src/map.i: src/map.cpp.i
+src/miniMap.i: src/miniMap.cpp.i
 
-.PHONY : src/map.i
+.PHONY : src/miniMap.i
 
 # target to preprocess a source file
-src/map.cpp.i:
-	$(MAKE) -f CMakeFiles/RoomEscape.dir/build.make CMakeFiles/RoomEscape.dir/src/map.cpp.i
-.PHONY : src/map.cpp.i
+src/miniMap.cpp.i:
+	$(MAKE) -f CMakeFiles/RoomEscape.dir/build.make CMakeFiles/RoomEscape.dir/src/miniMap.cpp.i
+.PHONY : src/miniMap.cpp.i
 
-src/map.s: src/map.cpp.s
+src/miniMap.s: src/miniMap.cpp.s
 
-.PHONY : src/map.s
+.PHONY : src/miniMap.s
 
 # target to generate assembly for a file
-src/map.cpp.s:
-	$(MAKE) -f CMakeFiles/RoomEscape.dir/build.make CMakeFiles/RoomEscape.dir/src/map.cpp.s
-.PHONY : src/map.cpp.s
+src/miniMap.cpp.s:
+	$(MAKE) -f CMakeFiles/RoomEscape.dir/build.make CMakeFiles/RoomEscape.dir/src/miniMap.cpp.s
+.PHONY : src/miniMap.cpp.s
+
+src/miniRooms.o: src/miniRooms.cpp.o
+
+.PHONY : src/miniRooms.o
+
+# target to build an object file
+src/miniRooms.cpp.o:
+	$(MAKE) -f CMakeFiles/RoomEscape.dir/build.make CMakeFiles/RoomEscape.dir/src/miniRooms.cpp.o
+.PHONY : src/miniRooms.cpp.o
+
+src/miniRooms.i: src/miniRooms.cpp.i
+
+.PHONY : src/miniRooms.i
+
+# target to preprocess a source file
+src/miniRooms.cpp.i:
+	$(MAKE) -f CMakeFiles/RoomEscape.dir/build.make CMakeFiles/RoomEscape.dir/src/miniRooms.cpp.i
+.PHONY : src/miniRooms.cpp.i
+
+src/miniRooms.s: src/miniRooms.cpp.s
+
+.PHONY : src/miniRooms.s
+
+# target to generate assembly for a file
+src/miniRooms.cpp.s:
+	$(MAKE) -f CMakeFiles/RoomEscape.dir/build.make CMakeFiles/RoomEscape.dir/src/miniRooms.cpp.s
+.PHONY : src/miniRooms.cpp.s
 
 src/player.o: src/player.cpp.o
 
@@ -258,32 +406,59 @@ src/player.cpp.s:
 	$(MAKE) -f CMakeFiles/RoomEscape.dir/build.make CMakeFiles/RoomEscape.dir/src/player.cpp.s
 .PHONY : src/player.cpp.s
 
-src/room.o: src/room.cpp.o
+src/saver_loader.o: src/saver_loader.cpp.o
 
-.PHONY : src/room.o
+.PHONY : src/saver_loader.o
 
 # target to build an object file
-src/room.cpp.o:
-	$(MAKE) -f CMakeFiles/RoomEscape.dir/build.make CMakeFiles/RoomEscape.dir/src/room.cpp.o
-.PHONY : src/room.cpp.o
+src/saver_loader.cpp.o:
+	$(MAKE) -f CMakeFiles/RoomEscape.dir/build.make CMakeFiles/RoomEscape.dir/src/saver_loader.cpp.o
+.PHONY : src/saver_loader.cpp.o
 
-src/room.i: src/room.cpp.i
+src/saver_loader.i: src/saver_loader.cpp.i
 
-.PHONY : src/room.i
+.PHONY : src/saver_loader.i
 
 # target to preprocess a source file
-src/room.cpp.i:
-	$(MAKE) -f CMakeFiles/RoomEscape.dir/build.make CMakeFiles/RoomEscape.dir/src/room.cpp.i
-.PHONY : src/room.cpp.i
+src/saver_loader.cpp.i:
+	$(MAKE) -f CMakeFiles/RoomEscape.dir/build.make CMakeFiles/RoomEscape.dir/src/saver_loader.cpp.i
+.PHONY : src/saver_loader.cpp.i
 
-src/room.s: src/room.cpp.s
+src/saver_loader.s: src/saver_loader.cpp.s
 
-.PHONY : src/room.s
+.PHONY : src/saver_loader.s
 
 # target to generate assembly for a file
-src/room.cpp.s:
-	$(MAKE) -f CMakeFiles/RoomEscape.dir/build.make CMakeFiles/RoomEscape.dir/src/room.cpp.s
-.PHONY : src/room.cpp.s
+src/saver_loader.cpp.s:
+	$(MAKE) -f CMakeFiles/RoomEscape.dir/build.make CMakeFiles/RoomEscape.dir/src/saver_loader.cpp.s
+.PHONY : src/saver_loader.cpp.s
+
+src/wall.o: src/wall.cpp.o
+
+.PHONY : src/wall.o
+
+# target to build an object file
+src/wall.cpp.o:
+	$(MAKE) -f CMakeFiles/RoomEscape.dir/build.make CMakeFiles/RoomEscape.dir/src/wall.cpp.o
+.PHONY : src/wall.cpp.o
+
+src/wall.i: src/wall.cpp.i
+
+.PHONY : src/wall.i
+
+# target to preprocess a source file
+src/wall.cpp.i:
+	$(MAKE) -f CMakeFiles/RoomEscape.dir/build.make CMakeFiles/RoomEscape.dir/src/wall.cpp.i
+.PHONY : src/wall.cpp.i
+
+src/wall.s: src/wall.cpp.s
+
+.PHONY : src/wall.s
+
+# target to generate assembly for a file
+src/wall.cpp.s:
+	$(MAKE) -f CMakeFiles/RoomEscape.dir/build.make CMakeFiles/RoomEscape.dir/src/wall.cpp.s
+.PHONY : src/wall.cpp.s
 
 src/window.o: src/window.cpp.o
 
@@ -319,26 +494,45 @@ help:
 	@echo "... clean"
 	@echo "... depend"
 	@echo "... rebuild_cache"
-	@echo "... RoomEscape"
 	@echo "... edit_cache"
+	@echo "... RoomEscape"
+	@echo "... lint"
 	@echo "... src/coin.o"
 	@echo "... src/coin.i"
 	@echo "... src/coin.s"
 	@echo "... src/controls.o"
 	@echo "... src/controls.i"
 	@echo "... src/controls.s"
+	@echo "... src/gameLogic.o"
+	@echo "... src/gameLogic.i"
+	@echo "... src/gameLogic.s"
+	@echo "... src/gameMap.o"
+	@echo "... src/gameMap.i"
+	@echo "... src/gameMap.s"
+	@echo "... src/gameMenu.o"
+	@echo "... src/gameMenu.i"
+	@echo "... src/gameMenu.s"
+	@echo "... src/gameRoom.o"
+	@echo "... src/gameRoom.i"
+	@echo "... src/gameRoom.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"
-	@echo "... src/map.o"
-	@echo "... src/map.i"
-	@echo "... src/map.s"
+	@echo "... src/miniMap.o"
+	@echo "... src/miniMap.i"
+	@echo "... src/miniMap.s"
+	@echo "... src/miniRooms.o"
+	@echo "... src/miniRooms.i"
+	@echo "... src/miniRooms.s"
 	@echo "... src/player.o"
 	@echo "... src/player.i"
 	@echo "... src/player.s"
-	@echo "... src/room.o"
-	@echo "... src/room.i"
-	@echo "... src/room.s"
+	@echo "... src/saver_loader.o"
+	@echo "... src/saver_loader.i"
+	@echo "... src/saver_loader.s"
+	@echo "... src/wall.o"
+	@echo "... src/wall.i"
+	@echo "... src/wall.s"
 	@echo "... src/window.o"
 	@echo "... src/window.i"
 	@echo "... src/window.s"

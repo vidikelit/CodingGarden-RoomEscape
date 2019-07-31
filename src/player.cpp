@@ -1,73 +1,51 @@
+#include "game/player.h"
 #include <BearLibTerminal.h>
-#include "../include/player.h"
-#include "../include/controls.h"
-#include "../include/room.h"
-
-void Player::move() {
-    Room room{0,0};
-    //движение при нажатии клавиши
-    if(controls.isUp()){
-        y_ -= speed_;
-        steps++;
-    }
-    if(controls.isDown()){
-        y_ += speed_;
-        steps++;
-    }
-    if(controls.isRight()){
-        x_ += speed_;
-        steps++;
-    }
-    if(controls.isLeft()){
-        x_ -= speed_;
-        steps++;
-    }
-//    ограничения по передвижению по комнате
-    if(getX() <= 0)
-        x_ = getX() + 1;
-    if(getX() >= room.getRoomSize())
-        x_ = getX() - 1;
-    if(getY() <= 0)
-        y_ = getY() + 1;
-    if(getY() >= room.getRoomSize())
-        y_ = getY() - 1;
-}
+#include "game/controls.h"
 
 void Player::render() {
-    terminal_layer(1);
-    terminal_put(x_, y_, symbol_);
-    terminal_layer(0);
-
-    terminal_put(21, 17, 0x40);
-    terminal_printf(22, 17, "=%d", steps);
-    terminal_clear_area(getX(),getY(), 1, 1);
-
-    terminal_put(21, 19, 0x24);
-    terminal_printf(22, 19, "=%d", coin);
-    terminal_clear_area(getX(),getY(), 1, 1);
+  terminal_layer(2);
+  terminal_put(x_, y_, symbol_);
 }
-
 void Player::update() {
-    move();
-    render();
+  render();
 }
 
 int Player::getX() const {
-    return x_;
+  return x_;
 }
 
 int Player::getY() const {
-    return y_;
+  return y_;
 }
 
-Player::Player(const Controls &controls, int x, int y) : controls(controls), x_(x), y_(y) {
-//    terminal_set("0x40: ../src/tiles/player.png");
-}
+Player::Player(const Controls &controls, int x, int y) : controls(controls), x_(x), y_(y) {}
 
 void Player::setX(int x) {
-    x_ = x;
+  x_ = x;
 }
 
 void Player::setY(int y) {
-    y_ = y;
+  y_ = y;
+}
+
+int Player::getSteps() const {
+  return steps;
+}
+
+void Player::setSteps(int steps) {
+  Player::steps = steps;
+}
+
+int Player::getCoin() const {
+  return coin;
+}
+
+void Player::setCoin(int coin) {
+  Player::coin = coin;
+}
+int Player::getSpeed() const {
+  return speed_;
+}
+void Player::setSpeed(int speed) {
+  speed_ = speed;
 }
