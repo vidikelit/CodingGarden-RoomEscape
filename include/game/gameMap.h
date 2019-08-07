@@ -3,35 +3,38 @@
 
 #include <vector>
 #include "game/gameRoom.h"
+#include "game/wall.h"
 
 class GameMap {
  private:
-  // вектор с координатами комнат
   std::vector<GameRoom> rooms{{0, 0}};
-  // координаты для генерации новой комнат
-  int point_x_ = 0;
-  int point_y_ = 0;
-  // номер текущей комнаты
+  int x_ = 0;
+  int y_ = 0;
   int number_room_ = 0;
 
- public:
-  void generatorMap();
-  void generatorRoom();
-  void generatorDoor(int x, int y, int i);
-  void generatorCoin(int n);
-  void setDoorCoin();
-  void render(int n);
-  void renderCoin(int n);
-  void formLevel(int x, int y);
+  int minRooms = 3;
+  int maxRooms = 6;
 
-  int getPointX() const;
-  void setPointX(int pointX);
-  int getPointY() const;
-  void setPointY(int pointY);
+ public:
+  void update();
+  void updateDoor();
+  void generatorLevel();
+  void generatorRoom();
+  void generatorDoor(int n_room);
+  void generatorCoin(int n_room);
+
+  void formRoom(int x, int y);
+  void formCoin(int x, int y, int r);
+  int getAllCoin();
+
+  int getX() const;
+  void setX(int x);
+  int getY() const;
+  void setY(int y);
   int getNumberRoom() const;
   void setNumberRoom(int numberRoom);
-  int getAllCoin();
-  const std::vector<GameRoom>& getRooms() const;
+  void setTilesRooms(bool tile);
+  std::vector<GameRoom>& getRooms();
   GameRoom& getCurrentRoom();
 };
 

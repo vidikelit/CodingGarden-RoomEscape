@@ -139,7 +139,6 @@ Temporary Items
 .idea
 cmake-build-debug
 build
-misc
 
 
 *.cbp

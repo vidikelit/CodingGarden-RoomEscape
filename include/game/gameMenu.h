@@ -13,8 +13,8 @@ class GameMenu {
   // пункты основного меню
   const char* continue_game_ = "Продолжить";
   const char* new_game_ = "Новая игра";
-  const char* save_game_ = "Сохранить";
   const char* load_game_ = "Загрузить";
+  const char* setting_game_ = "Настройки";
   const char* end_game_ = "Выход";
 
   // пункты меню сохранения/загрузки
@@ -22,8 +22,12 @@ class GameMenu {
   const char* slot2_ = "Слот 2";
   const char* slot3_ = "Слот 3";
 
-  std::vector<const char*> pointMainMenu{new_game_, load_game_, end_game_};
-  std::vector<const char*> pointSaveLoadMenu{slot1_, slot2_, slot3_};
+  // меню настроек
+  const char* tiles_ = "Тайлы [color=green]ON";
+
+  std::vector<const char*> pointMainMenu{new_game_, load_game_, setting_game_, end_game_};
+  std::vector<const char*> pointLoadMenu{slot1_};
+  std::vector<const char*> pointSettingMenu{tiles_};
 
   // 0 - основное меню, 1 - меню сохранений, 2 - меню загрузки
   int menu_ = 0;
@@ -31,19 +35,20 @@ class GameMenu {
   // слот сохранений
   int slot_;
 
- private:
   // основное меню
   bool gameMenuStatus_ = true;
   bool newGame_ = false;
-  bool saveGame_ = false;
   bool loadGame_ = false;
+  bool settingGame_ = false;
+  bool settingGameOnOff_ = true;
   bool continueGame_ = false;
   bool endGame_ = false;
 
  public:
   void update();
   void mainMenu();
-  void saveLoadMenu();
+  void loadMenu();
+  void settingMenu();
   void setNewMenuPoint();
 
   int getMenu() const;
@@ -61,12 +66,15 @@ class GameMenu {
   void setEndGame(bool endGame);
   bool isContinueGame() const;
   void setContinueGame(bool continueGame);
-  bool isSaveGame() const;
-  void setSaveGame(bool saveGame);
   bool isLoadGame() const;
   void setLoadGame(bool loadGame);
+  bool isSettingGame() const;
+  void setSettingGame(bool settingGame);
+  bool isSettingGameOnOff() const;
+  void setSettingGameOnOff(bool settingGameOnOff);
   int getSlot() const;
   void setSlot(int slot);
+  void setTiles(const char* tiles);
 };
 
 #endif  // INCLUDE_GAME_GAMEMENU_H_

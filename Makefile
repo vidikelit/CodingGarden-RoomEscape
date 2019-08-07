@@ -69,8 +69,8 @@ rebuild_cache/fast: rebuild_cache
 
 # Special rule for the target edit_cache
 edit_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
-	/home/vidik/apps/clion-2019.1.4/bin/cmake/linux/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake cache editor..."
+	/home/vidik/apps/clion-2019.1.4/bin/cmake/linux/bin/ccmake -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : edit_cache
 
 # Special rule for the target edit_cache
@@ -189,6 +189,60 @@ src/controls.s: src/controls.cpp.s
 src/controls.cpp.s:
 	$(MAKE) -f CMakeFiles/RoomEscape.dir/build.make CMakeFiles/RoomEscape.dir/src/controls.cpp.s
 .PHONY : src/controls.cpp.s
+
+src/door.o: src/door.cpp.o
+
+.PHONY : src/door.o
+
+# target to build an object file
+src/door.cpp.o:
+	$(MAKE) -f CMakeFiles/RoomEscape.dir/build.make CMakeFiles/RoomEscape.dir/src/door.cpp.o
+.PHONY : src/door.cpp.o
+
+src/door.i: src/door.cpp.i
+
+.PHONY : src/door.i
+
+# target to preprocess a source file
+src/door.cpp.i:
+	$(MAKE) -f CMakeFiles/RoomEscape.dir/build.make CMakeFiles/RoomEscape.dir/src/door.cpp.i
+.PHONY : src/door.cpp.i
+
+src/door.s: src/door.cpp.s
+
+.PHONY : src/door.s
+
+# target to generate assembly for a file
+src/door.cpp.s:
+	$(MAKE) -f CMakeFiles/RoomEscape.dir/build.make CMakeFiles/RoomEscape.dir/src/door.cpp.s
+.PHONY : src/door.cpp.s
+
+src/elevator.o: src/elevator.cpp.o
+
+.PHONY : src/elevator.o
+
+# target to build an object file
+src/elevator.cpp.o:
+	$(MAKE) -f CMakeFiles/RoomEscape.dir/build.make CMakeFiles/RoomEscape.dir/src/elevator.cpp.o
+.PHONY : src/elevator.cpp.o
+
+src/elevator.i: src/elevator.cpp.i
+
+.PHONY : src/elevator.i
+
+# target to preprocess a source file
+src/elevator.cpp.i:
+	$(MAKE) -f CMakeFiles/RoomEscape.dir/build.make CMakeFiles/RoomEscape.dir/src/elevator.cpp.i
+.PHONY : src/elevator.cpp.i
+
+src/elevator.s: src/elevator.cpp.s
+
+.PHONY : src/elevator.s
+
+# target to generate assembly for a file
+src/elevator.cpp.s:
+	$(MAKE) -f CMakeFiles/RoomEscape.dir/build.make CMakeFiles/RoomEscape.dir/src/elevator.cpp.s
+.PHONY : src/elevator.cpp.s
 
 src/gameLogic.o: src/gameLogic.cpp.o
 
@@ -503,6 +557,12 @@ help:
 	@echo "... src/controls.o"
 	@echo "... src/controls.i"
 	@echo "... src/controls.s"
+	@echo "... src/door.o"
+	@echo "... src/door.i"
+	@echo "... src/door.s"
+	@echo "... src/elevator.o"
+	@echo "... src/elevator.i"
+	@echo "... src/elevator.s"
 	@echo "... src/gameLogic.o"
 	@echo "... src/gameLogic.i"
 	@echo "... src/gameLogic.s"

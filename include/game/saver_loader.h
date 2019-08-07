@@ -12,13 +12,17 @@ class SaverLoader: public ISaverLoader{
   FILE *file;
   const char *path = "saveFile.txt";
   std::vector<char> textSave{};
-  int saveSlot_ = 0;
+  int level_;
+  bool clearLine;
 
  public:
   void saver() override;
   void loader() override;
-
-  void setSaveSlot(int saveSlot);
+  void lineCheck(int lev);
+  int getLevel() const;
+  void setLevel(int level);
+  bool isClearLine() const;
+  void setClearLine(bool clearLine);
   void setMap(GameMap *gameMap);
 };
 

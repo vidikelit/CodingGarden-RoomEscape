@@ -2,12 +2,11 @@
 #define INCLUDE_GAME_GAMELOGIC_H_
 
 #include "game/controls.h"
+#include "game/gameMap.h"
 #include "game/gameMenu.h"
+#include "game/miniMap.h"
 #include "game/player.h"
 #include "game/saver_loader.h"
-#include "game/gameMap.h"
-#include "game/miniMap.h"
-#include "game/wall.h"
 
 class GameLogic {
  private:
@@ -16,7 +15,8 @@ class GameLogic {
   GameMenu gameMenu;
   SaverLoader saverLoader;
   Controls* controls;
-  Player player{*controls, 11, 11};
+
+  Player player{*controls, 10, 11};
 
   bool run_ = false;
   bool end_ = false;
@@ -27,23 +27,28 @@ class GameLogic {
   int player_x_ = 0;
   int player_y_ = 0;
 
+  int level_ = 0;
+  bool loadLevel_ = false;
+
  public:
   void newGame();
   void loadGame();
+  void newLevel();
+  void saveLevel();
+  void prevLevel();
   void endGame();
+  void stats();
   void update();
   void updateMenu();
   void initGame();
   void setSprites();
   void playerMove();
-  void interWall(int x, int y);
+  void interWall();
   void renderSave();
-  void stats();
 
   // переход в новую комнату
-  void scanner(int x, int y, int n);
-  void playerPos(int x, int y, int n);
-  void teleport(int i);
+  void scanner();
+  void teleport();
 
   bool isRun() const;
   void setRun(bool run);
@@ -57,6 +62,9 @@ class GameLogic {
   void setPlayerY(int playerY);
   bool isEndGame() const;
   void setEndGame(bool endGame);
+  int getLevel() const;
+  void setLevel(int level);
+
   explicit GameLogic(Controls* controls);
 };
 

@@ -3,7 +3,8 @@
 
 void GameMenu::update() {
   terminal_clear();
-  if (menu_ == 1 || menu_ == 2) saveLoadMenu();
+  if (menu_ == 2) settingMenu();
+  if (menu_ == 1) loadMenu();
   if (menu_ == 0) mainMenu();
 }
 void GameMenu::mainMenu() {
@@ -24,17 +25,18 @@ void GameMenu::mainMenu() {
       // новая игра
       if (strcmp(pointMainMenu[getMenuPoint()], new_game_) == 0) {
         setGameMenuStatus(false);
-        setNewGame(true);
-        break;
-      }
-      // сохранить игру
-      if (strcmp(pointMainMenu[getMenuPoint()], save_game_) == 0) {
         setMenuPoint(0);
-        setMenu(1);
+        setNewGame(true);
         break;
       }
       // загрузить игру
       if (strcmp(pointMainMenu[getMenuPoint()], load_game_) == 0) {
+        setMenuPoint(0);
+        setMenu(1);
+        break;
+      }
+      // настройки
+      if (strcmp(pointMainMenu[getMenuPoint()], setting_game_) == 0) {
         setMenuPoint(0);
         setMenu(2);
         break;
@@ -56,55 +58,31 @@ void GameMenu::mainMenu() {
   }
   terminal_color(color_from_name("white"));
 }
-void GameMenu::saveLoadMenu() {
+void GameMenu::loadMenu() {
   terminal_clear();
-  if (getMenu() == 1)
-    terminal_print(5, 5, "[color=red]Сохранить\n генерацию");
-  else
-    terminal_print(5, 5, "[color=red]Загрузить\n генерацию");
-  for (unsigned int i = 0; i < pointSaveLoadMenu.size(); i++) {
+  terminal_print(5, 5, "[color=red]Загрузить\n генерацию");
+  for (unsigned int i = 0; i < pointLoadMenu.size(); i++) {
     if (getMenuPoint() == static_cast<int>(i)) {
       terminal_color(color_from_name("green"));
     }
-    terminal_printf(7, 8 + i, "%s", pointSaveLoadMenu[i]);
+    terminal_printf(7, 8 + i, "%s", pointLoadMenu[i]);
     terminal_color(color_from_name("white"));
     if (controls->isEnter()) {
       // Слот 1
-      if (strcmp(pointSaveLoadMenu[getMenuPoint()], slot1_) == 0) {
+      if (strcmp(pointLoadMenu[getMenuPoint()], slot1_) == 0) {
         setSlot(0);
-        if (getMenu() == 1)
-          setSaveGame(true);
-        else
-          setLoadGame(true);
-        break;
-      }
-      // Слот 2
-      if (strcmp(pointSaveLoadMenu[getMenuPoint()], slot2_) == 0) {
-        setSlot(1);
-        if (getMenu() == 1)
-          setSaveGame(true);
-        else
-          setLoadGame(true);
-        break;
-      }
-      // Слот 3
-      if (strcmp(pointSaveLoadMenu[getMenuPoint()], slot3_) == 0) {
-        setSlot(2);
-        if (getMenu() == 1)
-          setSaveGame(true);
-        else
-          setLoadGame(true);
+        setLoadGame(true);
         break;
       }
     }
   }
   if (controls->isUp()) {
     setMenuPoint(getMenuPoint() - 1);
-    if (getMenuPoint() < 0) setMenuPoint(pointSaveLoadMenu.size() - 1);
+    if (getMenuPoint() < 0) setMenuPoint(pointLoadMenu.size() - 1);
   }
   if (controls->isDown()) {
     setMenuPoint(getMenuPoint() + 1);
-    if (getMenuPoint() > static_cast<int>(pointSaveLoadMenu.size()) - 1) setMenuPoint(0);
+    if (getMenuPoint() > static_cast<int>(pointLoadMenu.size()) - 1) setMenuPoint(0);
   }
   if (controls->isEsc()) {
     setMenu(0);
@@ -112,10 +90,45 @@ void GameMenu::saveLoadMenu() {
   }
   terminal_color(color_from_name("white"));
 }
-
+void GameMenu::settingMenu() {
+  terminal_clear();
+  terminal_print(5, 5, "[color=red]Настройка\n графики");
+  for (unsigned int i = 0; i < pointSettingMenu.size(); i++) {
+    if (getMenuPoint() == static_cast<int>(i)) terminal_color(color_from_name("green"));
+    terminal_printf(7, 8 + i, "%s", pointSettingMenu[i]);
+    terminal_color(color_from_name("white"));
+    if (controls->isEnter()) {
+      // Настройка графики
+      if (strcmp(pointSettingMenu[getMenuPoint()], tiles_) == 0) {
+        setSettingGame(true);
+        if (isSettingGameOnOff()) {
+          pointSettingMenu.at(i) = "Тайлы [color=red]OFF";
+          setTiles("Тайлы [color=red]OFF");
+          setSettingGameOnOff(false);
+        } else {
+          pointSettingMenu.at(i) = "Тайлы [color=green]ON";
+          setTiles("Тайлы [color=green]ON");
+          setSettingGameOnOff(true);
+        }
+      }
+    }
+  }
+  //  if (controls->isUp()) {
+  //    setMenuPoint(getMenuPoint() - 1);
+  //    if (getMenuPoint() < 0) setMenuPoint(pointSettingMenu.size() - 1);
+  //  }
+  //  if (controls->isDown()) {
+  //    setMenuPoint(getMenuPoint() + 1);
+  //    if (getMenuPoint() > static_cast<int>(pointSettingMenu.size()) - 1) setMenuPoint(0);
+  //  }
+  if (controls->isEsc()) {
+    setMenu(0);
+    setMenuPoint(0);
+  }
+  terminal_color(color_from_name("white"));
+}
 void GameMenu::setNewMenuPoint() {
   pointMainMenu.insert(pointMainMenu.begin(), continue_game_);
-  pointMainMenu.insert(pointMainMenu.begin() + 2, save_game_);
 }
 int GameMenu::getMenuPoint() const {
   return menuPoint_;
@@ -162,12 +175,6 @@ bool GameMenu::isContinueGame() const {
 void GameMenu::setContinueGame(bool continueGame) {
   continueGame_ = continueGame;
 }
-bool GameMenu::isSaveGame() const {
-  return saveGame_;
-}
-void GameMenu::setSaveGame(bool saveGame) {
-  saveGame_ = saveGame;
-}
 bool GameMenu::isLoadGame() const {
   return loadGame_;
 }
@@ -179,4 +186,19 @@ int GameMenu::getSlot() const {
 }
 void GameMenu::setSlot(int slot) {
   GameMenu::slot_ = slot;
+}
+bool GameMenu::isSettingGame() const {
+  return settingGame_;
+}
+void GameMenu::setSettingGame(bool settingGame) {
+  settingGame_ = settingGame;
+}
+bool GameMenu::isSettingGameOnOff() const {
+  return settingGameOnOff_;
+}
+void GameMenu::setSettingGameOnOff(bool settingGameOnOff) {
+  settingGameOnOff_ = settingGameOnOff;
+}
+void GameMenu::setTiles(const char* tiles) {
+  tiles_ = tiles;
 }
