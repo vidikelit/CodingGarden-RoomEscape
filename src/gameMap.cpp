@@ -3,122 +3,112 @@
 #include <vector>
 #include "game/player.h"
 
-// генератор карты
-void GameMap::generatorMap() {
-  // генерируется от 3 до 5 комнат на карте
-  for (int i = 0; i < std::experimental::randint(5, 10); i++) {
-    bool a = true;
-    int x = getPointX();
-    int y = getPointY();
+void GameMap::update() {
+  generatorLevel();
+  for (unsigned int n_room = 0; n_room < rooms.size(); n_room++) {
+    generatorDoor(n_room);
+    generatorCoin(n_room);
+  }
+}
+void GameMap::updateDoor() {
+  for (unsigned int n_room = 0; n_room < rooms.size(); n_room++) generatorDoor(n_room);
+}
+// генерирование комнат
+void GameMap::generatorLevel() {
+  for (int i = 0; i < std::experimental::randint(minRooms, maxRooms); i++) {
+    int x = getX();
+    int y = getY();
     generatorRoom();
+    bool a = true;
     while (a) {
       a = false;
       for (unsigned int i = 0; i < rooms.size(); i++) {
-        if (rooms.at(i).getX() == getPointX()) {
-          if (rooms.at(i).getY() == getPointY()) {
-            setPointX(x);
-            setPointY(y);
+        if (rooms.at(i).getX() == getX()) {
+          if (rooms.at(i).getY() == getY()) {
+            setX(x);
+            setY(y);
             generatorRoom();
             a = true;
           }
         }
       }
     }
-    rooms.push_back(GameRoom(getPointX(), getPointY()));
+    rooms.push_back(GameRoom(getX(), getY()));
   }
-  setDoorCoin();
 }
-// генератор комнат
+// генератор координат комнат
 void GameMap::generatorRoom() {
   GameRoom gameRoom = rooms.at(0);
   int random = std::experimental::randint(1, 100);
   // вверх
-  if (random <= 25) {
-    setPointY(getPointY() - gameRoom.getRoomSizeY());
-  }
+  if (random <= 25) setY(getY() - gameRoom.getRoomSizeY());
   // вниз
-  if (random > 25 && random <= 50) {
-    setPointY(getPointY() + gameRoom.getRoomSizeY());
-  }
+  if (random > 25 && random <= 50) setY(getY() + gameRoom.getRoomSizeY());
   // влево
-  if (random > 50 && random <= 75) {
-    setPointX(getPointX() - gameRoom.getRoomSizeX());
-  }
+  if (random > 50 && random <= 75) setX(getX() - gameRoom.getRoomSizeX());
   // вправо
-  if (random > 75) {
-    setPointX(getPointX() + gameRoom.getRoomSizeX());
-  }
+  if (random > 75) setX(getX() + gameRoom.getRoomSizeX());
 }
-// генератор дверей
-void GameMap::generatorDoor(int x, int y, int i) {
+// генератор координат дверей
+void GameMap::generatorDoor(int n_room) {
   for (unsigned int n = 0; n < rooms.size(); n++) {
-    if (abs(abs(rooms.at(i).getY()) - abs(rooms.at(n).getY())) == rooms.at(0).getRoomSizeY() &&
-        rooms.at(i).getX() == rooms.at(n).getX()) {
+    if (abs(abs(rooms.at(n_room).getY()) - abs(rooms.at(n).getY())) == rooms.at(0).getRoomSizeY() &&
+        rooms.at(n_room).getX() == rooms.at(n).getX()) {
       // вверх
-      if (rooms.at(i).getY() > rooms.at(n).getY()) rooms.at(i).doors[0] = true;
+      if (rooms.at(n_room).getY() > rooms.at(n).getY()) rooms.at(n_room).setDoorCoord(10, 6);
       // вниз
-      if (rooms.at(i).getY() < rooms.at(n).getY()) rooms.at(i).doors[1] = true;
+      if (rooms.at(n_room).getY() < rooms.at(n).getY()) rooms.at(n_room).setDoorCoord(10, 16);
     }
-    if (abs(abs(rooms.at(i).getX()) - abs(rooms.at(n).getX())) == rooms.at(0).getRoomSizeX() &&
-        rooms.at(i).getY() == rooms.at(n).getY()) {
+    if (abs(abs(rooms.at(n_room).getX()) - abs(rooms.at(n).getX())) == rooms.at(0).getRoomSizeX() &&
+        rooms.at(n_room).getY() == rooms.at(n).getY()) {
       // влево
-      if (rooms.at(i).getX() > rooms.at(n).getX()) rooms.at(i).doors[2] = true;
+      if (rooms.at(n_room).getX() > rooms.at(n).getX()) rooms.at(n_room).setDoorCoord(0, 11);
       // вправо
-      if (rooms.at(i).getX() < rooms.at(n).getX()) rooms.at(i).doors[3] = true;
+      if (rooms.at(n_room).getX() < rooms.at(n).getX()) rooms.at(n_room).setDoorCoord(20, 11);
     }
   }
 }
-// генератор монет
-void GameMap::generatorCoin(int n) {
+// генератор координат монет
+void GameMap::generatorCoin(int n_room) {
   for (int i = 0; i < std::experimental::randint(1, 4); i++) {
-    rooms.at(n).pushCoin({std::experimental::randint(3, 18), std::experimental::randint(8, 15)});
+    rooms.at(n_room).setCoinCoord(std::experimental::randint(3, 16), std::experimental::randint(9, 14));
   }
 }
-// расстановка дверей и монет
-void GameMap::setDoorCoin() {
-  for (unsigned int i = 0; i < rooms.size(); i++) {
-    generatorDoor(rooms.at(i).getX(), rooms.at(i).getY(), i);
-    generatorCoin(i);
-  }
+void GameMap::formRoom(int x, int y) {
+    rooms.push_back(GameRoom(x, y));
 }
-// отрисовка (перенести в другое место)!
-void GameMap::render(int n) {
-  rooms.at(n).renderRoom();
-  rooms.at(n).renderDoor();
+void GameMap::formCoin(int x, int y, int r) {
+  rooms.at(r).getCoins().push_back(Coin(x, y));
 }
-void GameMap::renderCoin(int n) {
-  rooms.at(n).renderCoin();
-  rooms.at(n).renderExit();
+void GameMap::setTilesRooms(bool tile) {
+  for (unsigned int i = 0; i < rooms.size(); i++) rooms.at(i).setTiles(tile);
 }
 int GameMap::getAllCoin() {
   int coin = 0;
   for (unsigned int i = 0; i < rooms.size(); i++) coin += rooms.at(i).getCoinCount();
   return coin;
 }
-void GameMap::formLevel(int x, int y) {
-  rooms.push_back(GameRoom(x, y));
-}
 GameRoom& GameMap::getCurrentRoom() {
   return rooms[number_room_];
 }
-int GameMap::getPointX() const {
-  return point_x_;
+std::vector<GameRoom>& GameMap::getRooms() {
+  return rooms;
 }
-void GameMap::setPointX(int pointX) {
-  point_x_ = pointX;
+int GameMap::getX() const {
+  return x_;
 }
-int GameMap::getPointY() const {
-  return point_y_;
+void GameMap::setX(int x) {
+  x_ = x;
 }
-void GameMap::setPointY(int pointY) {
-  point_y_ = pointY;
+int GameMap::getY() const {
+  return y_;
+}
+void GameMap::setY(int y) {
+  y_ = y;
 }
 int GameMap::getNumberRoom() const {
   return number_room_;
 }
 void GameMap::setNumberRoom(int numberRoom) {
   number_room_ = numberRoom;
-}
-const std::vector<GameRoom>& GameMap::getRooms() const {
-  return rooms;
 }

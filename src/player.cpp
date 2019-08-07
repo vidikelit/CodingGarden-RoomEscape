@@ -4,48 +4,45 @@
 
 void Player::render() {
   terminal_layer(2);
-  terminal_put(x_, y_, symbol_);
+  terminal_put(x_, y_, symbol_player_);
 }
 void Player::update() {
   render();
 }
-
 int Player::getX() const {
   return x_;
 }
-
 int Player::getY() const {
   return y_;
 }
-
-Player::Player(const Controls &controls, int x, int y) : controls(controls), x_(x), y_(y) {}
-
 void Player::setX(int x) {
   x_ = x;
 }
-
 void Player::setY(int y) {
   y_ = y;
-}
-
-int Player::getSteps() const {
-  return steps;
-}
-
-void Player::setSteps(int steps) {
-  Player::steps = steps;
-}
-
-int Player::getCoin() const {
-  return coin;
-}
-
-void Player::setCoin(int coin) {
-  Player::coin = coin;
 }
 int Player::getSpeed() const {
   return speed_;
 }
-void Player::setSpeed(int speed) {
-  speed_ = speed;
+int Player::addStep() {
+  return steps_ += 1;
+}
+int Player::removeStep() {
+  return steps_ -= 1;
+}
+int Player::getSteps() const {
+  return steps_;
+}
+int Player::addCoin() {
+  return coin_ += 1;
+}
+Player::Player(const Controls &controls, int x, int y) : controls(controls), x_(x), y_(y) {}
+void Player::setCoin(int coin) {
+  coin_ = coin;
+}
+void Player::setSteps(int steps) {
+  steps_ = steps;
+}
+int Player::getCoin() const {
+  return coin_;
 }

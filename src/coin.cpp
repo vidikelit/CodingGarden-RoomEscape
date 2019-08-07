@@ -1,6 +1,10 @@
 #include "game/coin.h"
+#include <BearLibTerminal.h>
 
-Coin::Coin(int x, int y) : x_(x), y_(y) {}
+void Coin::update() {}
+void Coin::render() {
+  terminal_put(getX(), getY(), getSymbolCoin());
+}
 
 int Coin::getX() const {
   return x_;
@@ -21,3 +25,4 @@ void Coin::setY(int y) {
 int Coin::getSymbolCoin() const {
   return symbol_coin_;
 }
+Coin::Coin(int x, int y) : x_(x), y_(y) {}
