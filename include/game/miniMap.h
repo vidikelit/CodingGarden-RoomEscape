@@ -14,8 +14,10 @@ class MiniMap {
   bool tiles_ = true;
 
  public:
+  void update();
   void generatorMiniMap();
   void mapMove(int i);
+  void miniMapBack();
   void render();
 
   int getSymbolMap() const;

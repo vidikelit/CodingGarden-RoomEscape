@@ -1,10 +1,7 @@
 #include <BearLibTerminal.h>
 #include "game/controls.h"
 #include "game/gameLogic.h"
-#include "game/player.h"
 #include "game/window.h"
-
-#include "game/gameMap.h"
 
 int main() {
   Window window;
@@ -16,7 +13,6 @@ int main() {
   terminal_composition(TK_ON);
   terminal_set("input: filter=[keyboard+];");
   window.Settings();
-  gameLogic.initGame();
   while (true) {
     controls.Update();
     if (gameLogic.isEnd()) break;

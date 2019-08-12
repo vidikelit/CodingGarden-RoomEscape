@@ -3,15 +3,16 @@
 
 // инициализация объектов игры
 void GameLogic::initGame() {
+  terminal_clear();
   setSprites();
-  player.setX(10);
-  player.setY(11);
+  setRun(true);
+  setExitLevel(false);
 }
 // установка спрайтов
 void GameLogic::setSprites() {
   if (gameMenu.isSettingGameOnOff()) {
     terminal_set("0x40: ./resources/sprites/player.png");
-    terminal_set("0x25: ./resources/sprites/signExit.png");
+    terminal_set("0x25: ./resources/sprites/elevator.png");
     terminal_set("0x24: ./resources/sprites/coinGold.png");
     gameMap.setTilesRooms(true);
     miniMap.setTiles(true);
@@ -25,59 +26,65 @@ void GameLogic::setSprites() {
 }
 // новая игра
 void GameLogic::newGame() {
-  loadLevel_ = false;
-  if (strcmp(gameMenu.getPointMainMenu()[0], gameMenu.getContinueGame()) != 0) gameMenu.setNewMenuPoint();
-  terminal_clear();
-  setLevel(0);
-  player.setSteps(0);
-  player.setCoin(0);
-  gameMap = GameMap();
-  miniMap = MiniMap(&gameMap);
-  gameMap.update();
-  saveLevel();
   initGame();
+  setLevel(0);
+  saverLoader.newFile();
+  // создание карты
+  gameMap = GameMap();
+  gameMap.update();
   gameMap.getCurrentRoom().renderRoom();
-  miniMap.generatorMiniMap();
-  miniMap.render();
-  setRun(true);
-  setExitLevel(false);
+  // создание и отрисовка миникарты
+  miniMap = MiniMap(&gameMap);
+  miniMap.update();
+  // начальные настройки персонажа
+  player.setDefault();
 }
 // загрузка игры
 void GameLogic::loadGame() {
-  terminal_layer(0);
-  terminal_clear_area(0, 0, 21, 17);
-  if (strcmp(gameMenu.getPointMainMenu()[0], gameMenu.getContinueGame()) != 0) gameMenu.setNewMenuPoint();
-  gameMenu.setMenuPoint(0);
+  initGame();
+  // создание карты
   gameMap = GameMap();
-  miniMap = MiniMap(&gameMap);
-  if (loadLevel_) saverLoader.setLevel(getLevel());
+  saverLoader.setLevel(getLevel());  // потом заменим на пользовательские настройки
   saverLoader.setMap(&gameMap);
   saverLoader.loader();
   gameMap.updateDoor();
-  initGame();
-  miniMap.generatorMiniMap();
   gameMap.getCurrentRoom().renderRoom();
-  miniMap.render();
-  setRun(true);
-  setExitLevel(false);
+  // создание и отрисовка миникарты
+  miniMap = MiniMap(&gameMap);
+  miniMap.update();
 }
 // новый уровень
 void GameLogic::newLevel() {
   terminal_clear();
+  // сохранение текущего уровня
+  saveLevel();
+  // установка значения нового уровня
   setLevel(getLevel() + 1);
+  // создание карты
   gameMap = GameMap();
-  miniMap = MiniMap(&gameMap);
   gameMap.update();
-  // сохранение состояние текущего уровня
+  gameMap.getCurrentRoom().renderRoom();
+  // создание миникарты
+  miniMap = MiniMap(&gameMap);
+  miniMap.update();
+}
+// возвращение на предыдущий
+void GameLogic::prevLevel() {
+  setLevel(getLevel() - 1);
+  initGame();
+  // создание карты
+  gameMap = GameMap();
   saverLoader.setLevel(getLevel());
   saverLoader.setMap(&gameMap);
-  saverLoader.saver();
-  initGame();
+  saverLoader.loader();
+  gameMap.setNumberRoom(gameMap.getRooms().size() - 1);
+  gameMap.updateDoor();
   gameMap.getCurrentRoom().renderRoom();
+  // создание и отрисовка миникарты
+  miniMap = MiniMap(&gameMap);
   miniMap.generatorMiniMap();
+  miniMap.miniMapBack();
   miniMap.render();
-  setRun(true);
-  setExitLevel(false);
 }
 // сохранение текущего уровня
 void GameLogic::saveLevel() {
@@ -85,8 +92,13 @@ void GameLogic::saveLevel() {
   saverLoader.setMap(&gameMap);
   saverLoader.saver();
 }
-// возвращение на предыдущий
-void GameLogic::prevLevel() {}
+// вывод сообщения о сохранении
+void GameLogic::renderSave() {
+  terminal_clear();
+  terminal_printf(2, 7, "Уровень [color=green]%d [color=white]пройден", getLevel());
+  terminal_print(1, 9, "Генерация сохранена");
+  terminal_print(4, 15, "Нажмите [color=red]Enter");
+}
 // конец игры - вывод статистики
 void GameLogic::endGame() {
   terminal_clear();
@@ -113,6 +125,7 @@ void GameLogic::updateMenu() {
   }
   // новая игра
   if (gameMenu.isNewGame()) {
+    if (strcmp(gameMenu.getPointMainMenu()[0], gameMenu.getContinueGame()) != 0) gameMenu.setNewMenuPoint();
     gameMenu.setNewGame(false);
     newGame();
     setEnd(false);
@@ -120,9 +133,8 @@ void GameLogic::updateMenu() {
   // загрузить игру
   if (gameMenu.isLoadGame()) {
     gameMenu.setLoadGame(false);
-    setLevel(0);
-    saverLoader.setLevel(getLevel());
-    loadLevel_ = true;
+    if (strcmp(gameMenu.getPointMainMenu()[0], gameMenu.getContinueGame()) != 0) gameMenu.setNewMenuPoint();
+    setLevel(0);  // потом установим по пользовательским настройкам
     loadGame();
   }
   // настройки
@@ -132,24 +144,21 @@ void GameLogic::updateMenu() {
   }
   // выход
   if (gameMenu.isEndGame()) {
+    saveLevel();
     setEnd(true);
     setRun(false);
   }
 }
-void GameLogic::renderSave() {
-  terminal_clear();
-  terminal_printf(2, 7, "Уровень [color=green]%d [color=white]пройден", getLevel());
-  terminal_print(1, 9, "Генерация сохранена");
-  terminal_print(4, 15, "Нажмите [color=red]Enter");
-}
 // обновление игры
 void GameLogic::update() {
   // очистка поля
+  terminal_layer(10);
+  terminal_clear_area(0, 0, 21, 17);
   terminal_layer(1);
   terminal_clear_area(0, 0, 21, 17);
   terminal_layer(2);
   terminal_clear_area(0, 0, 21, 17);
-
+  // отрисовка монет
   gameMap.getCurrentRoom().renderCoin();
   // автосохранение
   if (renderSave_) {
@@ -161,7 +170,7 @@ void GameLogic::update() {
     }
     return;
   }
-
+  // обработка конца игры
   if (isEndGame()) {
     endGame();
     if (controls->isEnter()) {
@@ -172,31 +181,49 @@ void GameLogic::update() {
     }
     return;
   }
+  // установка выхода в последней комнате, если монет на карте нет
   if (gameMap.getAllCoin() == 0) gameMap.getRooms().back().setElevator();
+  // установка выхода в первой комнате
+  if (getLevel() != 0) gameMap.getRooms().at(0).setElevator();
   terminal_layer(0);
   if (gameMap.getCurrentRoom().getElevator().isExit()) gameMap.getCurrentRoom().renderElevator();
   setPlayerX(player.getX());
   setPlayerY(player.getY());
+  if (terminal_pick(player.getX(), player.getY(), 1) == gameMap.getCurrentRoom().getElevator().getSymbolEvelator()) {
+    terminal_layer(10);
+    if (gameMap.getNumberRoom() == 0)
+      terminal_printf(7, 10, "Back L%d", getLevel());
+    else
+      terminal_printf(8, 10, "Go L%d", getLevel() + 2);
+  }
   // заходим в дверь
   if (controls->isE()) {
     scanner();
     terminal_layer(0);
     if (terminal_pick(player.getX(), player.getY(), 1) == gameMap.getCurrentRoom().getElevator().getSymbolEvelator() &&
         getLevel() == 4) {
-      renderSave_ = true;
-      saveLevel();
-      endGame_ = true;
+      if (gameMap.getNumberRoom() == 0) {
+        saveLevel();
+        prevLevel();
+      } else {
+//        renderSave_ = true;
+        endGame_ = true;
+      }
     }
     if (terminal_pick(player.getX(), player.getY(), 1) == gameMap.getCurrentRoom().getElevator().getSymbolEvelator() &&
         getLevel() != 4) {
-      renderSave_ = true;
-      saveLevel();
-      saverLoader.lineCheck(getLevel() + 1);
-      if (loadLevel_ && !saverLoader.isClearLine()) {
-        setLevel(getLevel() + 1);
-        loadGame();
+      if (gameMap.getNumberRoom() == 0) {
+        saveLevel();
+        prevLevel();
       } else {
-        newLevel();
+//        renderSave_ = true;
+        saverLoader.lineCheck(getLevel() + 1);
+        if (!saverLoader.isClearLine()) {
+          setLevel(getLevel() + 1);
+          loadGame();
+        } else {
+          newLevel();
+        }
       }
     }
   }
@@ -222,6 +249,19 @@ void GameLogic::update() {
     gameMenu.setGameMenuStatus(true);
     gameMenu.setMenu(0);
   }
+}
+// вывод статистики
+void GameLogic::stats() {
+  terminal_layer(10);
+  terminal_clear_area(5, 0, 21, 5);
+  terminal_put(6, 1, 0x40);
+  terminal_printf(7, 1, "=%d", player.getSteps());
+
+  terminal_put(6, 2, 0x24);
+  terminal_printf(7, 2, "=%d", player.getCoin());
+
+  terminal_printf(16, 5, "L=%d/5", getLevel() + 1);
+  terminal_layer(2);
 }
 void GameLogic::scanner() {
   for (unsigned int i = 0; i < gameMap.getCurrentRoom().getDoors().size(); i++) {
@@ -343,18 +383,6 @@ bool GameLogic::isEndGame() const {
 }
 void GameLogic::setEndGame(bool endGame) {
   endGame_ = endGame;
-}
-void GameLogic::stats() {
-  terminal_layer(10);
-  terminal_clear_area(5, 0, 21, 5);
-  terminal_put(6, 1, 0x40);
-  terminal_printf(7, 1, "=%d", player.getSteps());
-
-  terminal_put(6, 2, 0x24);
-  terminal_printf(7, 2, "=%d", player.getCoin());
-
-  terminal_printf(16, 5, "L=%d/5", getLevel() + 1);
-  terminal_layer(2);
 }
 int GameLogic::getLevel() const {
   return level_;

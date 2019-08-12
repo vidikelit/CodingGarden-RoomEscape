@@ -1,6 +1,10 @@
 #include "game/miniMap.h"
 #include <BearLibTerminal.h>
 
+void MiniMap::update() {
+  generatorMiniMap();
+  render();
+}
 void MiniMap::render() {
   terminal_layer(3);
   terminal_clear_area(0, 0, 5, 5);
@@ -11,6 +15,11 @@ void MiniMap::render() {
       terminal_put(miniRooms.at(i).getPosRenderX() + miniRooms.at(i).getX(),
                    miniRooms.at(i).getPosRenderY() + miniRooms.at(i).getY(), 0xA00);
     }
+    // выделение первой и последней комнаты
+    terminal_put(miniRooms.at(0).getPosRenderX() + miniRooms.at(0).getX(),
+                 miniRooms.at(0).getPosRenderY() + miniRooms.at(0).getY(), 0xA02);
+    terminal_put(miniRooms.back().getPosRenderX() + miniRooms.back().getX(),
+                 miniRooms.back().getPosRenderY() + miniRooms.back().getY(), 0xA02);
     terminal_put(miniRooms.at(0).getPosRenderX(), miniRooms.at(0).getPosRenderY(), 0xA01);
     // угловые
     terminal_put(0, 0, 0xE00);
@@ -74,6 +83,12 @@ void MiniMap::mapMove(int i) {
     for (unsigned int j = 0; j < miniRooms.size(); j++) {
       miniRooms.at(j).setX(miniRooms.at(j).getX() - 1);
     }
+  }
+}
+void MiniMap::miniMapBack() {
+  for (auto& room : miniRooms) {
+    room.setX(room.getX() - miniRooms.back().getX());
+    room.setY(room.getY() - miniRooms.back().getY());
   }
 }
 int MiniMap::getSymbolMap() const {

@@ -46,3 +46,9 @@ void Player::setSteps(int steps) {
 int Player::getCoin() const {
   return coin_;
 }
+void Player::setDefault() {
+  setX(10);
+  setY(11);
+  setCoin(0);
+  setSteps(0);
+}

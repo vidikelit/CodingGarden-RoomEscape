@@ -19,6 +19,7 @@ class SaverLoader: public ISaverLoader{
   void saver() override;
   void loader() override;
   void lineCheck(int lev);
+  void newFile();
   int getLevel() const;
   void setLevel(int level);
   bool isClearLine() const;

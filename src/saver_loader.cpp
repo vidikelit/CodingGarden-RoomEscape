@@ -134,3 +134,9 @@ bool SaverLoader::isClearLine() const {
 void SaverLoader::setClearLine(bool clearLine) {
   SaverLoader::clearLine = clearLine;
 }
+void SaverLoader::newFile() {
+  file = fopen(path, "w+");
+  for (int i = 0; i < 5; i++) fprintf(file, "\n");
+  fprintf(file, "/");
+  fclose(file);
+}

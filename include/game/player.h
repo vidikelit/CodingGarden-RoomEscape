@@ -20,11 +20,11 @@ class Player : public IGameObjects {
  public:
   void update() override;
   void render() override;
+  void setDefault();
 
   int addStep();
   int removeStep();
   int addCoin();
-
   int getX() const;
   int getY() const;
   void setX(int x);
