@@ -17,13 +17,13 @@
 ## Игровые элементы
 ### Игровая область
 ![](/readme/game.png)<br/>
-Игрок - ![](/readme/player.png)<br/>
-Монеты - ![](/readme/coinGold.png)<br/>
-Дверь - ![](/readme/door.png)<br/>
-Стена - ![](/readme/wall.png)<br/>
-Портал - ![](/readme/elevator.png)
+Игрок - ![](/readme/player.png) или @<br/>
+Монеты - ![](/readme/coinGold.png) или $<br/>
+Дверь - ![](/readme/door.png) или ><br/>
+Стена - ![](/readme/wall.png) или #<br/>
+Портал - ![](/readme/elevator.png) или %
 ### Мини-карта
 ![](/readme/minimap.png)<br/>
-Комната мини-карты - ![](/readme/room_mini.png)<br/>
+Комната мини-карты - ![](/readme/room_mini.png) или +<br/>
 Комната, где находится игрок - ![](/readme/player_mini.png)<br/>
 Комната с порталом - ![](/readme/elevator_mini.png) 
