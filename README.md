@@ -9,20 +9,20 @@
 него, то появится статистика. Игра завершена.
 
 ## Управление
-Ходить - стрелочками или WASD;
-Открыть дверь или зайти в портал - E;
-Выход в меню - ESC;
+Ходить - стрелочками или WASD;<br/>
+Открыть дверь или зайти в портал - E;<br/>
+Выход в меню - ESC;<br/>
 Выбор - Enter.
 
 ## Игровые элементы
 ### Игровая область
-![alt text](https://drive.google.com/open?id=1OKjPiLy1i66LacU3hT3pXi_ejTkfN5wZ)
-Игрок - 
-Монеты - 
-Двери -
+![alt text](https://drive.google.com/open?id=1OKjPiLy1i66LacU3hT3pXi_ejTkfN5wZ)<br/>
+Игрок - [](/resources/sprites/player.png)<br/>
+Монеты - <br/>
+Двери - <br/>
 Стены -
 ### Мини-карта
-![alt text](https://drive.google.com/open?id=18DWpqU-x3kjIerFA30TlGmRpGL0PMppD)
-Комната мини-карты -
-Комната, где находится игрок -
-Комната с порталом - 
+![alt text](https://drive.google.com/open?id=18DWpqU-x3kjIerFA30TlGmRpGL0PMppD)<br/>
+Комната мини-карты - <br/>
+Комната, где находится игрок - <br/>
+Комната с порталом -  
