@@ -13,7 +13,7 @@ class Player : public IGameObjects {
   int symbol_player_ = 0x40;  // @
 
   int speed_ = 1;
-  int boost_;
+  int health = 100;
   int coin_ = 0;
   int steps_ = 0;
 

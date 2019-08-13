@@ -116,15 +116,15 @@ void SaverLoader::lineCheck(int lev) {
   for (unsigned int i = 0; i < textSave.size(); i++) {
     if (newLine == lev) {
       if ((textSave.at(i) == '\n' && textSave.at(i + 1) == '\n') ||
-          (textSave.at(i) == '\n' && textSave.at(i + 1) == '/')) {
+          (textSave.at(i) == '\n' && textSave.at(i + 1) == '/') ||
+           textSave.at(i) == '\0') {
         clearLine = true;
         break;
       }
-        clearLine = false;
+      clearLine = false;
       break;
     }
-    if (textSave.at(i) == '\n')
-      newLine++;
+    if (textSave.at(i) == '\n') newLine++;
   }
   fclose(file);
 }

@@ -75,7 +75,7 @@ void GameMap::generatorCoin(int n_room) {
   }
 }
 void GameMap::formRoom(int x, int y) {
-    rooms.push_back(GameRoom(x, y));
+  rooms.push_back(GameRoom(x, y));
 }
 void GameMap::formCoin(int x, int y, int r) {
   rooms.at(r).getCoins().push_back(Coin(x, y));

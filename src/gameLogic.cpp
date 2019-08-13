@@ -26,31 +26,31 @@ void GameLogic::setSprites() {
 }
 // новая игра
 void GameLogic::newGame() {
-  initGame();
   setLevel(0);
   saverLoader.newFile();
   // создание карты
   gameMap = GameMap();
-  gameMap.update();
-  gameMap.getCurrentRoom().renderRoom();
-  // создание и отрисовка миникарты
   miniMap = MiniMap(&gameMap);
+  gameMap.update();
+  // отрисовка
+  initGame();
+  gameMap.getCurrentRoom().renderRoom();
   miniMap.update();
   // начальные настройки персонажа
   player.setDefault();
 }
 // загрузка игры
 void GameLogic::loadGame() {
-  initGame();
   // создание карты
   gameMap = GameMap();
-  saverLoader.setLevel(getLevel());  // потом заменим на пользовательские настройки
+  miniMap = MiniMap(&gameMap);
+  saverLoader.setLevel(getLevel());  // потом заменить на пользовательские настройки
   saverLoader.setMap(&gameMap);
   saverLoader.loader();
   gameMap.updateDoor();
+  // отрисовка
+  initGame();
   gameMap.getCurrentRoom().renderRoom();
-  // создание и отрисовка миникарты
-  miniMap = MiniMap(&gameMap);
   miniMap.update();
 }
 // новый уровень
@@ -62,28 +62,29 @@ void GameLogic::newLevel() {
   setLevel(getLevel() + 1);
   // создание карты
   gameMap = GameMap();
-  gameMap.update();
-  gameMap.getCurrentRoom().renderRoom();
-  // создание миникарты
   miniMap = MiniMap(&gameMap);
+  gameMap.update();
+  // отрисовка
+  initGame();
+  gameMap.getCurrentRoom().renderRoom();
   miniMap.update();
 }
 // возвращение на предыдущий
 void GameLogic::prevLevel() {
   setLevel(getLevel() - 1);
-  initGame();
   // создание карты
   gameMap = GameMap();
+  miniMap = MiniMap(&gameMap);
   saverLoader.setLevel(getLevel());
   saverLoader.setMap(&gameMap);
   saverLoader.loader();
   gameMap.setNumberRoom(gameMap.getRooms().size() - 1);
   gameMap.updateDoor();
-  gameMap.getCurrentRoom().renderRoom();
-  // создание и отрисовка миникарты
-  miniMap = MiniMap(&gameMap);
   miniMap.generatorMiniMap();
   miniMap.miniMapBack();
+  // отрисовка
+  initGame();
+  gameMap.getCurrentRoom().renderRoom();
   miniMap.render();
 }
 // сохранение текущего уровня
@@ -110,16 +111,12 @@ void GameLogic::endGame() {
 }
 // обновление меню
 void GameLogic::updateMenu() {
-  if (gameMenu.isGameMenuStatus()) {
-    gameMenu.update();
-  }
-  if (renderSave_) {
-    renderSave();
-  }
+  if (gameMenu.isGameMenuStatus()) gameMenu.update();
+  if (renderSave_) renderSave();
   // продолжить
   if (gameMenu.isContinueGame()) {
     gameMenu.setContinueGame(false);
-    setRun(true);
+    initGame();
     gameMap.getCurrentRoom().renderRoom();
     miniMap.render();
   }
@@ -133,14 +130,19 @@ void GameLogic::updateMenu() {
   // загрузить игру
   if (gameMenu.isLoadGame()) {
     gameMenu.setLoadGame(false);
-    if (strcmp(gameMenu.getPointMainMenu()[0], gameMenu.getContinueGame()) != 0) gameMenu.setNewMenuPoint();
-    setLevel(0);  // потом установим по пользовательским настройкам
-    loadGame();
+    saverLoader.lineCheck(0);
+    if (saverLoader.isClearLine()) {
+      terminal_layer(10);
+      terminal_print(0, 0, "Сохранений нет");
+    } else {
+      if (strcmp(gameMenu.getPointMainMenu()[0], gameMenu.getContinueGame()) != 0) gameMenu.setNewMenuPoint();
+      setLevel(0);  // потом установим по пользовательским настройкам
+      loadGame();
+    }
   }
   // настройки
   if (gameMenu.isSettingGame()) {
     gameMenu.setSettingGame(false);
-    initGame();
   }
   // выход
   if (gameMenu.isEndGame()) {
@@ -206,7 +208,7 @@ void GameLogic::update() {
         saveLevel();
         prevLevel();
       } else {
-//        renderSave_ = true;
+        //        renderSave_ = true;
         endGame_ = true;
       }
     }
@@ -216,7 +218,7 @@ void GameLogic::update() {
         saveLevel();
         prevLevel();
       } else {
-//        renderSave_ = true;
+        //        renderSave_ = true;
         saverLoader.lineCheck(getLevel() + 1);
         if (!saverLoader.isClearLine()) {
           setLevel(getLevel() + 1);
