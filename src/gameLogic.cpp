@@ -11,7 +11,7 @@ void GameLogic::initGame() {
 // установка спрайтов
 void GameLogic::setSprites() {
   if (gameMenu.isSettingGameOnOff()) {
-    terminal_set("0x40: ..resources/sprites/player.png");
+    terminal_set("0x40: ../resources/sprites/player.png");
     terminal_set("0x25: ../resources/sprites/elevator.png");
     terminal_set("0x24: ../resources/sprites/coinGold.png");
     gameMap.setTilesRooms(true);
