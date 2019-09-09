@@ -13,7 +13,7 @@ void GameRoom::renderRoom() {
     // левый верхний
     symbol_tiles_ = 0xE00;
     tilesWall.clear();
-    terminal_set("0xE00: resources/tilesets/tilesetRoom.png, size=64x64");
+    terminal_set("0xE00: ../resources/tilesets/tilesetRoom.png, size=64x64");
     terminal_put(0, 6, 0xE00);
     terminal_put(20, 6, 0xE01);
     terminal_put(0, 16, 0xE02);

@@ -9,7 +9,7 @@ void MiniMap::render() {
   terminal_layer(3);
   terminal_clear_area(0, 0, 5, 5);
   if (isTiles()) {
-    terminal_set("0xA00: ./resources/tilesets/tilesetMiniMap.png, size=64x64");
+    terminal_set("0xA00: ../resources/tilesets/tilesetMiniMap.png, size=64x64");
     // комнаты
     for (unsigned int i = 0; i < miniRooms.size(); i++) {
       terminal_put(miniRooms.at(i).getPosRenderX() + miniRooms.at(i).getX(),
