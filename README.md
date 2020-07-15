@@ -25,4 +25,4 @@ https://github.com/vidikelit/CodingGarden-ECS-RoomEscape/tree/master
 ## Результат работы
 Хорошее настроение, очень много съеденого мороженного на выиграном мною демо, отличная рабочая атмосфера. Итог красивый сертификатик и классный брилок.<br/>
 Фото отчет: https://vk.com/coding_garden?z=album-166811439_265711561<br/>
-Мой сертификат: ![](/readme/certificate.jpg)
+Мой сертификат: ![](/readme/certificate_resizer.jpg)
