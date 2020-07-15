@@ -1,5 +1,9 @@
 # Room Escape
 
+## Новый проект
+Проект полностью был переписан по шаблону проектирования Entity-Component-System<br/>
+https://github.com/vidikelit/CodingGarden-ECS-RoomEscape/tree/master
+
 ## Что делать?
 Бегать по уровням, собирать монетки, убегать или сражаться с врагами, слушать 8bit каверы на System of a Down:)<br/>
 Соревноваться с товарищями, до конца пройти будет очень сложно.
